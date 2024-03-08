@@ -12,7 +12,7 @@ import { AccountService, Account } from '../../../../services/account.service';
 import { jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 import { Group } from '../../../../services/group.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-form-account',
   standalone: true,
@@ -64,9 +64,16 @@ export class FormAccountComponent {
             const userId = this.getActualIdUser();
             this.userService.getUserById(userId).subscribe((user) => {
               user.accounts!.push(account);
-              this.userService
-                .updateUser(user)
-                .subscribe(() => window.location.reload());
+              this.userService.updateUser(user).subscribe(() => {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Compte ajouté',
+                  showConfirmButton: false,
+                  timer: 1500,
+                }).then(() => {
+                  window.location.reload();
+                });
+              });
             });
           });
       }
@@ -79,9 +86,16 @@ export class FormAccountComponent {
           title: this.accountForm.value.title,
           description: this.accountForm.value.description,
         };
-        this.accountService
-          .updateAccount(updatedAccount)
-          .subscribe(() => window.location.reload());
+        this.accountService.updateAccount(updatedAccount).subscribe(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Compte modifié',
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            window.location.reload();
+          });
+        });
       }
     }
   }

@@ -13,6 +13,7 @@ import {
   Transaction,
   TransactionService,
 } from '../../../../services/transaction.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-transaction',
@@ -142,7 +143,16 @@ export class FormTransactionComponent {
         };
         this.transactionService
           .insertTransaction(transactionCreated)
-          .subscribe(() => window.location.reload());
+          .subscribe(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Transaction ajouté',
+              showConfirmButton: false,
+              timer: 1500,
+            }).then(() => {
+              window.location.reload();
+            });
+          });
       } else {
         const transactionCreated = {
           id: this.transactionToUpdate!.id,
@@ -153,9 +163,16 @@ export class FormTransactionComponent {
           budget: budgetUpdated,
           isRefill: refillUpdated,
         };
-        this.transactionService
-          .update(transactionCreated)
-          .subscribe(() => window.location.reload());
+        this.transactionService.update(transactionCreated).subscribe(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Transaction modifié',
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            window.location.reload();
+          });
+        });
       }
     }
   }
