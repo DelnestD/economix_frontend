@@ -1,8 +1,14 @@
 <div class="budgetTransaction">
-    <p class="flex items-center font-textFont text-xl">
+    <p class="flex items-center font-textFont text-xl px-[2%]">
         {{ titleBudget }}
     </p>
     <p class="flex items-center mr-4 font-textFont text-2xl">
         € {{ totalBudget.toFixed(2) }}
     </p>
+</div>
+<div>
+    <app-transaction />
+</div>
+<div>
+    <app-transaction />
 </div>

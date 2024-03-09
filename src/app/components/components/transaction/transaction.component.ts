@@ -8,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './transaction.component.css'
 })
 export class TransactionComponent {
+  dateTransaction: Date = new Date();
+  description: string = "Description de la transaction/du budget.";
+  amount: number = 0;
 
 }
