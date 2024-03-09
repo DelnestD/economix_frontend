@@ -1,5 +1,5 @@
 <div class="w-full flex">
-    <div class="side h-screen border-r-4 border-r-secondary">
+    <div class="side border-r-4 border-r-secondary">
         <p class="title">
             Mon compte
         </p>
@@ -13,13 +13,16 @@
         </div>
     </div>
     <div class="side">
-        <div class="flex justify-between">
+        <div class="flex justify-between items-center">
             <p class="title">
                 Mon budget
             </p>
-            <button type="button" class="btnAdd -mt-5">
+            <button type="button" class="btnAdd -mt-10">
                 Nouveau budget
             </button>
+        </div>
+        <div>
+            <app-budget-structure />
         </div>
     </div>
 </div>

@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './budget-structure.component.css'
 })
 export class BudgetStructureComponent {
-
+  totalBudget: number = 0;
+  titleBudget: string = "Budget 1";
 }
