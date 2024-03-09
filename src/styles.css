@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "titleFont";
+    src: url(./assets/fonts/Aurora.otf);
+}
+@font-face {
+    font-family: "textFont";
+    src: url(./assets/fonts/RoleModelPersonalUseRegular-K7zLy.otf);
+}
+
+.onglet {
+    @apply font-textFont text-xl font-bold hover:text-light;
+}

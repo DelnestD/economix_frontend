@@ -1,4 +1,4 @@
-<div id="navbar" class="flex justify-between px-5 py-2 bg-slate-300">
+<div id="navbar" class="flex justify-between px-5 py-2 bg-secondary">
   <div id="logo">
     <a href="">
       <img src="./assets/images/logo.png" alt="logo" class="w-28" />
@@ -6,9 +6,9 @@
   </div>
   <nav>
     <ul class="flex py-5">
-      <li><a routerLink="/about" routerLinkActive="active">A propos</a></li>
-      <li class="px-8"><a href="">Contact</a></li>
-      <li><a href="">S'inscrire</a></li>
+      <li><a routerLink="/a-propos" routerLinkActive="active" class="onglet">A propos</a></li>
+      <li class="px-8"><a routerLink="/contact" routerLinkActive="active" class="onglet">Contact</a></li>
+      <li><a class="onglet hover:cursor-pointer">S'inscrire</a></li>
     </ul>
   </nav>
 </div>
