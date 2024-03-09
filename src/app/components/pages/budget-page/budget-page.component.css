@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .side {
-    @apply w-1/2 my-7 py-7 px-[5%] h-screen;
+    @apply w-1/2 my-7 py-7 px-[5%] h-[80vh];
 }
 
 .title {
