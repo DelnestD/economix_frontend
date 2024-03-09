@@ -1,0 +1,25 @@
+<div class="w-full flex">
+    <div class="side h-screen border-r-4 border-r-secondary">
+        <p class="title">
+            Mon compte
+        </p>
+        <div class="budgetTransaction">
+            <button type="button" class="btnAdd">
+                Nouvelle transaction
+            </button>
+            <p class="flex items-center mr-4 font-textFont text-2xl">
+                € {{ totalCompte.toFixed(2) }}
+            </p>
+        </div>
+    </div>
+    <div class="side">
+        <div class="flex justify-between">
+            <p class="title">
+                Mon budget
+            </p>
+            <button type="button" class="btnAdd -mt-5">
+                Nouveau budget
+            </button>
+        </div>
+    </div>
+</div>

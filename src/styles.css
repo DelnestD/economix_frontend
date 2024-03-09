@@ -8,9 +8,7 @@
 }
 @font-face {
     font-family: "textFont";
-    src: url(./assets/fonts/RoleModelPersonalUseRegular-K7zLy.otf);
+    src: url(./assets/fonts/Montserrat-VariableFont_wght.ttf);
 }
 
-.onglet {
-    @apply font-textFont text-xl font-bold hover:text-light;
-}
+
