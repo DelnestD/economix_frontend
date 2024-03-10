@@ -14,3 +14,7 @@
 .budgetTransaction {
     @apply flex justify-between border-2 border-dark bg-info rounded-t-xl p-3 h-20;
 }
+
+.transactionStructure {
+    @apply w-full flex font-textFont px-[3%] py-[2%] bg-primary;
+}

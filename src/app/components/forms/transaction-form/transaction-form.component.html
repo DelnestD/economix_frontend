@@ -1,0 +1,28 @@
+<form #form="ngForm">
+    <div class="transactionStructure border-b-2 border-b-light">
+        <p class="w-[16%]">
+            <input #date="ngModel" required type="date" ngModel name="date" id="date">
+        </p>
+        @if (date.invalid) {
+            @if (date.errors?.['required']) {
+                <div class="errors">
+                    La date est obligatoire.
+                </div>
+            }
+        }
+        <p class="w-[73%]">
+            <textarea #description="ngModel" ngModel name="description" id="description"></textarea>
+        </p>
+        @if (description.invalid) {
+            @if (description.errors?.['required']) {
+                <div class="errors">
+                    La description est obligatoire.
+                </div>
+            }
+        }
+        <p class="w-[11%] flex">
+            € <input #amount="ngModel" required type="number" ngModel name="amount" id="amount">
+        </p>
+    </div>
+    <button [disabled]="form.invalid" type="submit">Valider</button>
+</form>
