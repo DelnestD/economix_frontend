@@ -12,7 +12,9 @@
             </p>
         </div>
         <div>
-            <app-transaction />
+            @for (transaction of transactions; track transaction.id) {
+                <app-transaction />
+            }
         </div>
     </div>
     <div class="side">

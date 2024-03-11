@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TransactionComponent } from '../transaction/transaction.component';
+import { Transaction, TransactionService } from '../../../services/transaction.service';
 
 @Component({
   selector: 'app-budget-structure',
@@ -8,7 +9,21 @@ import { TransactionComponent } from '../transaction/transaction.component';
   templateUrl: './budget-structure.component.html',
   styleUrl: './budget-structure.component.css'
 })
-export class BudgetStructureComponent {
+export class BudgetStructureComponent implements OnInit {
   totalBudget: number = 0;
   titleBudget: string = "Budget 1";
+
+  transactions: Transaction[] = [];
+
+  constructor(private transactionService: TransactionService) {}
+
+  ngOnInit(): void {
+    this.loadTransactions;
+  }
+  
+  loadTransactions() {
+    this.transactionService.getTransactionByBudgetId('1').subscribe(transactions => {
+      this.transactions = transactions;
+    })
+  }
 }
