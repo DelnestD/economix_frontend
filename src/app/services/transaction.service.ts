@@ -12,7 +12,7 @@ export interface Transaction {
   providedIn: 'root'
 })
 export class TransactionService {
-  baseUrl = 'http://localhost:3000/transaction/';
+  baseUrl = 'http://localhost:8081/transaction/';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -21,11 +21,11 @@ export class TransactionService {
   }
 
   getTransactionByBudgetId(budgetId: string) {
-    return this.httpClient.get<Transaction[]>(`${this.baseUrl}${budgetId}`);
+    return this.httpClient.get<Transaction[]>(`${this.baseUrl}budget/${budgetId}`);
   }
 
   getTransactionByAccountId(accountId: string) {
-    return this.httpClient.get<Transaction[]>(`${this.baseUrl}${accountId}`);
+    return this.httpClient.get<Transaction[]>(`${this.baseUrl}account/${accountId}`);
   }
 
   insertTransaction(transaction: Transaction) {

@@ -12,7 +12,7 @@ export interface Budget {
   providedIn: 'root'
 })
 export class BudgetService {
-  baseUrl = 'http://localhost:3000/budget/';
+  baseUrl = 'http://localhost:8081/budget/';
 
   constructor(private httpClient: HttpClient) { }
 
