@@ -49,3 +49,7 @@ h1 {
   button:hover {
     background-color: #45a049;
   }
+
+  p {
+    margin-bottom: 48px;
+  }
