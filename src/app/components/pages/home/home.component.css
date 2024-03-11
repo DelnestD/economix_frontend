@@ -20,7 +20,6 @@ h1 {
   
   form {
     max-width: 400px;
-    margin: 0 auto;
   }
   
   label {
@@ -37,7 +36,8 @@ h1 {
     border-radius: 4px;
   }
   
-  button {
+  .bouton {
+    display: block;
     background-color: #4caf50;
     color: #fff;
     padding: 12px;
@@ -46,10 +46,31 @@ h1 {
     cursor: pointer;
   }
   
-  button:hover {
+  .bouton:hover {
     background-color: #45a049;
   }
 
   p {
     margin-bottom: 48px;
+  }
+
+  .example-container mat-form-field + mat-form-field {
+    margin-left: 8px;
+  }
+  
+  .example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+
+  mat-form-field {
+    width: 350px;
   }
