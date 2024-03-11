@@ -1,0 +1,51 @@
+main {
+    display: flex;
+}
+
+section {
+    width: 50%;
+    height: max-content;
+    padding: 60px 120px 60px 120px;
+}
+
+h1 {
+    color: #45a049;
+    font-size: xx-large;
+    margin-bottom: 48px;
+  }
+  
+  p {
+    color: #555;
+  }
+  
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
