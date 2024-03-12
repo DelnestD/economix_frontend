@@ -1,3 +1,43 @@
-#board {
+@font-face {
+  font-family: "FlappyAngel";
+  src: url("../../../../assets/flappyAngel/fonts/Flappy.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+.container {
+  background-color: #272020;
+  padding-bottom: 2%;
+  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
+}
+.message {
+  color: white;
+  text-align: center;
+}
+.message h2 {
+  font-size: 50px;
+}
+.message h3 {
+  font-size: 30px;
+}
+.message h4 {
+  font-size: 25px;
+}
+.flappyAngel {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
   background-image: url("../../../../assets/flappyAngel/images/background.png");
+  background-size: auto;
+}
+
+#board {
+  width: fit-content;
+  height: fit-content;
+  background-image: url("../../../../assets/flappyAngel/images/background.png");
+  position: absolute;
+  margin-top: 1;
+  bottom: 1;
+  left: 38%;
 }
