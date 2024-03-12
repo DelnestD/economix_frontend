@@ -13,7 +13,12 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: '**',
+    path: '404',
     component: NotFoundComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '404',
+    pathMatch: 'full',
   },
 ];
