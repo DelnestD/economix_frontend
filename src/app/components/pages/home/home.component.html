@@ -11,7 +11,11 @@
       qui eux-mêmes peuvent avoir un accès à leurs dépenses.
     </p>
   </section>
-  <!-- <app-connexion></app-connexion> -->
+
+  @if (focusConnexion) {
+  <app-connexion></app-connexion>
+  } @else {
   <app-subscribe></app-subscribe>
+  }
 </main>
 <!-- <app-footer /> -->
