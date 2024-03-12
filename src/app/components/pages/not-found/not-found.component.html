@@ -1,7 +1,11 @@
-<div tabindex="-1" (keydown)="moveAngel($event)">
-  <div>
-    <p>404 Page Not Found</p>
+<div class="container" tabindex="-1" (keydown)="moveAngel($event)">
+  <div class="message">
+    <h2>404 Page Not Found</h2>
+    <h3>La page que vous cherchez n'existe pas</h3>
+    <h4>Vous pouvez toutefois profiter de notre superbe jeu !</h4>
+    <h4>Pour Sauter appuyer sur espace, ↑ ou z</h4>
   </div>
-
-  <canvas id="board"></canvas>
+  <div class="flappyAngel">
+    <canvas id="board"></canvas>
+  </div>
 </div>
