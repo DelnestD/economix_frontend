@@ -16,17 +16,7 @@ export class RegisterService {
 
   constructor(private httpClient: HttpClient) {}
 
-  private verifyPasswordAreSame(password: string, confirmPassword: string) {
-    if (password != confirmPassword) {
-      return false;
-    }
-    return true;
-  }
-
-  register(data: RegisterInfos, confirmPassword: string) {
-    if (this.verifyPasswordAreSame(data.password, confirmPassword)) {
-      return this.httpClient.post<RegisterInfos>(this.baseUrl, data);
-    }
-    return null;
+  register(data: RegisterInfos) {
+    return this.httpClient.post<RegisterInfos>(this.baseUrl, data);
   }
 }
