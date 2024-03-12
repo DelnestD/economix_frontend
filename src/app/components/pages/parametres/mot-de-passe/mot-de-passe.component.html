@@ -1,4 +1,39 @@
-<form class="change-mdp">
-  <label for="mdp">mdp</label>
-  <input class="inputText" type="password" id="mdp" name="mdp" />
-</form>
+<h1 class="text-center font-titleFont text-xl font-bold">
+  Modification du mot de passe
+</h1>
+<div class="py-5 mb-5 flex">
+  <div class="w-[28%] m-auto py-5 bg-light shadow-lg">
+    <form class="change-mdp font-textFont text-sm">
+      <div class="pt-5 pb-2 flex justify-end">
+        <label class="px-3" for="mdp">Mot de passe actuel</label>
+        <input class="inputText mr-3" type="password" id="mdp" name="mdp" />
+      </div>
+      <div class="pb-2 flex justify-end">
+        <label class="px-3" for="new-mdp">Nouveau mot de passe</label>
+        <input
+          class="inputText mr-3"
+          type="password"
+          id="new-mdp"
+          name="new-mdp"
+        />
+      </div>
+      <div class="pb-5 flex justify-end">
+        <label class="px-3" for="conf-mdp">Confirmation du mot de passe</label>
+        <input
+          class="inputText mr-3"
+          type="password"
+          id="conf-mdp"
+          name="conf-mdp"
+        />
+      </div>
+      <div class="flex justify-end">
+        <button
+          class="border py-1 bg-secondary px-2 rounded-md mr-3"
+          type="submit"
+        >
+          Valider
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
