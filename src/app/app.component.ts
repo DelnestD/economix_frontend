@@ -18,7 +18,7 @@ export class AppComponent {
   constructor(private router: Router) {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        if (val.url === '/404') {
+        if (val.url === '/not-found') {
           this.show = false;
         } else {
           this.show = true;
