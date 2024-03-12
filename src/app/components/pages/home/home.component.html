@@ -11,39 +11,7 @@
       qui eux-mêmes peuvent avoir un accès à leurs dépenses.
     </p>
   </section>
-
-  <section>
-    <h1>Connexion</h1>
-    <form id="loginForm" method="post">
-      <mat-form-field>
-        <mat-label>Entrez votre email</mat-label>
-        <input
-          matInput
-          placeholder="machin@example.com"
-          [formControl]="email"
-          required
-        />
-        @if (email.invalid) {
-        <mat-error>{{ getErrorMessage() }}</mat-error>
-        }
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Mot de passe</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" />
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="hide = !hide"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide"
-        >
-          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-        </button>
-      </mat-form-field>
-
-      <button class="bouton" type="submit">Se connecter</button>
-    </form>
-  </section>
+  <!-- <app-connexion></app-connexion> -->
+  <app-subscribe></app-subscribe>
 </main>
 <!-- <app-footer /> -->
