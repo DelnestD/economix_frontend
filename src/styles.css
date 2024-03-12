@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.change-mdp .inputText{
+
+    @apply border-2 border-secondary;
+}
