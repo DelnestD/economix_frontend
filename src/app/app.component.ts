@@ -15,10 +15,16 @@ export class AppComponent {
   title = 'EconomiX';
   show: boolean = true;
 
-  constructor(private router: Router) {
-    router.events.subscribe((val) => {
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        if (val.url === '/not-found') {
+        console.log(val.url);
+        if (
+          val.url === '/not-found' ||
+          val.urlAfterRedirects === '/not-found'
+        ) {
           this.show = false;
         } else {
           this.show = true;
