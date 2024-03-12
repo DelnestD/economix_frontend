@@ -6,7 +6,6 @@ export interface RegisterInfos {
   lastName: string;
   email: string;
   password: string;
-  passwordConfirm: string;
 }
 
 @Injectable({
@@ -17,15 +16,15 @@ export class RegisterService {
 
   constructor(private httpClient: HttpClient) {}
 
-  private verifyPasswordAreSame(data: RegisterInfos) {
-    if (data.password != data.passwordConfirm) {
+  private verifyPasswordAreSame(password: string, confirmPassword: string) {
+    if (password != confirmPassword) {
       return false;
     }
     return true;
   }
 
-  register(data: RegisterInfos) {
-    if (this.verifyPasswordAreSame(data)) {
+  register(data: RegisterInfos, confirmPassword: string) {
+    if (this.verifyPasswordAreSame(data.password, confirmPassword)) {
       return this.httpClient.post<RegisterInfos>(this.baseUrl, data);
     }
     return null;
