@@ -31,7 +31,6 @@ export class NotFoundComponent {
 
   //sound
   declare hitSound: HTMLAudioElement;
-  declare buttonSound: HTMLAudioElement;
   declare backgroundSound: HTMLAudioElement;
   volume: number = 0.1;
 
@@ -117,10 +116,6 @@ export class NotFoundComponent {
     this.hitSound.src = 'assets/flappyAngel/sounds/hit.wav';
     this.hitSound.volume = this.volume;
     this.hitSound.load();
-    this.buttonSound = new Audio();
-    this.buttonSound.src = 'assets/flappyAngel/sounds/button.wav';
-    this.buttonSound.volume = this.volume;
-    this.buttonSound.load();
     this.backgroundSound = new Audio();
     this.backgroundSound.src = 'assets/flappyAngel/sounds/gamemusic.wav';
     this.backgroundSound.volume = this.volume;
@@ -128,12 +123,10 @@ export class NotFoundComponent {
 
     if (this.startingBlock) {
       this.context.fillStyle = 'white';
-      this.context.font = '120px';
-      this.context.fillText(
-        'Appuyez sur espace, z ou fléche du haut pour jouer',
-        5,
-        45
-      );
+      this.context.font = '80px FlappyAngel';
+      this.context.fillText('Flappy Angel', 20, 225);
+      this.context.font = '40px FlappyAngel';
+      this.context.fillText(`Jump to Start`, 80, 475);
     }
   }
 
@@ -187,14 +180,37 @@ export class NotFoundComponent {
 
     //score
     this.context.fillStyle = 'white';
-    this.context.font = '45px';
-    this.context.fillText(this.score.toString(), 340, 30);
-
+    this.context.font = '60px FlappyAngel';
+    if (this.score < 10) {
+      this.context.fillText(this.score.toString(), 165, 50);
+    } else {
+      this.context.fillText(this.score.toString(), 145, 50);
+    }
     if (this.gameOver) {
       this.backgroundSound.pause();
       this.backgroundSound.currentTime = 0;
+      this.context.clearRect(0, 0, this.board.width, this.board.height);
+      this.angel.y = this.angelY;
+      this.fireArray = [];
+      this.angel.y = Math.max(this.angel.y + this.velocityY, 0);
+      this.context.drawImage(
+        this.angelImg[this.currentFrame],
+        this.angel.x,
+        this.angel.y,
+        this.angel.width,
+        this.angel.height
+      );
       this.context.fillStyle = 'white';
-      this.context.fillText('Game Over', 80, 300);
+      this.context.font = '80px FlappyAngel';
+      this.context.fillText(`Game Over`, 40, 250);
+      this.context.font = '60px FlappyAngel';
+      if (this.score < 10) {
+        this.context.fillText(`Score ${this.score.toString()}`, 100, 300);
+      } else {
+        this.context.fillText(`Score ${this.score.toString()}`, 80, 300);
+      }
+      this.context.font = '40px FlappyAngel';
+      this.context.fillText(`Jump to Restart`, 65, 450);
     }
   }
 
@@ -240,8 +256,8 @@ export class NotFoundComponent {
 
       //reset game
       if (this.gameOver) {
-        this.angel.y = this.angelY;
-        this.fireArray = [];
+        // this.angel.y = this.angelY;
+        // this.fireArray = [];
         this.score = 0;
         this.gameOver = false;
       }
