@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-transaction',
@@ -8,9 +8,18 @@ import { Component } from '@angular/core';
   templateUrl: './transaction.component.html',
   styleUrl: './transaction.component.css'
 })
-export class TransactionComponent {
-  dateTransaction: Date = new Date();
-  description: string = "Description de la transaction/du budget.";
-  amount: number = 0;
+export class TransactionComponent implements OnInit {
+  @Input()
+  dateTransaction!: Date;
+  @Input()
+  description!: string;
+  @Input()
+  amount!: number;
 
+
+  ngOnInit(){
+    console.log('init',this.dateTransaction);
+    
+    
+  }
 }

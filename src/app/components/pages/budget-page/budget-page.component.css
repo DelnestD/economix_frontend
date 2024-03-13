@@ -13,3 +13,7 @@
 .btnAdd {
     @apply border-2 border-dark hover:border-secondary bg-secondary hover:bg-light hover:text-dark font-textFont p-3 rounded-xl;
 }
+
+.budgetTransaction {
+    @apply flex justify-between border-2 border-dark bg-primary rounded-t-xl p-3 h-20;
+}

@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.budgetTransaction {
+    @apply flex justify-between border-2 border-dark bg-primary rounded-t-xl p-3 h-20;
+}

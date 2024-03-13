@@ -4,17 +4,22 @@
             Mon compte
         </p>
         <div class="budgetTransaction">
-            <button type="button" class="btnAdd" (click)="showFormTransaction()">
+            <button type="button" class="btnAdd">
                 Nouvelle transaction
             </button>
-            <p class="flex items-center mr-4 font-textFont text-2xl">
-                € {{ totalCompte.toFixed(2) }}
-            </p>
+            <div class="flex items-center mr-4 font-textFont text-2xl w-[15%] justify-end">
+                <p>
+                    € {{ totalCompte.toFixed(2) }}
+                </p>
+            </div>
         </div>
         <div>
             @for (transaction of transactions; track transaction.id) {
-                {{ transaction.title }}
-                <app-transaction />
+                <app-transaction 
+                    [dateTransaction]="transaction.date"
+                    [description]="transaction.title"
+                    [amount]="transaction.amount"
+                />
             }
         </div>
     </div>

@@ -20,17 +20,13 @@ export class BudgetPageComponent implements OnInit {
   constructor(private transactionService: TransactionService) {}
 
   ngOnInit(): void {
-    this.loadTransactions();
+    this.loadTransactions(); 
   }
   
   loadTransactions() {
-    this.transactionService.getTransactionByAccountId('3996620d-b6cf-4cf8-a03a-684a1940e784').subscribe(transaction => {
-      this.transactions = transaction;
+    this.transactionService.getTransactionByAccountId('f8646c26-f727-4c72-93d6-b7ef3a136003').subscribe(transactions => {
+      this.transactions = transactions;
       console.log(this.transactions);
     })
-  }
-
-  showFormTransaction() {
-
   }
 }

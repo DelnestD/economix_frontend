@@ -18,12 +18,5 @@ export class BudgetStructureComponent implements OnInit {
   constructor(private transactionService: TransactionService) {}
 
   ngOnInit(): void {
-    this.loadTransactions;
-  }
-  
-  loadTransactions() {
-    this.transactionService.getTransactionByBudgetId('1').subscribe(transactions => {
-      this.transactions = transactions;
-    })
   }
 }
