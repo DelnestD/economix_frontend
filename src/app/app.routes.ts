@@ -17,15 +17,15 @@ export const routes: Routes = [
   },
   {
     path: 'about',
-    redirectTo: 'home',
+    component: AProposComponent,
   },
   {
     path: 'contact',
-    redirectTo: 'home',
+    component: ContactComponent,
   },
   {
     path: 'parameters',
-    redirectTo: 'home',
+    component: ParametresComponent,
   },
   {
     path: 'not-found',
