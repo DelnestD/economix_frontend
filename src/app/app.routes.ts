@@ -13,6 +13,18 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'about',
+    redirectTo: 'home',
+  },
+  {
+    path: 'contact',
+    redirectTo: 'home',
+  },
+  {
+    path: 'parameters',
+    redirectTo: 'home',
+  },
+  {
     path: 'not-found',
     component: NotFoundComponent,
   },

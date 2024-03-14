@@ -1,14 +1,22 @@
 <div id="navbar" class="flex justify-between px-5 py-2 bg-slate-300">
   <div id="logo">
-    <a href="">
+    <a routerLink="/home">
       <img src="./assets/images/logo.png" alt="logo" class="w-28" />
     </a>
   </div>
   <nav>
     <ul class="flex py-5">
-      <li><a href="">A propos</a></li>
-      <li class="px-8"><a href="">Contact</a></li>
-      <li><a href="">S'inscrire</a></li>
+      <li><a routerLink="/about">A propos</a></li>
+      <li class="px-8" routerLink="/contact"><a href="">Contact</a></li>
+      <li [hidden]="!isRegistered || isConnected" (click)="switchConnection()">
+        <span class="cursor-pointer">S'inscrire</span>
+      </li>
+      <li [hidden]="isRegistered || isConnected" (click)="switchConnection()">
+        <span class="cursor-pointer">Se Connecter</span>
+      </li>
+      <li [hidden]="!isConnected">
+        <a routerLink="/parameters">Mon Compte</a>
+      </li>
     </ul>
   </nav>
 </div>
