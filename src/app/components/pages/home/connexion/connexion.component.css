@@ -1,9 +1,9 @@
 main {
     display: flex;
+    width: 100%;
 }
 
 section {
-    width: 50%;
     height: max-content;
     padding: 60px 120px 60px 120px;
 }
@@ -51,6 +51,10 @@ h1 {
   .bouton:hover {
     background-color: #45a049;
   }
+
+.boxButton {
+  display: flex;
+}
 
   p {
     margin-bottom: 48px;
