@@ -2,6 +2,16 @@
   <h1>Inscription</h1>
   <form id="loginForm" method="post">
     <mat-form-field>
+      <mat-label>Entrez votre nom</mat-label>
+      <input matInput placeholder="Nom" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Entrez votre prénom</mat-label>
+      <input matInput placeholder="Prénom" />
+    </mat-form-field>
+
+    <mat-form-field>
       <mat-label>Entrez votre email</mat-label>
       <input
         matInput
@@ -45,6 +55,7 @@
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
     </mat-form-field>
+
     <div class="boxbutton">
       <button class="bouton" type="submit">S'inscrire</button>
       <button class="bouton" type="connexion" (click)="onConnexionClick()">
