@@ -1,5 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
+
+export interface SerializedTransaction {
+  id: string;
+  date: string;
+  title: string;
+  amount: number;
+}
 
 export interface Transaction {
   id: string;
@@ -16,24 +24,42 @@ export class TransactionService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getTransactionById(id: string) {
-    return this.httpClient.get<Transaction[]>(`${this.baseUrl}${id}`);
+  getTransactionById(id: string): Observable<Transaction[]> {
+    return this.httpClient.get<SerializedTransaction[]>(`${this.baseUrl}${id}`).pipe(
+      map((t) => {
+        return t.map((t) => ({
+          ...t,
+          date: new Date(t.date)
+        }))
+      }));
   }
 
-  getTransactionByBudgetId(budgetId: string) {
-    return this.httpClient.get<Transaction[]>(`${this.baseUrl}budget/${budgetId}`);
+  getTransactionByBudgetId(budgetId: string): Observable<Transaction[]> {
+    return this.httpClient.get<SerializedTransaction[]>(`${this.baseUrl}budget/${budgetId}`).pipe(
+      map((t) => {
+        return t.map((t) => ({
+          ...t,
+          date: new Date(t.date)
+        }))
+      }));
   }
 
-  getTransactionByAccountId(accountId: string) {
-    return this.httpClient.get<Transaction[]>(`${this.baseUrl}account/${accountId}`);
+  getTransactionByAccountId(accountId: string): Observable<Transaction[]> {
+    return this.httpClient.get<SerializedTransaction[]>(`${this.baseUrl}account/${accountId}`).pipe(
+      map((t) => {
+        return t.map((t) => ({
+          ...t,
+          date: new Date(t.date)
+        }))
+      }));
   }
 
-  insertTransaction(transaction: Transaction) {
-    return this.httpClient.post<Transaction>(this.baseUrl, transaction);
+  insertTransaction(transaction: SerializedTransaction) {
+    return this.httpClient.post<SerializedTransaction>(this.baseUrl, transaction);
   }
 
-  update(id: string, transaction: Partial<Transaction>) {
-    return this.httpClient.patch<Transaction>(`${this.baseUrl}${id}`, transaction);
+  update(id: string, transaction: Partial<SerializedTransaction>) {
+    return this.httpClient.patch<SerializedTransaction>(`${this.baseUrl}${id}`, transaction);
   }
 
   deleteTransaction(id: string) {
