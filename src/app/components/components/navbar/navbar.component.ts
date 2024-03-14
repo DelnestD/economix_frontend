@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
+  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
   isConnected: boolean = false;

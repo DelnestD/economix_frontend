@@ -1,29 +1,31 @@
-<div id="navbar" class="flex justify-between px-5 py-2 bg-slate-300">
+<div id="navbar" class="flex justify-between px-5 bg-secondary">
   <div id="logo">
-    <a routerLink="/home">
-      <img src="./assets/images/logo.png" alt="logo" class="w-28" />
+    <a routerLink="/home" routerLinkActive="active">
+      <img src="./assets/images/logo.png" alt="logo" class="w-[15%]" />
     </a>
   </div>
-  <nav>
-    <ul class="flex py-5">
-      <li class="cursor-pointer" routerLink="/about"><p>A propos</p></li>
-      <li class="px-8 cursor-pointer" routerLink="/contact"><p>Contact</p></li>
+  <nav class="px-4 flex items-center w-[35%]">
+    <ul class="flex justify-around w-full">
+      <li>
+        <a routerLink="/about" routerLinkActive="active" class="onglet"
+          >A propos</a
+        >
+      </li>
+      <li>
+        <a routerLink="/contact" routerLinkActive="active" class="onglet"
+          >Contact</a
+        >
+      </li>
       <li [hidden]="!isRegistered || isConnected" (click)="switchConnection()">
-        <p>S'inscrire</p>
+        <p class="onglet cursor-pointer">S'inscrire</p>
       </li>
-      <li
-        class="cursor-pointer"
-        [hidden]="isRegistered || isConnected"
-        (click)="switchConnection()"
-      >
-        <p>Se Connecter</p>
+      <li [hidden]="isRegistered || isConnected" (click)="switchConnection()">
+        <p class="onglet cursor-pointer">Se connecter</p>
       </li>
-      <li
-        class="cursor-pointer"
-        [hidden]="!isConnected"
-        routerLink="/parameters"
-      >
-        <p>Mon Compte</p>
+      <li [hidden]="!isConnected">
+        <a routerLink="/parametres" routerLinkActive="active" class="onglet"
+          >Mon Compte</a
+        >
       </li>
     </ul>
   </nav>
