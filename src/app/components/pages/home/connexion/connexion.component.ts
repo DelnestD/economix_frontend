@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -26,7 +27,7 @@ import {
 export class ConnexionComponent implements OnInit {
   hide = true;
   email = new FormControl('', [Validators.required, Validators.email]);
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef, private router: Router) {}
 
   ngOnInit(): void {
     const loginForm = this.el.nativeElement.querySelector(
@@ -63,5 +64,9 @@ export class ConnexionComponent implements OnInit {
   private validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  }
+
+  onSubscribeClick(): void {
+    this.router.navigate(['/subscribe']);
   }
 }

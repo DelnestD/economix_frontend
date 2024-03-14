@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -20,7 +21,7 @@ export class SubscribeComponent implements OnInit {
   @ViewChild('passwordConfirmation', { static: true }) passwordConfirmation!: ElementRef;
 
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef, private router: Router) { }
 
   ngOnInit(): void {
     const loginForm = this.el.nativeElement.querySelector('#loginForm') as HTMLFormElement;
@@ -54,5 +55,9 @@ export class SubscribeComponent implements OnInit {
   private validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  }
+
+  onConnexionClick(): void {
+    this.router.navigate(['/connexion']);
   }
 }

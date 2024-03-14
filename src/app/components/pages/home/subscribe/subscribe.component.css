@@ -45,6 +45,7 @@ h1 {
     border-radius: 4px;
     cursor: pointer;
     width: 120px;
+    margin-top: 48px;
   }
   
   .bouton:hover {
@@ -75,3 +76,4 @@ h1 {
   mat-form-field {
     width: 350px;
   }
+  
