@@ -3,7 +3,11 @@
 </h1>
 <div class="py-5 mb-5 flex">
   <div class="w-[28%] m-auto py-5 bg-light shadow-lg">
-    <form class="change-mdp font-textFont text-sm">
+    <form
+      [formGroup]="modifyPasswordForm"
+      (ngSubmit)="submit()"
+      class="change-mdp font-textFont text-sm"
+    >
       <div class="pt-5 pb-2 flex justify-end">
         <label class="px-3" for="mdp">Mot de passe actuel</label>
         <input class="inputText mr-3" type="password" id="mdp" name="mdp" />
@@ -26,8 +30,15 @@
           name="conf-mdp"
         />
       </div>
+      <p class="text-danger text-right pr-3 pb-3">{{ txtErrorPassword }}</p>
       <div class="flex justify-end">
-        <button class="btnSubmit mr-3" type="submit">Valider</button>
+        <button
+          class="btnSubmit mr-3"
+          type="submit"
+          (click)="modifyPassword(mdp.value)"
+        >
+          Valider
+        </button>
       </div>
     </form>
   </div>
