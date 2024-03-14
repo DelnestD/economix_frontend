@@ -8,8 +8,9 @@ import {
   FormControl,
   Validators,
   FormsModule,
-  ReactiveFormsModule,
+  ReactiveFormsModule
 } from '@angular/forms';
+import { HomeComponent } from '../home.component';
 @Component({
   selector: 'app-connexion',
   standalone: true,
@@ -20,6 +21,7 @@ import {
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    HomeComponent
   ],
   templateUrl: './connexion.component.html',
   styleUrl: './connexion.component.css',

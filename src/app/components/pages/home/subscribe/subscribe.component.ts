@@ -5,11 +5,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from '../home.component';
 
 @Component({
   selector: 'app-subscribe',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, FormsModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, FormsModule, ReactiveFormsModule, HomeComponent],
   templateUrl: './subscribe.component.html',
   styleUrls: ['./subscribe.component.css']
 })

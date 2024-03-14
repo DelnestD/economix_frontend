@@ -3,9 +3,7 @@ main {
 }
 
 section {
-  width: 50%;
   height: max-content;
-  padding: 60px 120px 60px 120px;
 }
 
 h1 {

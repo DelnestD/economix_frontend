@@ -1,66 +1,76 @@
-<section>
-  <h1>Inscription</h1>
-  <form id="loginForm" method="post">
-    <mat-form-field>
-      <mat-label>Entrez votre nom</mat-label>
-      <input matInput placeholder="Nom" />
-    </mat-form-field>
+<div class="flex">
+  <section class="w-1/2">
+    <app-home></app-home>
+  </section>
 
-    <mat-form-field>
-      <mat-label>Entrez votre prénom</mat-label>
-      <input matInput placeholder="Prénom" />
-    </mat-form-field>
+  <section>
+    <h1>Inscription</h1>
+    <form id="loginForm" method="post">
+      <mat-form-field>
+        <mat-label>Entrez votre nom</mat-label>
+        <input matInput placeholder="Nom" />
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Entrez votre email</mat-label>
-      <input
-        matInput
-        placeholder="machin@example.com"
-        [formControl]="email"
-        required
-      />
-      @if (email.invalid) {
-      <mat-error>{{ getErrorMessage() }}</mat-error>
-      }
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Entrez votre prénom</mat-label>
+        <input matInput placeholder="Prénom" />
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Mot de passe</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" />
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="hide = !hide"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide"
-      >
-        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-      </button>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Entrez votre email</mat-label>
+        <input
+          matInput
+          placeholder="machin@example.com"
+          [formControl]="email"
+          required
+        />
+        @if (email.invalid) {
+        <mat-error>{{ getErrorMessage() }}</mat-error>
+        }
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Vérification du mot de passe</mat-label>
-      <input
-        matInput
-        [type]="hide ? 'password' : 'text'"
-        #passwordConfirmation
-      />
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="hide = !hide"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide"
-      >
-        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-      </button>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Mot de passe</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
 
-    <div class="boxButton">
-      <button class="bouton" type="submit">S'inscrire</button>
-      <button class="bouton ml-8" type="connexion" (click)="onConnexionClick()">
-        Se connecter
-      </button>
-    </div>
-  </form>
-</section>
+      <mat-form-field>
+        <mat-label>Vérification du mot de passe</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          #passwordConfirmation
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="boxButton">
+        <button class="bouton" type="submit">S'inscrire</button>
+        <button
+          class="bouton ml-8"
+          type="connexion"
+          (click)="onConnexionClick()"
+        >
+          Se connecter
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

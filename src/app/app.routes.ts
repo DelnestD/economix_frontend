@@ -10,12 +10,12 @@ import { SubscribeComponent } from './components/pages/home/subscribe/subscribe.
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'connexion',
     pathMatch: 'full',
   },
   {
     path: 'home',
-    component: HomeComponent,
+    component: ConnexionComponent,
   },
   {
     path: 'a-propos',
