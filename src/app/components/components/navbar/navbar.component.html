@@ -6,16 +6,24 @@
   </div>
   <nav>
     <ul class="flex py-5">
-      <li><a routerLink="/about">A propos</a></li>
-      <li class="px-8" routerLink="/contact"><a href="">Contact</a></li>
+      <li class="cursor-pointer" routerLink="/about"><p>A propos</p></li>
+      <li class="px-8 cursor-pointer" routerLink="/contact"><p>Contact</p></li>
       <li [hidden]="!isRegistered || isConnected" (click)="switchConnection()">
-        <span class="cursor-pointer">S'inscrire</span>
+        <p>S'inscrire</p>
       </li>
-      <li [hidden]="isRegistered || isConnected" (click)="switchConnection()">
-        <span class="cursor-pointer">Se Connecter</span>
+      <li
+        class="cursor-pointer"
+        [hidden]="isRegistered || isConnected"
+        (click)="switchConnection()"
+      >
+        <p>Se Connecter</p>
       </li>
-      <li [hidden]="!isConnected">
-        <a routerLink="/parameters">Mon Compte</a>
+      <li
+        class="cursor-pointer"
+        [hidden]="!isConnected"
+        routerLink="/parameters"
+      >
+        <p>Mon Compte</p>
       </li>
     </ul>
   </nav>
