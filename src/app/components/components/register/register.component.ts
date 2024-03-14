@@ -1,12 +1,42 @@
 import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
 })
 export class RegisterComponent {
+  showPassword: boolean = false;
+  showPasswordConfirmation: boolean = false;
 
+  registerForm = new FormGroup(
+    {
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      email: new FormControl('', Validators.email),
+      password: new FormControl(''),
+      passwordConfirmation: new FormControl(''),
+    },
+    [Validators.required]
+  );
+
+  onSubmit() {
+    console.log(this.registerForm.value);
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+  toggleShowPasswordConfirmation() {
+    this.showPasswordConfirmation = !this.showPasswordConfirmation;
+  }
 }

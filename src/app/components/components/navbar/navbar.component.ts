@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-
+import { SharedService } from '../../../services/shared.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -13,7 +13,10 @@ export class NavbarComponent {
   isConnected: boolean = false;
   isRegistered: boolean = true;
 
-  constructor(private cookieService: CookieService) {}
+  constructor(
+    private cookieService: CookieService,
+    private sharedService: SharedService
+  ) {}
 
   ngOnInit() {
     //TODO check when login - register is implemented
@@ -29,6 +32,7 @@ export class NavbarComponent {
       this.isConnected = false;
       this.isRegistered = true;
     }
+    this.sharedService.changeRegisterStatus(this.isRegistered);
   }
 
   checkExpiration(dateToCheck: Date) {
@@ -42,5 +46,6 @@ export class NavbarComponent {
   switchConnection() {
     //TODO add switch of component from login to register and vice versa
     this.isRegistered = !this.isRegistered;
+    this.sharedService.changeRegisterStatus(this.isRegistered);
   }
 }
