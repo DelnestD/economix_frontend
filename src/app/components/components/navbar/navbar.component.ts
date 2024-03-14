@@ -8,7 +8,6 @@ import { CookieService } from 'ngx-cookie-service';
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
-  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
   isConnected: boolean = false;
@@ -17,7 +16,7 @@ export class NavbarComponent {
   constructor(private cookieService: CookieService) {}
 
   ngOnInit() {
-    //set here to check if user is connected
+    //TODO check when login - register is implemented
     const tokenCookie = this.cookieService.get('accessToken');
     const expirationCookie = new Date(this.cookieService.get('Expires'));
 
@@ -39,7 +38,9 @@ export class NavbarComponent {
     }
     return false;
   }
+
   switchConnection() {
+    //TODO add switch of component from login to register and vice versa
     this.isRegistered = !this.isRegistered;
   }
 }
