@@ -6,19 +6,27 @@
   </div>
   <nav class="px-4 flex items-center w-[35%]">
     <ul class="flex justify-around w-full">
-      <li>
+      <li class="tabs">
         <a routerLink="/about" routerLinkActive="active">A propos</a>
       </li>
-      <li>
+      <li class="tabs">
         <a routerLink="/contact" routerLinkActive="active">Contact</a>
       </li>
-      <li [hidden]="!isRegistered || isConnected" (click)="switchConnection()">
-        <p class="cursor-pointer">S'inscrire</p>
+      <li
+        [class.tabs]="isRegistered && !isConnected"
+        [hidden]="!isRegistered || isConnected"
+        (click)="switchConnection()"
+      >
+        <p>S'inscrire</p>
       </li>
-      <li [hidden]="isRegistered || isConnected" (click)="switchConnection()">
-        <p class="cursor-pointer">Se connecter</p>
+      <li
+        [class.tabs]="!isRegistered && !isConnected"
+        [hidden]="isRegistered || isConnected"
+        (click)="switchConnection()"
+      >
+        <p>Se connecter</p>
       </li>
-      <li [hidden]="!isConnected">
+      <li [class.tabs]="isConnected" [hidden]="!isConnected">
         <a routerLink="/parametres" routerLinkActive="active">Mon Compte</a>
       </li>
     </ul>

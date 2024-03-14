@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.tabs {
+  @apply h-[60px] w-[150px] flex justify-center items-center cursor-pointer hover:bg-primary hover:text-lg;
+}
+
+.tabs a {
+  @apply w-full h-full text-center py-4;
+}
