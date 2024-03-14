@@ -2,18 +2,45 @@
 
 <div class="py-5 mb-5 flex">
   <div class="w-[28%] m-auto py-5 bg-light shadow-lg">
-    <form class="change-mdp w-full m-auto font-textFont text-sm">
-      <div class="pt-5 pb-2 flex justify-end">
+    <form class="change-mdp w-[85%] m-auto font-textFont text-sm">
+      <div class="pt-5 pb-2 flex justify-center">
         <label class="px-3" for="name">e-mail</label>
         <input class="inputText mr-3" type="text" id="name" name="name" />
         <div class="flex justify-end">
-          <button
-            class="border py-1 bg-secondary px-2 rounded-md mr-3"
-            type="submit"
-          >
-            Ajouter
-          </button>
+          <button class="btnSubmit mr-3" type="submit">Ajouter</button>
         </div>
+      </div>
+      <div>
+        <table class="mt-4 w-full">
+          <thead class="pb-5 font-bold">
+            <td>Membres</td>
+            <td class="pl-5" colspan="2">Rôles</td>
+          </thead>
+          <tbody>
+            <tr>
+              <td><label for="role">membre 1</label></td>
+              <td>
+                <input type="radio" name="role1" id="leader" class="ml-5" />
+                Leader
+              </td>
+              <td>
+                <input type="radio" name="role1" id="membre" />
+                Membre
+              </td>
+            </tr>
+            <tr>
+              <td><label for="role">membre 2</label></td>
+              <td>
+                <input type="radio" name="role2" id="leader" class="ml-5" />
+                Leader
+              </td>
+              <td><input type="radio" name="role2" id="membre" /> Membre</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex justify-end mr-7">
+        <button class="btnSubmit mt-3" type="submit">Valider</button>
       </div>
     </form>
   </div>
