@@ -1,20 +1,44 @@
-<h1 class="text-center font-titleFont text-xl font-bold">Liste des membres</h1>
-
-<div class="py-5 mb-5 flex">
-  <div class="w-[28%] m-auto py-5 bg-light shadow-lg">
-    <form class="change-mdp w-full m-auto font-textFont text-sm">
-      <div class="pt-5 pb-2 flex justify-end">
-        <label class="px-3" for="name">e-mail</label>
-        <input class="inputText mr-3" type="text" id="name" name="name" />
-        <div class="flex justify-end">
-          <button
-            class="border py-1 bg-secondary px-2 rounded-md mr-3"
-            type="submit"
-          >
-            Ajouter
-          </button>
-        </div>
-      </div>
-    </form>
+<h1 class="text-center text-2xl font-semibold text-dark"></h1>
+Liste des membres
+<form class="mt-8" [formGroup]="usersList">
+  <div class="mx-auto max-w-xl">
+    <div class="py-2">
+      <label class="label flex" for="user">e-mail</label>
+      <input class="input" type="mail" id="user" formControlName="user" />
+    </div>
+    <button class="button" type="submit">Ajouter</button>
   </div>
-</div>
+
+  <div class="flex bg-light">
+    <div>
+      <div>
+        <h2>Membres</h2>
+      </div>
+      <div>
+        <p>membre 1</p>
+        <p>membre 2</p>
+      </div>
+    </div>
+    <div>
+      <div>
+        <h2>Rôles</h2>
+      </div>
+      <div class="flex">
+        <p>leader</p>
+        <label for=""></label>
+        <input type="radio" />
+        <p>membre</p>
+        <label for=""></label>
+        <input type="radio" />
+      </div>
+      <div class="flex">
+        <p>leader</p>
+        <label for=""></label>
+        <input type="radio" />
+        <p>membre</p>
+        <label for=""></label>
+        <input type="radio" />
+      </div>
+    </div>
+  </div>
+</form>

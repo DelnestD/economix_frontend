@@ -16,14 +16,16 @@ import { confirmPassword } from '../../../validators/password.validator';
   styleUrl: './update-user.component.css',
 })
 export class UpdateUserComponent {
+  showOldPassword : boolean = false;
   showPassword: boolean = false;
   showPasswordConfirmation: boolean = false;
 
-  registerForm = new FormGroup(
+  updateForm = new FormGroup(
     {
       firstName: new FormControl(''),
       lastName: new FormControl(''),
       email: new FormControl('', Validators.email),
+      oldPassword: new FormControl(''),
       password: new FormControl(''),
       passwordConfirmation: new FormControl(''),
     },
@@ -31,7 +33,11 @@ export class UpdateUserComponent {
   );
 
   onSubmit() {
-    console.log(this.registerForm.value);
+    console.log(this.updateForm.value);
+  }
+
+  toggleShowOldPassword() {
+    this.showOldPassword = !this.showOldPassword;
   }
 
   toggleShowPassword() {
