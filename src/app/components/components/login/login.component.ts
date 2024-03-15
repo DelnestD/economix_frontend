@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ import {
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  constructor(private loginService: LoginService) {}
   showPassword: boolean = false;
 
   loginForm: FormGroup = new FormGroup(
@@ -27,6 +29,7 @@ export class LoginComponent {
 
   onSubmit() {
     console.log(this.loginForm.value);
+    this.loginService.login(this.loginForm.value);
   }
 
   toggleShowPassword() {
