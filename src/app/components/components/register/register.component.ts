@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { confirmPassword } from '../../validators/password.validator';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +27,7 @@ export class RegisterComponent {
       password: new FormControl(''),
       passwordConfirmation: new FormControl(''),
     },
-    [Validators.required]
+    [Validators.required, confirmPassword]
   );
 
   onSubmit() {
