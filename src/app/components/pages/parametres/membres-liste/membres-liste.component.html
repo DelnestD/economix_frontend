@@ -1,5 +1,4 @@
-<h1 class="text-center text-2xl font-semibold text-dark"></h1>
-Liste des membres
+<h1 class="text-center text-2xl font-semibold text-dark">Liste des membres</h1>
 <form class="mt-8" [formGroup]="usersList">
   <div class="mx-auto max-w-xl">
     <div class="py-2">
@@ -9,9 +8,9 @@ Liste des membres
     <button class="button" type="submit">Ajouter</button>
   </div>
 
-  <div class="flex bg-light">
+  <div class="flex justify-around mx-auto max-w-xl bg-light mt-8 p-5">
     <div>
-      <div>
+      <div class="pb-3">
         <h2>Membres</h2>
       </div>
       <div>
@@ -20,24 +19,24 @@ Liste des membres
       </div>
     </div>
     <div>
-      <div>
+      <div class="pb-3">
         <h2>Rôles</h2>
       </div>
       <div class="flex">
         <p>leader</p>
-        <label for=""></label>
-        <input type="radio" />
+        <label for="leader1"></label>
+        <input type="radio" name="role1" id="leader1" class="mx-2" />
         <p>membre</p>
-        <label for=""></label>
-        <input type="radio" />
+        <label for="member1"></label>
+        <input type="radio" name="role1" id="member1" class="mx-2" />
       </div>
       <div class="flex">
         <p>leader</p>
-        <label for=""></label>
-        <input type="radio" />
+        <label for="leader2"></label>
+        <input type="radio" name="role2" id="leader2" class="mx-2" />
         <p>membre</p>
-        <label for=""></label>
-        <input type="radio" />
+        <label for="member2"></label>
+        <input type="radio" name="role2" id="member2" class="mx-2" />
       </div>
     </div>
   </div>
