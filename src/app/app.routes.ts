@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { NotFoundComponent } from './components/pages/not-found/not-found.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { AProposComponent } from './components/pages/a-propos/a-propos.component';
 import { ContactComponent } from './components/pages/contact/contact.component';
 import { ParametresComponent } from './components/pages/parametres/parametres.component';
+import { AboutComponent } from './components/pages/about/about.component';
 
 export const routes: Routes = [
   {
@@ -17,7 +17,7 @@ export const routes: Routes = [
   },
   {
     path: 'about',
-    component: AProposComponent,
+    component: AboutComponent,
   },
   {
     path: 'contact',
