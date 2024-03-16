@@ -11,3 +11,6 @@
 .button {
   @apply mt-3 text-lg font-semibold bg-secondary w-full rounded-lg px-6 py-3 block shadow-xl hover:text-[white] hover:bg-primary;
 }
+.error-message {
+  @apply text-danger text-sm;
+}

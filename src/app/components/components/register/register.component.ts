@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { confirmPassword } from '../../validators/password.validator';
+import { RegisterService } from '../../../services/register.service';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +20,7 @@ import { confirmPassword } from '../../validators/password.validator';
 export class RegisterComponent {
   showPassword: boolean = false;
   showPasswordConfirmation: boolean = false;
+  showErrorMessages: boolean = false;
 
   registerForm = new FormGroup(
     {
@@ -30,8 +33,32 @@ export class RegisterComponent {
     [Validators.required, confirmPassword]
   );
 
+  constructor(private registerService: RegisterService) {}
+
   onSubmit() {
-    console.log(this.registerForm.value);
+    const newUser = {
+      firstName: this.registerForm.value.firstName!,
+      lastName: this.registerForm.value.lastName!,
+      email: this.registerForm.value.email!,
+      password: this.registerForm.value.password!,
+    };
+    this.registerService
+      .register(newUser)
+      .pipe(
+        catchError((e: { status: number; message: string }) => {
+          const errorMessage =
+            e.status === 409 ? 'Email already exists' : e.message;
+          document.getElementsByClassName('error-message')[0].innerHTML =
+            'Un compte avec cet email existe déjà';
+          this.showErrorMessages = true;
+          return errorMessage;
+        })
+      )
+      .subscribe((reponse) => {
+        if (this.showErrorMessages === false) {
+          console.log('User registered successfully');
+        }
+      });
   }
 
   toggleShowPassword() {
