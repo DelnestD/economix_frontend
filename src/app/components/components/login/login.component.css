@@ -9,5 +9,14 @@
   @apply px-1 text-dark text-lg font-semibold;
 }
 .button {
-  @apply mt-3 text-lg font-semibold bg-secondary w-full rounded-lg px-6 py-3 block shadow-xl hover:text-[white] hover:bg-primary;
+  @apply mt-3 text-lg font-semibold bg-secondary w-full rounded-lg px-6 py-3 block shadow-xl cursor-default;
+}
+.button-hover {
+  @apply hover:text-[white] hover:bg-primary cursor-pointer;
+}
+.error-message {
+  @apply text-danger text-sm;
+}
+.error-label {
+  @apply px-1 text-danger text-lg font-semibold;
 }

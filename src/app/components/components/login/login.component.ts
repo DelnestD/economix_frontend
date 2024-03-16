@@ -6,9 +6,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { LoginService } from '../../../services/login.service';
+import { LoginService, accessToken } from '../../../services/login.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginComponent {
     private loginService: LoginService
   ) {}
   showPassword: boolean = false;
+  showErrorMessage: boolean = false;
 
   loginForm: FormGroup = new FormGroup(
     {
@@ -34,20 +36,35 @@ export class LoginComponent {
   );
 
   onSubmit() {
+    this.showErrorMessage = false;
     console.log(this.loginForm.value);
-    this.loginService.login(this.loginForm.value);
-    this.checkLoggedIn();
-  }
-
-  checkLoggedIn() {
-    const tokenCookie = this.cookieService.get('accessToken');
-    console.log('tokenCookie', tokenCookie);
-    if (tokenCookie) {
-      //TODO change route when view accound/budget is ready
-      this.router.navigate(['/parameters']);
-    } else {
-      console.error('No token found');
-    }
+    this.loginService
+      .login(this.loginForm.value)
+      .pipe(
+        catchError((e: { status: number; message: string }) => {
+          const errorMessage =
+            e.status === 401 ? 'Email or Password invalid' : e.message;
+          this.showErrorMessage = true;
+          return errorMessage;
+        })
+      )
+      .subscribe((response: string | accessToken) => {
+        if (this.showErrorMessage === false) {
+          console.log('User logged in successfully');
+          console.log('response', response);
+          if (typeof response !== 'string') {
+            const expires = new Date(response.expires);
+            this.cookieService.set(
+              'accessToken',
+              response.accessToken,
+              expires,
+              '/'
+            );
+            //TODO: redirect to the account/budget page
+            this.router.navigate(['/parameters']);
+          }
+        }
+      });
   }
 
   toggleShowPassword() {
