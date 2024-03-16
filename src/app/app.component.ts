@@ -14,5 +14,5 @@ import { BudgetPageComponent } from './components/pages/budget-page/budget-page.
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = '0';
+  title = 'economix';
 }

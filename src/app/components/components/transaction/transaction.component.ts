@@ -8,18 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './transaction.component.html',
   styleUrl: './transaction.component.css'
 })
-export class TransactionComponent implements OnInit {
+export class TransactionComponent {
   @Input()
   dateTransaction!: Date;
   @Input()
   description!: string;
   @Input()
   amount!: number;
-
-
-  ngOnInit(){
-    console.log('init',this.dateTransaction);
-    
-    
-  }
 }
