@@ -1,15 +1,49 @@
-<div id="navbar" class="flex justify-between px-5 py-2 bg-secondary">
+<div id="navbar" class="flex justify-between px-5 bg-secondary">
   <div id="logo">
-    <a routerLink="/budget" routerLinkActive="active">
-      <img src="./assets/images/logo.png" alt="logo" class="w-28" />
+    <a routerLink="/home" routerLinkActive="active">
+      <img src="./assets/images/logo.png" alt="logo" class="w-[15%]" />
     </a>
   </div>
-  <nav>
-    <ul class="flex py-5">
-      <li><a routerLink="/a-propos" routerLinkActive="active" class="onglet">A propos</a></li>
-      <li class="px-8"><a routerLink="/contact" routerLinkActive="active" class="onglet">Contact</a></li>
-      <li><a class="onglet hover:cursor-pointer">S'inscrire</a></li>
+  <nav class="px-4 flex items-center w-[35%]">
+    <ul class="flex justify-around w-full">
+      <li class="tabs">
+        <a routerLink="/about" routerLinkActive="active">A propos</a>
+      </li>
+      <li class="tabs">
+        <a routerLink="/contact" routerLinkActive="active">Contact</a>
+      </li>
+      <li
+        [class.tabs]="isRegistered && !isConnected"
+        [hidden]="!isRegistered || isConnected"
+        (click)="switchConnection()"
+      >
+        <p>S'inscrire</p>
+      </li>
+      <li
+        [class.tabs]="!isRegistered && !isConnected"
+        [hidden]="isRegistered || isConnected"
+        (click)="switchConnection()"
+      >
+        <p>Se connecter</p>
+      </li>
+      <li
+        [class.tabs-select-dropdown]="isConnected"
+        [hidden]="!isConnected"
+        (mouseenter)="setShowDropDown(true)"
+        (mouseleave)="setShowDropDown(false)"
+      >
+        <p>Mon Compte</p>
+        <ul class="dropdown" [hidden]="!showDropDown">
+          <li class="tabs-dropdown">
+            <a routerLink="/parameters" routerLinkActive="active"
+              >Mes Paramètres</a
+            >
+          </li>
+          <li class="tabs-dropdown" (click)="deconnect()">
+            <p>Se déconnecter</p>
+          </li>
+        </ul>
+      </li>
     </ul>
   </nav>
 </div>
-<router-outlet />
