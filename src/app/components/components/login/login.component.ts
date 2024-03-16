@@ -8,7 +8,6 @@ import {
 } from '@angular/forms';
 import { LoginService, accessToken } from '../../../services/login.service';
 import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
 
 @Component({
@@ -20,7 +19,6 @@ import { catchError } from 'rxjs';
 })
 export class LoginComponent {
   constructor(
-    private router: Router,
     private cookieService: CookieService,
     private loginService: LoginService
   ) {}
@@ -61,7 +59,8 @@ export class LoginComponent {
               '/'
             );
             //TODO: redirect to the account/budget page
-            this.router.navigate(['/parameters']);
+            //? windows location because reload also navbar
+            window.location.href = '/parameters';
           }
         }
       });
