@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ParametersComponent } from './parameters.component';
+import { ParametersGroupComponent } from './parameters-group.component';
 
-describe('ParametersComponent', () => {
-  let component: ParametersComponent;
-  let fixture: ComponentFixture<ParametersComponent>;
+describe('ParametersGroupComponent', () => {
+  let component: ParametersGroupComponent;
+  let fixture: ComponentFixture<ParametersGroupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ParametersComponent]
+      imports: [ParametersGroupComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ParametersComponent);
+    fixture = TestBed.createComponent(ParametersGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

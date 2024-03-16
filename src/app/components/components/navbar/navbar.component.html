@@ -6,6 +6,9 @@
   </div>
   <nav class="px-4 flex items-center w-[35%]">
     <ul class="flex justify-around w-full">
+      <!-- <li class="tabs">
+        <a routerLink="/budget" routerLinkActive="active">Budget</a>
+      </li> -->
       <li class="tabs">
         <a routerLink="/about" routerLinkActive="active">A propos</a>
       </li>
@@ -32,11 +35,16 @@
         (mouseenter)="setShowDropDown(true)"
         (mouseleave)="setShowDropDown(false)"
       >
-        <p>Mon Compte</p>
+        <p>Mes Paramètres</p>
         <ul class="dropdown" [hidden]="!showDropDown">
           <li class="tabs-dropdown">
-            <a routerLink="/parameters" routerLinkActive="active"
-              >Mes Paramètres</a
+            <a routerLink="/parameters/user" routerLinkActive="active"
+              >Mon Compte</a
+            >
+          </li>
+          <li class="tabs-dropdown">
+            <a routerLink="/parameters/group" routerLinkActive="active"
+              >Mon Foyer</a
             >
           </li>
           <li class="tabs-dropdown" (click)="deconnect()">

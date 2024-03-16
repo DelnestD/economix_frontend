@@ -3,7 +3,8 @@ import { NotFoundComponent } from './components/pages/not-found/not-found.compon
 import { HomeComponent } from './components/pages/home/home.component';
 import { ContactComponent } from './components/pages/contact/contact.component';
 import { AboutComponent } from './components/pages/about/about.component';
-import { ParametersComponent } from './components/pages/parameters/parameters.component';
+import { ParametersUserComponent } from './components/pages/parameters-user/parameters-user.component';
+import { ParametersGroupComponent } from './components/pages/parameters-group/parameters-group.component';
 
 export const routes: Routes = [
   {
@@ -25,7 +26,10 @@ export const routes: Routes = [
   },
   {
     path: 'parameters',
-    component: ParametersComponent,
+    children: [
+      { path: 'user', component: ParametersUserComponent },
+      { path: 'group', component: ParametersGroupComponent },
+    ],
   },
   {
     path: 'not-found',

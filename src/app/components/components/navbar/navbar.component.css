@@ -20,11 +20,11 @@
 }
 
 .dropdown {
-  @apply w-[150px] h-[120px] absolute top-[60px] right-0 mr-[5.85rem] bg-secondary shadow-lg text-base;
+  @apply w-[150px] absolute top-[60px] right-0 mr-[5.85rem] shadow-lg text-base;
 }
 
 .tabs-dropdown {
-  @apply w-full h-1/2 flex justify-center items-center cursor-pointer hover:bg-primary hover:text-lg;
+  @apply w-full h-1/2 flex justify-center items-center cursor-pointer bg-secondary hover:bg-primary hover:text-lg;
 }
 
 .tabs-dropdown a,
