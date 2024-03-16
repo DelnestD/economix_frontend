@@ -13,10 +13,10 @@ import { confirmPassword } from '../../../validators/password.validator';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './update-user.component.html',
-  styleUrl: './update-user.component.css',
+  styleUrl: '../../../../../styles.css',
 })
 export class UpdateUserComponent {
-  showOldPassword : boolean = false;
+  showOldPassword: boolean = false;
   showPassword: boolean = false;
   showPasswordConfirmation: boolean = false;
 

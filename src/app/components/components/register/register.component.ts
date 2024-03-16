@@ -15,7 +15,7 @@ import { catchError } from 'rxjs';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
+  styleUrl: '../../../../styles.css',
 })
 export class RegisterComponent {
   showPassword: boolean = false;

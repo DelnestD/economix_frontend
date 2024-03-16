@@ -15,7 +15,7 @@ import { catchError } from 'rxjs';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrl: '../../../../styles.css',
 })
 export class LoginComponent {
   constructor(

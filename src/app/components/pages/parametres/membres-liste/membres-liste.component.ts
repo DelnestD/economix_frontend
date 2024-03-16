@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-membres-liste',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './membres-liste.component.html',
-  styleUrl: './membres-liste.component.css'
+  styleUrl: '../../../../../styles.css',
 })
 export class MembresListeComponent {
   usersList = new FormGroup(
@@ -19,4 +25,3 @@ export class MembresListeComponent {
     [Validators.required]
   );
 }
-
