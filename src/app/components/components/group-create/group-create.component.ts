@@ -8,16 +8,16 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'app-modification-groupe',
+  selector: 'app-group-create',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
-  templateUrl: './modification-groupe.component.html',
-  styleUrl: '../../../../../styles.css',
+  templateUrl: './group-create.component.html',
+  styleUrl: '../../../../styles.css',
 })
-export class ModificationGroupeComponent {
-  updateGroupForm = new FormGroup(
+export class GroupCreateComponent {
+  createGroupForm = new FormGroup(
     {
-      newName: new FormControl(''),
+      name: new FormControl(''),
     },
     [Validators.required]
   );

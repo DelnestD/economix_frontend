@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { NotFoundComponent } from './components/pages/not-found/not-found.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { ContactComponent } from './components/pages/contact/contact.component';
-import { ParametresComponent } from './components/pages/parametres/parametres.component';
 import { AboutComponent } from './components/pages/about/about.component';
+import { ParametersComponent } from './components/pages/parameters/parameters.component';
 
 export const routes: Routes = [
   {
@@ -25,7 +25,7 @@ export const routes: Routes = [
   },
   {
     path: 'parameters',
-    component: ParametresComponent,
+    component: ParametersComponent,
   },
   {
     path: 'not-found',
