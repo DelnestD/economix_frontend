@@ -1,23 +1,12 @@
-<h1 class="text-center font-titleFont text-xl font-bold">
+<h1 class="text-center text-2xl font-semibold text-dark">
   Création d'un groupe
+  <form class="mt-8" [formGroup]="createGroupForm">
+    <div class="mx-auto max-w-xl">
+      <div class="py-2">
+        <label class="label flex" for="name">Nom</label>
+        <input class="input" type="text" id="name" formControlName="name" />
+      </div>
+      <button class="button" type="submit">Créer</button>
+    </div>
+  </form>
 </h1>
-
-<div class="py-5 mb-5 flex">
-  <div class="w-[28%] m-auto py-5 bg-light shadow-lg">
-    <form class="change-mdp w-full m-auto font-textFont text-sm">
-      <div class="pt-5 pb-2 flex justify-end">
-        <label class="px-3" for="name">Nom du groupe</label>
-        <input class="inputText mr-3" type="text" id="name" name="name" />
-      </div>
-
-      <div class="flex justify-end">
-        <button
-          class="border py-1 bg-secondary px-2 rounded-md mr-3"
-          type="submit"
-        >
-          Valider
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
