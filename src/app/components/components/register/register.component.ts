@@ -22,16 +22,18 @@ export class RegisterComponent {
   showPasswordConfirmation: boolean = false;
   showErrorMessages: boolean = false;
 
-  registerForm = new FormGroup(
-    {
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      email: new FormControl('', Validators.email),
-      password: new FormControl(''),
-      passwordConfirmation: new FormControl(''),
-    },
-    [Validators.required, confirmPassword]
-  );
+  registerForm = new FormGroup({
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.email, Validators.required]),
+    passwordGroup: new FormGroup(
+      {
+        password: new FormControl('', [Validators.required]),
+        passwordConfirmation: new FormControl('', [Validators.required]),
+      },
+      confirmPassword
+    ),
+  });
 
   constructor(private registerService: RegisterService) {}
 
@@ -40,7 +42,7 @@ export class RegisterComponent {
       firstName: this.registerForm.value.firstName!,
       lastName: this.registerForm.value.lastName!,
       email: this.registerForm.value.email!,
-      password: this.registerForm.value.password!,
+      password: this.registerForm.value.passwordGroup?.password!,
     };
     this.registerService
       .register(newUser)
@@ -48,8 +50,6 @@ export class RegisterComponent {
         catchError((e: { status: number; message: string }) => {
           const errorMessage =
             e.status === 409 ? 'Email already exists' : e.message;
-          document.getElementsByClassName('error-message')[0].innerHTML =
-            'Un compte avec cet email existe déjà';
           this.showErrorMessages = true;
           return errorMessage;
         })
@@ -59,6 +59,14 @@ export class RegisterComponent {
           console.log('User registered successfully');
         }
       });
+  }
+
+  get EmailControl() {
+    return this.registerForm.get('email') as FormControl;
+  }
+
+  get PasswordGroupControl() {
+    return this.registerForm.get('passwordGroup') as FormGroup;
   }
 
   toggleShowPassword() {
