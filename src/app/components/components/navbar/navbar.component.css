@@ -8,11 +8,15 @@
 
 .tabs a,
 .tabs p {
-  @apply w-full h-full text-center py-4;
+  @apply w-full h-full text-center font-semibold py-4;
 }
 
 .tabs-select-dropdown {
   @apply h-[60px] w-[150px] flex justify-center items-center cursor-default hover:bg-primary hover:text-lg;
+}
+
+.tabs-select-dropdown p {
+  @apply w-full h-full text-center font-semibold py-4;
 }
 
 .dropdown {
@@ -21,4 +25,9 @@
 
 .tabs-dropdown {
   @apply w-full h-1/2 flex justify-center items-center cursor-pointer hover:bg-primary hover:text-lg;
+}
+
+.tabs-dropdown a,
+.tabs-dropdown p {
+  @apply w-full h-full text-center font-semibold py-4;
 }
