@@ -8,13 +8,13 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'app-user-role-update',
+  selector: 'app-group-user-list-update',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
-  templateUrl: './user-role-update.component.html',
+  templateUrl: './group-user-list-update.component.html',
   styleUrl: '../../../../styles.css',
 })
-export class UserRoleUpdateComponent {
+export class GroupUserListUpdateComponent {
   usersList = new FormGroup(
     {
       user: new FormControl(''),
