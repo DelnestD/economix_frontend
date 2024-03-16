@@ -9,7 +9,7 @@ import { SharedService } from '../../../services/shared.service';
   standalone: true,
   imports: [CommonModule, LoginComponent, RegisterComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrl: '../../../../styles.css',
 })
 export class HomeComponent {
   showLogin: boolean = false;
