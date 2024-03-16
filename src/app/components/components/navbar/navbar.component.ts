@@ -12,6 +12,7 @@ import { SharedService } from '../../../services/shared.service';
 export class NavbarComponent {
   isConnected: boolean = false;
   isRegistered: boolean = true;
+  showDropDown: boolean = false;
 
   constructor(
     private router: Router,
@@ -34,5 +35,16 @@ export class NavbarComponent {
   switchConnection() {
     this.isRegistered = !this.isRegistered;
     this.sharedService.changeRegisterStatus(this.isRegistered);
+  }
+
+  setShowDropDown(value: boolean) {
+    this.showDropDown = value;
+  }
+
+  deconnect() {
+    this.cookieService.delete('accessToken');
+    this.isConnected = false;
+    this.isRegistered = true;
+    this.router.navigate(['/home']);
   }
 }
