@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { LoginService } from '../../../services/login.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,11 @@ import { LoginService } from '../../../services/login.service';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private loginService: LoginService) {}
+  constructor(
+    private router: Router,
+    private cookieService: CookieService,
+    private loginService: LoginService
+  ) {}
   showPassword: boolean = false;
 
   loginForm: FormGroup = new FormGroup(
@@ -30,6 +36,18 @@ export class LoginComponent {
   onSubmit() {
     console.log(this.loginForm.value);
     this.loginService.login(this.loginForm.value);
+    this.checkLoggedIn();
+  }
+
+  checkLoggedIn() {
+    const tokenCookie = this.cookieService.get('accessToken');
+    console.log('tokenCookie', tokenCookie);
+    if (tokenCookie) {
+      //TODO change route when view accound/budget is ready
+      this.router.navigate(['/parameters']);
+    } else {
+      console.error('No token found');
+    }
   }
 
   toggleShowPassword() {
