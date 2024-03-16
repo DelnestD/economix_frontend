@@ -47,6 +47,13 @@
         </div>
       </div>
     </div>
-    <button class="button" type="submit">Se connecter</button>
+    <button
+      class="button"
+      type="submit"
+      [disabled]="loginForm.invalid"
+      [class.button-hover]="loginForm.valid"
+    >
+      Se connecter
+    </button>
   </div>
 </form>

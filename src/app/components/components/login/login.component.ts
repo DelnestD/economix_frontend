@@ -25,13 +25,10 @@ export class LoginComponent {
   showPassword: boolean = false;
   showErrorMessage: boolean = false;
 
-  loginForm: FormGroup = new FormGroup(
-    {
-      email: new FormControl('', Validators.email),
-      password: new FormControl(''),
-    },
-    [Validators.required]
-  );
+  loginForm: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+  });
 
   onSubmit() {
     this.showErrorMessage = false;
