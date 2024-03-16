@@ -20,7 +20,6 @@ export class AppComponent {
   ngOnInit() {
     this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        console.log(val.url);
         if (
           val.url === '/not-found' ||
           val.urlAfterRedirects === '/not-found'
