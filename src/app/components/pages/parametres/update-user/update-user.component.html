@@ -144,6 +144,13 @@
         </div>
       </div>
     </div>
-    <button class="button" type="submit">Mettre à jour</button>
+    <button
+      class="button"
+      type="submit"
+      [disabled]="updateForm.invalid"
+      [class.button-hover]="updateForm.valid"
+    >
+      Mettre à jour
+    </button>
   </div>
 </form>

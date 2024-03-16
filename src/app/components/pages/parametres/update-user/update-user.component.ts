@@ -22,14 +22,14 @@ export class UpdateUserComponent {
 
   updateForm = new FormGroup(
     {
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      email: new FormControl('', Validators.email),
-      oldPassword: new FormControl(''),
-      password: new FormControl(''),
-      passwordConfirmation: new FormControl(''),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      oldPassword: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      passwordConfirmation: new FormControl('', [Validators.required]),
     },
-    [Validators.required, confirmPassword]
+    [confirmPassword]
   );
 
   onSubmit() {
