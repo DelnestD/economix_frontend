@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { User, UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-user-infos-update',
@@ -22,6 +23,25 @@ export class UserInfosUpdateComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
+
+  declare actualUser: User;
+
+  constructor(userService: UserService) {
+    userService
+      .getUserById('58595930-d57c-47fa-b704-25b0d0edf44e')
+      .subscribe((user) => {
+        console.log(user);
+
+        this.actualUser = user;
+        this.updateUserForm.setValue({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          password: '',
+        });
+      });
+  }
+
   onSubmit() {
     console.log(this.updateUserForm.value);
   }
