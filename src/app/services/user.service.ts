@@ -6,8 +6,8 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
-  role: Role;
+  password?: string;
+  role?: Role;
 }
 
 export enum Role {
@@ -47,8 +47,8 @@ export class UserService {
     return this.httpClient.post<User>(this.baseUrl, user);
   }
 
-  updateUser(id: string, user: Partial<User>) {
-    return this.httpClient.patch<User>(`${this.baseUrl}${id}`, user);
+  updateUser(user: Partial<User>) {
+    return this.httpClient.patch<User>(`${this.baseUrl}${user.id}`, user);
   }
 
   deleteUser(id: string) {

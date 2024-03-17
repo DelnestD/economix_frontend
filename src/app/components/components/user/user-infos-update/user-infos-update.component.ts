@@ -7,6 +7,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { User, UserService } from '../../../../services/user.service';
+import { CookieService } from 'ngx-cookie-service';
+import { jwtDecode } from 'jwt-decode';
+import bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-user-infos-update',
@@ -17,6 +20,8 @@ import { User, UserService } from '../../../../services/user.service';
 })
 export class UserInfosUpdateComponent {
   showPassword: boolean = false;
+  showErrorMessage: boolean = false;
+
   updateUserForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -26,24 +31,45 @@ export class UserInfosUpdateComponent {
 
   declare actualUser: User;
 
-  constructor(userService: UserService) {
-    userService
-      .getUserById('58595930-d57c-47fa-b704-25b0d0edf44e')
-      .subscribe((user) => {
-        console.log(user);
-
-        this.actualUser = user;
-        this.updateUserForm.setValue({
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          password: '',
-        });
+  constructor(
+    private userService: UserService,
+    private cookieService: CookieService
+  ) {
+    userService.getUserById(this.getActualIdUser()).subscribe((user) => {
+      this.actualUser = user;
+      this.updateUserForm.setValue({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        password: '',
       });
+    });
   }
 
   onSubmit() {
-    console.log(this.updateUserForm.value);
+    bcrypt.compare(
+      this.updateUserForm.value.password!,
+      this.actualUser.password!,
+      (err, res) => {
+        if (res) {
+          const updatedUser: User = {
+            id: this.actualUser.id,
+            firstName: this.updateUserForm.value.firstName!,
+            lastName: this.updateUserForm.value.lastName!,
+            email: this.updateUserForm.value.email!,
+          };
+          //? check email ?
+          this.userService.updateUser(updatedUser).subscribe((user) => {
+            console.log('User updated', user);
+          });
+        } else {
+          console.error('Password is incorrect');
+          this.showErrorMessage = true;
+          document.getElementsByClassName('error-message')[0].innerHTML =
+            'Mot de passe incorrect';
+        }
+      }
+    );
   }
 
   get EmailControl() {
@@ -52,5 +78,16 @@ export class UserInfosUpdateComponent {
 
   toggleShowPassword() {
     this.showPassword = !this.showPassword;
+  }
+  getActualIdUser() {
+    return this.getDecodedAccessToken(this.cookieService.get('accessToken')).id;
+  }
+
+  getDecodedAccessToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      return null;
+    }
   }
 }
