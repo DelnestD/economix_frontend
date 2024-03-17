@@ -12,7 +12,7 @@ import {
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './group-user-list-update.component.html',
-  styleUrl: '../../../../styles.css',
+  styleUrl: '../../../../../styles.css',
 })
 export class GroupUserListUpdateComponent {
   usersList = new FormGroup(

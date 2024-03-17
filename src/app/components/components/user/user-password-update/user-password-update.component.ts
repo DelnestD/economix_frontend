@@ -6,14 +6,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { confirmPassword } from '../../validators/password.validator';
+import { confirmPassword } from '../../../validators/password.validator';
 
 @Component({
   selector: 'app-user-password-update',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './user-password-update.component.html',
-  styleUrl: '../../../../styles.css',
+  styleUrl: '../../../../../styles.css',
 })
 export class UserPasswordUpdateComponent {
   showOldPassword: boolean = false;

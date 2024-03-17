@@ -6,8 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { confirmPassword } from '../../validators/password.validator';
-import { RegisterService } from '../../../services/register.service';
+import { confirmPassword } from '../../../validators/password.validator';
+import { RegisterService } from '../../../../services/register.service';
 import { catchError } from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ import { catchError } from 'rxjs';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: '../../../../styles.css',
+  styleUrl: '../../../../../styles.css',
 })
 export class RegisterComponent {
   showPassword: boolean = false;

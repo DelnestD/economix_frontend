@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { GroupCreateComponent } from '../../components/group-create/group-create.component';
-import { GroupUpdateComponent } from '../../components/group-update/group-update.component';
-import { GroupUserListUpdateComponent } from '../../components/group-user-list-update/group-user-list-update.component';
+import { GroupCreateComponent } from '../../components/group/group-create/group-create.component';
+import { GroupUpdateComponent } from '../../components/group/group-update/group-update.component';
+import { GroupUserListUpdateComponent } from '../../components/group/group-user-list-update/group-user-list-update.component';
 
 @Component({
   selector: 'app-parameters-group',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { SharedService } from '../../../services/shared.service';
+import { SharedService } from '../../../../services/shared.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,

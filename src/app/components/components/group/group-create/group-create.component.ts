@@ -12,7 +12,7 @@ import {
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './group-create.component.html',
-  styleUrl: '../../../../styles.css',
+  styleUrl: '../../../../../styles.css',
 })
 export class GroupCreateComponent {
   createGroupForm = new FormGroup(

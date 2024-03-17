@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { LoginService, accessToken } from '../../../services/login.service';
+import { LoginService, accessToken } from '../../../../services/login.service';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError } from 'rxjs';
 
@@ -15,7 +15,7 @@ import { catchError } from 'rxjs';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: '../../../../styles.css',
+  styleUrl: '../../../../../styles.css',
 })
 export class LoginComponent {
   constructor(

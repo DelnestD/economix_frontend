@@ -12,7 +12,7 @@ import {
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './group-update.component.html',
-  styleUrl: '../../../../styles.css',
+  styleUrl: '../../../../../styles.css',
 })
 export class GroupUpdateComponent {
   updateGroupForm = new FormGroup(

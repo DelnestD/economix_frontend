@@ -12,7 +12,7 @@ import {
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './user-infos-update.component.html',
-  styleUrl: '../../../../styles.css',
+  styleUrl: '../../../../../styles.css',
 })
 export class UserInfosUpdateComponent {
   showPassword: boolean = false;
