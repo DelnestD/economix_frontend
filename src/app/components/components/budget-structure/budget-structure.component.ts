@@ -1,22 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { TransactionComponent } from '../transaction/transaction.component';
-import { Transaction, TransactionService } from '../../../services/transaction.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-budget-structure',
   standalone: true,
-  imports: [TransactionComponent],
+  imports: [HttpClientModule],
   templateUrl: './budget-structure.component.html',
   styleUrl: './budget-structure.component.css'
 })
-export class BudgetStructureComponent implements OnInit {
-  totalBudget: number = 0;
-  titleBudget: string = "Budget 1";
-
-  transactions: Transaction[] = [];
-
-  constructor(private transactionService: TransactionService) {}
-
-  ngOnInit(): void {
-  }
+export class BudgetStructureComponent {
+  @Input()
+  description!: string;
+  @Input()
+  total!: string;
 }

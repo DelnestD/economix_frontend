@@ -1,34 +1,56 @@
 <div class="w-full flex">
     <div class="side border-r-4 border-r-secondary">
-        <p class="title">
-            Mon compte
-        </p>
-        <div class="budgetTransaction">
+        <div class="flex justify-between items-center">
+            <p class="title">
+                Mon compte
+            </p>
             <button type="button" class="btnAdd">
                 Nouvelle transaction
             </button>
-            <div class="flex items-center mr-4 font-textFont text-2xl w-[15%] justify-end">
-                <p>
-                    € {{ totalCompte.toFixed(2) }}
-                </p>
-            </div>
         </div>
-        <div>
-            @for (transaction of transactions; track transaction.id) {
-                <app-transaction 
-                    [dateTransaction]="transaction.date"
-                    [description]="transaction.title"
-                    [amount]="transaction.amount"
-                />
+
+        <cdk-accordion>
+            @for (account of accounts; track account.id; let index = $index) {
+                <cdk-accordion-item
+                    #accordionItem="cdkAccordionItem"
+                    role="button"
+                    tabindex="0"
+                    [attr.id]="'accordion-header-' + index"
+                    [attr.aria-expanded]="accordionItem.expanded"
+                    [attr.aria-controls]="'accordion-body-' + index"
+                >
+                    <div (click)="accordionItem.toggle()">
+                        <app-budget-structure 
+                            [description]="account.description"
+                            [total]="totalAccount.toFixed(2)"
+                        />
+                    </div>
+                    <div
+                        role="region"
+                        [style.display]="accordionItem.expanded ? '' : 'none'"
+                        [attr.id]="'accordion-body-' + index"
+                        [attr.aria-labelledby]="'accordion-header-' + index"
+                    >
+                        @for (transaction of transactions; track transaction.id) {
+                            <app-transaction 
+                                [dateTransaction]="transaction.date"
+                                [description]="transaction.title"
+                                [amount]="transaction.amount"
+                            />
+                        }
+                    </div>
+                </cdk-accordion-item>
             }
-        </div>
+        </cdk-accordion>
+
     </div>
+
     <div class="side">
         <div class="flex justify-between items-center">
             <p class="title">
                 Mon budget
             </p>
-            <button type="button" class="btnAdd -mt-10">
+            <button type="button" class="btnAdd">
                 Nouveau budget
             </button>
         </div>

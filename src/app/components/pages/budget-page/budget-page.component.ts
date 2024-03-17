@@ -3,50 +3,59 @@ import { BudgetStructureComponent } from '../../components/budget-structure/budg
 import { TransactionComponent } from '../../components/transaction/transaction.component';
 import { TransactionFormComponent } from '../../forms/transaction-form/transaction-form.component';
 import { Transaction, TransactionService } from '../../../services/transaction.service';
+import { Account, AccountService } from '../../../services/account.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AccountService } from '../../../services/account.service';
-// import { jwtDecode } from "jwt-decode";
 import { UserService } from '../../../services/user.service';
-import { Collapse, Tooltip, initTWE } from 'tw-elements';
+import { CookieService } from 'ngx-cookie-service';
+import { jwtDecode } from "jwt-decode";
+import { CdkAccordionModule } from "@angular/cdk/accordion";
 
 @Component({
   selector: 'app-budget-page',
   standalone: true,
-  imports: [HttpClientModule, BudgetStructureComponent, TransactionComponent, TransactionFormComponent],
+  imports: [HttpClientModule, BudgetStructureComponent, TransactionComponent, TransactionFormComponent, CdkAccordionModule],
   templateUrl: './budget-page.component.html',
   styleUrl: './budget-page.component.css'
 })
 export class BudgetPageComponent implements OnInit {
-  totalCompte: number = 0;
-  
-  transactions: Transaction[] = [];
+  expandedIndex = 0;
+  totalAccount: number = 0;
 
-  constructor(private transactionService: TransactionService, private accountService: AccountService, private userService: UserService) {}
+  transactions: Transaction[] = [];
+  accounts: Account[] = [];
+
+  constructor(
+    private transactionService: TransactionService, 
+    private accountService: AccountService, 
+    private userService: UserService,
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit(): void {
-    initTWE({ Collapse });
-    this.loadTransactions(); 
-    // console.log('getDecodeAccessToken', this.getDecodedAccessToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyMGI3NzcxLTkxOGMtNDE3YS05ZjQwLWI3MDMzN2VjYTdiOCIsImlhdCI6MTcxMDYxMTg5OSwiZXhwIjoxNzEwNjEyMTk5fQ.jCvLKPVNCf6wiltpbkYlOCeLlqp6WFT7zy3BPziG2ak").id);
+    this.loadAccounts();
   }
-  
-  loadTransactions() {
-    this.transactionService.getTransactionByAccountId('7134415e-d9fc-4208-8108-8cb47d433cad').subscribe(transactions => {
-      this.transactions = transactions;
-      // console.log('accountId', this.getAccountId().subscribe(accountId => {console.log(accountId);
-      console.log('getCurrentIdUser', sessionStorage.getItem('id'));
+
+  loadAccounts() {
+    this.userService.getUserAccounts(this.getActualIdUser()).subscribe(accounts => {
+      this.accounts = accounts;
+      accounts.forEach(acc => {
+        this.transactionService.getTransactionByAccountId(acc.id).subscribe(transactions => {
+          console.log('transactions', this.transactions = transactions);
+        });
+      })
     })
   }
 
-  getAccountId() {
-    return this.accountService.getAccountById('7134415e-d9fc-4208-8108-8cb47d433cad');
+  getActualIdUser() {
+    return this.getDecodedAccessToken(this.cookieService.get("accessToken")).id;
   }
 
-  // getDecodedAccessToken(token: string): any {
-  //   try {
-  //     return jwtDecode(token);
-  //   } catch (Error) {
-  //     return null;
-  //   }
-    
-  // }
+  getDecodedAccessToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      return null;
+    }
+  }
+  
 }
