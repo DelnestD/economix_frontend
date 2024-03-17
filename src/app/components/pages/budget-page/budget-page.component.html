@@ -8,7 +8,6 @@
                 Nouvelle transaction
             </button>
         </div>
-
         <cdk-accordion>
             @for (account of accounts; track account.id; let index = $index) {
                 <cdk-accordion-item
@@ -31,7 +30,7 @@
                         [attr.id]="'accordion-body-' + index"
                         [attr.aria-labelledby]="'accordion-header-' + index"
                     >
-                        @for (transaction of transactions[index]; track transaction.id) {
+                        @for (transaction of transactionsAccount[index]; track transaction.id) {
                             <app-transaction 
                                 [dateTransaction]="transaction.date"
                                 [description]="transaction.title"
@@ -42,7 +41,6 @@
                 </cdk-accordion-item>
             }
         </cdk-accordion>
-
     </div>
 
     <div class="side">
@@ -55,7 +53,39 @@
             </button>
         </div>
         <div>
-            <app-budget-structure />
+            <cdk-accordion>
+                @for (budget of budgets; track budget.id; let index = $index) {
+                    <cdk-accordion-item
+                        #accordionItem="cdkAccordionItem"
+                        role="button"
+                        tabindex="0"
+                        [attr.id]="'accordion-header-' + index"
+                        [attr.aria-expanded]="accordionItem.expanded"
+                        [attr.aria-controls]="'accordion-body-' + index"
+                    >
+                        <div (click)="accordionItem.toggle()">
+                            <app-budget-structure 
+                                [description]="budget.description"
+                                [total]="totalBudget[index]"
+                            />
+                        </div>
+                        <div
+                            role="region"
+                            [style.display]="accordionItem.expanded ? '' : 'none'"
+                            [attr.id]="'accordion-body-' + index"
+                            [attr.aria-labelledby]="'accordion-header-' + index"
+                        >
+                            @for (transaction of transactionsBudget[index]; track transaction.id) {
+                                <app-transaction 
+                                    [dateTransaction]="transaction.date"
+                                    [description]="transaction.title"
+                                    [amount]="transaction.amount"
+                                />
+                            }
+                        </div>
+                    </cdk-accordion-item>
+                }
+            </cdk-accordion>
         </div>
     </div>
 </div>

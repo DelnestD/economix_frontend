@@ -11,5 +11,5 @@
 }
 
 .btnAdd {
-    @apply border-2 border-dark hover:border-secondary bg-secondary hover:bg-light hover:text-dark font-textFont p-3 rounded-xl text-sm -mt-10 min-w-[35%];
+    @apply border-2 border-dark hover:border-secondary bg-secondary hover:bg-light hover:text-dark font-textFont p-3 text-sm -mt-10 min-w-[30%];
 }
