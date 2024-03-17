@@ -22,7 +22,7 @@
                     <div (click)="accordionItem.toggle()">
                         <app-budget-structure 
                             [description]="account.description"
-                            [total]="totalAccount.toFixed(2)"
+                            [total]="totalAccount[index]"
                         />
                     </div>
                     <div
@@ -31,7 +31,7 @@
                         [attr.id]="'accordion-body-' + index"
                         [attr.aria-labelledby]="'accordion-header-' + index"
                     >
-                        @for (transaction of transactions; track transaction.id) {
+                        @for (transaction of transactions[index]; track transaction.id) {
                             <app-transaction 
                                 [dateTransaction]="transaction.date"
                                 [description]="transaction.title"

@@ -3,7 +3,7 @@ import { BudgetStructureComponent } from '../../components/budget-structure/budg
 import { TransactionComponent } from '../../components/transaction/transaction.component';
 import { TransactionFormComponent } from '../../forms/transaction-form/transaction-form.component';
 import { Transaction, TransactionService } from '../../../services/transaction.service';
-import { Account, AccountService } from '../../../services/account.service';
+import { Account } from '../../../services/account.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -19,30 +19,29 @@ import { CdkAccordionModule } from "@angular/cdk/accordion";
 })
 export class BudgetPageComponent implements OnInit {
   expandedIndex = 0;
-  totalAccount: number = 0;
+  totalAccount: number[] = [];
 
-  transactions: Transaction[] = [];
+  transactions: Transaction[][] = [];
   accounts: Account[] = [];
 
   constructor(
-    private transactionService: TransactionService, 
-    private accountService: AccountService, 
+    private transactionService: TransactionService,
     private userService: UserService,
     private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
-    this.loadAccounts();
-  }
-
-  loadAccounts() {
     this.userService.getUserAccounts(this.getActualIdUser()).subscribe(accounts => {
       this.accounts = accounts;
-      accounts.forEach(acc => {
-        this.transactionService.getTransactionByAccountId(acc.id).subscribe(transactions => {
-          console.log('transactions', this.transactions = transactions);
+      for (let i = 0; i <= accounts.length; i++) {
+        this.totalAccount[i] = 0;
+        this.transactionService.getTransactionByAccountId(accounts[i].id).subscribe(transactions => {
+          this.transactions[i] = transactions;
+          transactions.map(transaction => {
+            this.totalAccount[i] += transaction.amount;
+          })
         });
-      })
+      }
     })
   }
 

@@ -12,5 +12,5 @@ export class BudgetStructureComponent {
   @Input()
   description!: string;
   @Input()
-  total!: string;
+  total!: number;
 }
