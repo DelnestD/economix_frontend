@@ -3,7 +3,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SharedService } from '../../../../services/shared.service';
 import { jwtDecode } from 'jwt-decode';
-import { User, UserService } from '../../../../services/user.service';
+import { Role, User, UserService } from '../../../../services/user.service';
 import { Group } from '../../../../services/group.service';
 import { CommonModule } from '@angular/common';
 @Component({
@@ -17,7 +17,8 @@ export class NavbarComponent {
   isConnected: boolean = false;
   isRegistered: boolean = true;
   showDropDown: boolean = false;
-  haveGroup: boolean = false;
+  isLeader: boolean = false;
+  haveGroup: boolean = true;
 
   constructor(
     private router: Router,
@@ -33,8 +34,10 @@ export class NavbarComponent {
       this.userService
         .getUserById(this.getActualIdUser())
         .subscribe((user: User) => {
-          if (user.role !== null) {
-            this.haveGroup = true;
+          if (user.role === Role.LEADER) {
+            this.isLeader = true;
+          } else if (user.role === null) {
+            this.haveGroup = false;
           }
         });
     } else {
