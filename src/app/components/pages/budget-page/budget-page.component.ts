@@ -3,18 +3,19 @@ import { BudgetStructureComponent } from '../../components/budget-structure/budg
 import { TransactionComponent } from '../../components/transaction/transaction.component';
 import { TransactionFormComponent } from '../../forms/transaction-form/transaction-form.component';
 import { Transaction, TransactionService } from '../../../services/transaction.service';
-import { Account, AccountService } from '../../../services/account.service';
+import { Account } from '../../../services/account.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from "jwt-decode";
 import { CdkAccordionModule } from "@angular/cdk/accordion";
-import { Budget, BudgetService } from '../../../services/budget.service';
+import { Budget } from '../../../services/budget.service';
+import { FormNewBudgetComponent } from './form-new-budget/form-new-budget.component';
 
 @Component({
   selector: 'app-budget-page',
   standalone: true,
-  imports: [HttpClientModule, BudgetStructureComponent, TransactionComponent, TransactionFormComponent, CdkAccordionModule],
+  imports: [HttpClientModule, BudgetStructureComponent, TransactionComponent, TransactionFormComponent, CdkAccordionModule, FormNewBudgetComponent],
   templateUrl: './budget-page.component.html',
   styleUrl: './budget-page.component.css'
 })
