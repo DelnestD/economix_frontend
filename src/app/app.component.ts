@@ -9,7 +9,7 @@ import { NavbarComponent } from './components/components/common/navbar/navbar.co
   standalone: true,
   imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: '../styles.css',
 })
 export class AppComponent {
   title = 'EconomiX';
