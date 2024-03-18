@@ -92,8 +92,14 @@
 </div>
 <div class="absolute text-2xl w-full flex justify-center items-end">
     @for (member of membersGroup; track member.id) {
-        <button type="button" class="btnMember" (click)="showBudgetOfMemberSelected(member.id)">
+        <input type="radio" value="{{ member.firstName }}" placeholder="{{ member.firstName }}" class="btnMember" (click)="showBudgetOfMemberSelected(member.id)">
+            
+        />
+        <!-- <button class="btnMember" (click)="showBudgetOfMemberSelected(member.id)">
             {{ member.firstName }}
-        </button>
+        </button> -->
     }
+    <button type="button" class="btnMember" (click)="showBudgetOfAllMembers()">
+        Tout
+    </button>
 </div>

@@ -17,3 +17,7 @@
 .btnMember {
     @apply w-[5rem] h-[5rem] font-textFont text-sm bg-info rounded-full mx-3 hover:bg-light hover:border-2 hover:border-primary hover:font-bold;
 }
+
+.btnMemberSelected {
+    @apply w-[5rem] h-[5rem] font-textFont text-sm rounded-full mx-3 bg-light border-2 border-primary font-bold;
+}

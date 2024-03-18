@@ -42,7 +42,7 @@ export class BudgetPageComponent implements OnInit {
   ngOnInit(): void {
     this.loadTransactionsAccount(this.getActualIdUser());
     this.loadTransactionsBudget(this.getActualIdUser());
-    this.loadMembers(this.getActualIdUser());
+    this.loadMembers();
   }
 
   loadTransactionsAccount(id: string) {
@@ -75,19 +75,14 @@ export class BudgetPageComponent implements OnInit {
     });
   }
 
-  loadMembers(id: string) {
-    this.userService.getUserById(id).subscribe(user => {
+  loadMembers() {
+    this.userService.getUserById(this.getActualIdUser()).subscribe(user => {
       if (user.group) {
         this.groupId = user.group.id;
       }
-      this.membersGroup = [];
-      
+
       this.userService.getUserByGroupId(this.groupId).subscribe(user => {
-        for (let u of user) {
-          if (u.id !== id) {
-            this.membersGroup.push(u);
-          }
-        }
+          this.membersGroup = user;
       });
     });
   }
@@ -95,7 +90,11 @@ export class BudgetPageComponent implements OnInit {
   showBudgetOfMemberSelected(member: string) {
     this.loadTransactionsAccount(member);
     this.loadTransactionsBudget(member);
-    this.loadMembers(member);
+    this.loadMembers();
+  }
+
+  showBudgetOfAllMembers() {
+
   }
 
   getRoleActualUser() {
