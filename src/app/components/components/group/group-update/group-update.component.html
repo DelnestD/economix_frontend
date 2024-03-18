@@ -1,17 +1,12 @@
 <h1 class="text-center text-2xl font-semibold text-dark">
   Modification du groupe
-  <form class="mt-8" [formGroup]="updateGroupForm">
-    <div class="mx-auto max-w-xl">
-      <div class="py-2">
-        <label class="label flex" for="newName">Nouveau nom du groupe</label>
-        <input
-          class="input"
-          type="text"
-          id="newName"
-          formControlName="newName"
-        />
-      </div>
-      <button class="button" type="submit">Valider</button>
-    </div>
-  </form>
 </h1>
+<form class="mt-8" [formGroup]="updateGroupForm">
+  <div class="mx-auto max-w-xl">
+    <div class="py-2">
+      <label class="label flex" for="newName">Nouveau nom du groupe</label>
+      <input class="input" type="text" id="newName" formControlName="newName" />
+    </div>
+    <button class="button" type="submit">Valider</button>
+  </div>
+</form>
