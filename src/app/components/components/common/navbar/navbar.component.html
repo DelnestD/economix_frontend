@@ -42,6 +42,11 @@
               >Mon Compte</a
             >
           </li>
+          <li class="tabs-dropdown" *ngIf="!haveGroup">
+            <a routerLink="/parameters/createGroup" routerLinkActive="active"
+              >Créer mon Foyer</a
+            >
+          </li>
           <li class="tabs-dropdown" *ngIf="haveGroup">
             <a routerLink="/parameters/group" routerLinkActive="active"
               >Mon Foyer</a
