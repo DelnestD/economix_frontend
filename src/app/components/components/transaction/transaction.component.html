@@ -1,12 +1,19 @@
-<div class="w-full flex font-textFont text-sm px-[3%] py-[1%] bg-light border-b-2 border-b-dark">
-    <p class="w-[19%]">
-        {{ dateTransaction.getDate()<=9?"0"+dateTransaction.getDate():dateTransaction.getDate() }} {{ dateTransaction.getMonth()<=9?"0"+dateTransaction.getMonth():dateTransaction.getMonth() }} {{ dateTransaction.getFullYear() }}
-
-    </p>
-    <p class="w-[68%]">
-        {{ description }}
-    </p>
-    <p class="w-[13%] flex">
-        € {{ amount.toFixed(2) }}
-    </p>
+<div class="transaction w-full flex font-textFont text-sm px-4 pt-3 bg-light">
+  <p class="w-[19%]">
+    {{
+      dateTransaction.getDate() <= 9
+        ? "0" + dateTransaction.getDate()
+        : dateTransaction.getDate()
+    }}
+    {{
+      dateTransaction.getMonth() <= 9
+        ? "0" + dateTransaction.getMonth()
+        : dateTransaction.getMonth()
+    }}
+    {{ dateTransaction.getFullYear() }}
+  </p>
+  <p class="w-[68%]">
+    {{ description }}
+  </p>
+  <p class="w-[13%] flex">€ {{ amount.toFixed(2) }}</p>
 </div>

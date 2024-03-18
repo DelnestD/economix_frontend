@@ -3,13 +3,22 @@
 @tailwind utilities;
 
 .side {
-    @apply w-1/2 my-7 py-7 px-[5%] h-[80vh];
+  @apply w-1/2 mb-7 pb-7 px-[5%] min-h-[75vh];
 }
 
 .title {
-    @apply font-titleFont text-xl font-semibold h-10 mb-6;
+  @apply font-titleFont text-xl font-semibold h-10 flex items-center;
 }
 
 .btnAdd {
-    @apply border-2 border-dark hover:border-secondary bg-secondary hover:bg-light hover:text-dark font-textFont p-3 text-sm -mt-10 min-w-[30%];
+  @apply border-2 border-dark hover:border-secondary bg-secondary hover:bg-light hover:text-dark
+    font-textFont text-lg w-80 h-14 font-semibold top-20 rounded-full;
+}
+.btnAddRound {
+  @apply mx-5 border-2 border-dark hover:border-secondary bg-secondary hover:bg-light hover:text-dark
+    font-textFont py-1 px-3 min-w-[5%] rounded-full text-lg font-bold;
+}
+
+.accordion {
+  @apply border-x-2 border-b-2 border-dark pb-3 bg-light;
 }

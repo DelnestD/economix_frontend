@@ -1,17 +1,43 @@
 <div
   class="w-[100vw] h-[100vh] bg-[black] bg-opacity-20 fixed top-0 left-0"
-  *ngIf="showModal"
+  *ngIf="showModal !== ''"
   tabindex="-1"
-  (click)="setShowModal(false)"
 ></div>
-<app-form-new-budget *ngIf="showModal"></app-form-new-budget>
+<app-form-transaction
+  *ngIf="showModal === 'transaction'"
+  [createNew]="true"
+  [accounts]="accounts"
+  [budgets]="budgets"
+  (close)="setShowModal('')"
+></app-form-transaction>
+<app-form-budget
+  *ngIf="showModal === 'budget'"
+  [createNew]="false"
+  (close)="setShowModal('')"
+></app-form-budget>
+
+<div class="flex justify-center mt-10">
+  <button class="btnAdd" (click)="setShowModal('transaction')">
+    Nouvelle transaction
+  </button>
+</div>
+<div class="flex justify-between px-32">
+  <div class="flex items-center mb-5">
+    <p class="title">Mon compte</p>
+    <button type="button" class="btnAddRound" (click)="setShowModal('')">
+      +
+    </button>
+  </div>
+  <div class="flex items-center mb-5">
+    <button type="button" class="btnAddRound" (click)="setShowModal('budget')">
+      +
+    </button>
+    <p class="title">Mon budget</p>
+  </div>
+</div>
 
 <div class="w-full flex static">
   <div class="side border-r-4 border-r-secondary">
-    <div class="flex justify-between items-center">
-      <p class="title">Mon compte</p>
-      <button type="button" class="btnAdd">Nouvelle transaction</button>
-    </div>
     <cdk-accordion>
       @for (account of accounts; track account.id; let index = $index) {
       <cdk-accordion-item
@@ -24,11 +50,12 @@
       >
         <div (click)="accordionItem.toggle()">
           <app-budget-structure
-            [description]="account.description"
+            [description]="account.title"
             [total]="totalAccount[index]"
           />
         </div>
         <div
+          class="accordion"
           role="region"
           [style.display]="accordionItem.expanded ? '' : 'none'"
           [attr.id]="'accordion-body-' + index"
@@ -49,12 +76,6 @@
   </div>
 
   <div class="side">
-    <div class="flex justify-between items-center">
-      <p class="title">Mon budget</p>
-      <button type="button" class="btnAdd" (click)="setShowModal(true)">
-        Nouveau budget
-      </button>
-    </div>
     <div>
       <cdk-accordion>
         @for (budget of budgets; track budget.id; let index = $index) {
@@ -68,11 +89,12 @@
         >
           <div (click)="accordionItem.toggle()">
             <app-budget-structure
-              [description]="budget.description"
+              [description]="budget.title"
               [total]="totalBudget[index]"
             />
           </div>
           <div
+            class="accordion"
             role="region"
             [style.display]="accordionItem.expanded ? '' : 'none'"
             [attr.id]="'accordion-body-' + index"

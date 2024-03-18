@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.inputline {
+  @apply w-[100%] flex text-center mt-5 items-center;
+}
+label {
+  @apply w-[50%];
+}
+input,
+textarea,
+select {
+  @apply flex align-middle w-[40%] min-h-7 mx-10 px-2 border-2 border-dark;
+  background-color: white;
+}

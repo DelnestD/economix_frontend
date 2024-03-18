@@ -1,0 +1,59 @@
+<div
+  class="absolute top-[20%] left-[25%] w-[50%] border-2 border-dark bg-light pb-7 rounded-xl"
+>
+  <p
+    class="flex justify-center font-titleFont text-xl my-10 font-bold bg-primary py-3"
+  >
+    @if (createNew) { Ajouter } @else { Modifier } un transaction
+  </p>
+  <form [formGroup]="createForm" class="font-textFont">
+    <div class="inputline">
+      <label for="account">Compte</label>
+      <select name="account" id="account">
+        @for (account of accounts; track $index) {
+        <option title="{{ account.description }}" value="{{ account.title }}">
+          {{ account.title }}
+        </option>
+        }
+      </select>
+    </div>
+    <div class="inputline">
+      <label for="budget">Compte</label>
+      <select name="budget" id="budget">
+        <option value="" selected></option>
+        @for (budget of budgets; track $index) {
+        <option title="{{ budget.description }}" value="{{ budget.title }}">
+          {{ budget.title }}
+        </option>
+        }
+      </select>
+    </div>
+    <div class="inputline">
+      <label for="description">Description</label>
+      <textarea name="description" id="description" rows="3"></textarea>
+    </div>
+    <div class="inputline">
+      <label for="amount">Montant</label>
+      <input type="number" name="amount" id="amount" />
+    </div>
+
+    <div class="mt-10 w-[100%] flex">
+      <div class="w-[50%] flex justify-center">
+        <button
+          class="bg-danger px-10 py-3 rounded-xl font-bold text-lg text-light hover:bg-dangerhover"
+          (click)="closeModal()"
+        >
+          Fermer
+        </button>
+      </div>
+      <div class="w-[50%] flex justify-center">
+        <button
+          class="bg-success px-10 py-3 rounded-xl font-bold text-lg text-light hover:bg-successhover"
+          (click)="submitForm()"
+        >
+          @if (createNew) { Ajouter } @else { Modifier }
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

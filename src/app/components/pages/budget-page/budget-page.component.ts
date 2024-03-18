@@ -13,8 +13,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { Budget } from '../../../services/budget.service';
-import { FormNewBudgetComponent } from './form-new-budget/form-new-budget.component';
+import { FormBudgetComponent } from './form-budget/form-budget.component';
 import { CommonModule } from '@angular/common';
+import { FormTransactionComponent } from './form-transaction/form-transaction.component';
 
 @Component({
   selector: 'app-budget-page',
@@ -26,7 +27,8 @@ import { CommonModule } from '@angular/common';
     TransactionComponent,
     TransactionFormComponent,
     CdkAccordionModule,
-    FormNewBudgetComponent,
+    FormBudgetComponent,
+    FormTransactionComponent,
   ],
   templateUrl: './budget-page.component.html',
   styleUrl: './budget-page.component.css',
@@ -41,7 +43,7 @@ export class BudgetPageComponent implements OnInit {
   accounts: Account[] = [];
   budgets: Budget[] = [];
 
-  showModal: boolean = true;
+  showModal: string = 'transaction';
 
   constructor(
     private transactionService: TransactionService,
@@ -59,7 +61,7 @@ export class BudgetPageComponent implements OnInit {
       .getUserAccounts(this.getActualIdUser())
       .subscribe((accounts) => {
         this.accounts = accounts;
-        for (let i = 0; i <= accounts.length; i++) {
+        for (let i = 0; i < accounts.length; i++) {
           this.totalAccount[i] = 0;
           this.transactionService
             .getTransactionByAccountId(accounts[i].id)
@@ -78,7 +80,7 @@ export class BudgetPageComponent implements OnInit {
       .getUserBudgets(this.getActualIdUser())
       .subscribe((budgets) => {
         this.budgets = budgets;
-        for (let i = 0; i <= budgets.length; i++) {
+        for (let i = 0; i < budgets.length; i++) {
           this.totalBudget[i] = 0;
           this.transactionService
             .getTransactionByBudgetId(budgets[i].id)
@@ -92,8 +94,8 @@ export class BudgetPageComponent implements OnInit {
       });
   }
 
-  setShowModal(status: boolean) {
-    this.showModal = status;
+  setShowModal(modal: string) {
+    this.showModal = modal;
   }
 
   getActualIdUser() {
