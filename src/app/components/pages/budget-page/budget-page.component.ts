@@ -16,6 +16,7 @@ import { Budget } from '../../../services/budget.service';
 import { FormBudgetComponent } from './form-budget/form-budget.component';
 import { CommonModule } from '@angular/common';
 import { FormTransactionComponent } from './form-transaction/form-transaction.component';
+import { FormAccountComponent } from './form-account/form-account.component';
 
 @Component({
   selector: 'app-budget-page',
@@ -27,8 +28,9 @@ import { FormTransactionComponent } from './form-transaction/form-transaction.co
     TransactionComponent,
     TransactionFormComponent,
     CdkAccordionModule,
-    FormBudgetComponent,
     FormTransactionComponent,
+    FormAccountComponent,
+    FormBudgetComponent,
   ],
   templateUrl: './budget-page.component.html',
   styleUrl: './budget-page.component.css',
@@ -43,7 +45,7 @@ export class BudgetPageComponent implements OnInit {
   accounts: Account[] = [];
   budgets: Budget[] = [];
 
-  showModal: string = 'transaction';
+  showModal: string = '';
 
   constructor(
     private transactionService: TransactionService,
@@ -54,6 +56,10 @@ export class BudgetPageComponent implements OnInit {
   ngOnInit(): void {
     this.loadTransactionsAccount();
     this.loadTransactionsBudget();
+
+    setTimeout(() => {
+      console.log('accounts', this.accounts);
+    }, 5000);
   }
 
   loadTransactionsAccount() {

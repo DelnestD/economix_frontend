@@ -10,9 +10,14 @@
   [budgets]="budgets"
   (close)="setShowModal('')"
 ></app-form-transaction>
+<app-form-account
+  *ngIf="showModal === 'account'"
+  [createNew]="true"
+  (close)="setShowModal('')"
+></app-form-account>
 <app-form-budget
   *ngIf="showModal === 'budget'"
-  [createNew]="false"
+  [createNew]="true"
   (close)="setShowModal('')"
 ></app-form-budget>
 
@@ -24,7 +29,7 @@
 <div class="flex justify-between px-32">
   <div class="flex items-center mb-5">
     <p class="title">Mon compte</p>
-    <button type="button" class="btnAddRound" (click)="setShowModal('')">
+    <button type="button" class="btnAddRound" (click)="setShowModal('account')">
       +
     </button>
   </div>

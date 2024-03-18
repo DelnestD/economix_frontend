@@ -18,7 +18,7 @@
       </select>
     </div>
     <div class="inputline">
-      <label for="budget">Compte</label>
+      <label for="budget">Budget</label>
       <select name="budget" id="budget">
         <option value="" selected></option>
         @for (budget of budgets; track $index) {
@@ -29,12 +29,12 @@
       </select>
     </div>
     <div class="inputline">
-      <label for="description">Description</label>
-      <textarea name="description" id="description" rows="3"></textarea>
+      <label for="title">Titre *</label>
+      <input type="text" name="title" id="title" required />
     </div>
     <div class="inputline">
-      <label for="amount">Montant</label>
-      <input type="number" name="amount" id="amount" />
+      <label for="amount">Montant *</label>
+      <input type="number" name="amount" id="amount" required />
     </div>
 
     <div class="mt-10 w-[100%] flex">

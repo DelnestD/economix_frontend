@@ -4,20 +4,16 @@
   <p
     class="flex justify-center font-titleFont text-xl my-10 font-bold bg-primary py-3"
   >
-    @if (createNew) { Ajouter } @else { Modifier } un budget
+    @if (createNew) { Ajouter } @else { Modifier } un compte
   </p>
   <form [formGroup]="createForm" class="font-textFont">
     <div class="inputline">
-      <label for="name" class="label">Nom *</label>
-      <input type="text" name="name" id="name" required />
+      <label for="name" class="label">Nom</label>
+      <input type="text" name="name" id="name" />
     </div>
     <div class="inputline">
-      <label for="description">Description *</label>
+      <label for="description">Description</label>
       <textarea name="description" id="description" rows="3"></textarea>
-    </div>
-    <div class="inputline">
-      <label for="amount">Montant fixé *</label>
-      <input type="number" name="amount" id="amount" required />
     </div>
 
     <div class="mt-10 w-[100%] flex">
