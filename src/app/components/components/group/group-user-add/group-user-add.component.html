@@ -1,0 +1,27 @@
+<h1 class="text-center text-2xl font-semibold text-dark">
+  Ajouter un utilisateur au foyer
+</h1>
+<div class="text-center mt-4" [hidden]="!showErrorMessage">
+  <p class="error-message">Cette utilisateur est déjà dans un foyer</p>
+</div>
+<form class="mt-8" [formGroup]="userAddForm" (ngSubmit)="onSubmit()">
+  <div class="mx-auto max-w-xl">
+    <div class="py-2">
+      <div class="flex justify-between">
+        <label class="label" for="email">Email</label>
+        @if(EmailControl.invalid && EmailControl.touched){
+        <p class="error-label">Ce n'est pas un format d'email valide</p>
+        }
+      </div>
+      <input class="input" type="email" id="email" formControlName="email" />
+    </div>
+    <button
+      class="button"
+      type="submit"
+      [disabled]="userAddForm.invalid"
+      [class.button-hover]="userAddForm.valid"
+    >
+      Ajouter
+    </button>
+  </div>
+</form>
