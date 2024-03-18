@@ -4,10 +4,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { SharedService } from '../../../../services/shared.service';
 import { jwtDecode } from 'jwt-decode';
 import { User, UserService } from '../../../../services/user.service';
+import { Group } from '../../../../services/group.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
@@ -15,22 +17,30 @@ export class NavbarComponent {
   isConnected: boolean = false;
   isRegistered: boolean = true;
   showDropDown: boolean = false;
+  haveGroup: boolean = false;
 
   constructor(
     private router: Router,
     private cookieService: CookieService,
     private userService: UserService,
     private sharedService: SharedService
-  ) {
-    userService.getUserById(this.getActualIdUser()).subscribe((user: any) => {
-      console.log(user.groupId);
-    });
-  }
+  ) {}
 
   ngOnInit() {
     //? cookie is deleted automaticaly 3 min after expiration
     if (this.cookieService.check('accessToken')) {
       this.isConnected = true;
+      this.userService
+        .getUserById(this.getActualIdUser())
+        .subscribe((user: User) => {
+          console.log(user);
+
+          if (user.role !== null) {
+            console.log(user.role);
+            this.haveGroup = true;
+          }
+          console.log(this.haveGroup);
+        });
     } else {
       this.isConnected = false;
       this.isRegistered = true;
