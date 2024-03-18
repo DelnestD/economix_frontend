@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account } from './account.service';
 import { Budget } from './budget.service';
+import { Group } from './group.service';
 
 export interface User {
   id: string;
@@ -9,6 +10,7 @@ export interface User {
   lastName: string;
   password: string;
   role: Role;
+  group?: Group;
 }
 
 export enum Role {

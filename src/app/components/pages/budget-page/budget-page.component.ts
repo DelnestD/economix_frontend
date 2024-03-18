@@ -5,12 +5,13 @@ import { TransactionFormComponent } from '../../forms/transaction-form/transacti
 import { Transaction, TransactionService } from '../../../services/transaction.service';
 import { Account } from '../../../services/account.service';
 import { HttpClientModule } from '@angular/common/http';
-import { UserService } from '../../../services/user.service';
+import { Role, UserService } from '../../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from "jwt-decode";
 import { CdkAccordionModule } from "@angular/cdk/accordion";
 import { Budget } from '../../../services/budget.service';
 import { FormNewBudgetComponent } from './form-new-budget/form-new-budget.component';
+import { GroupService } from '../../../services/group.service';
 
 @Component({
   selector: 'app-budget-page',
@@ -20,6 +21,9 @@ import { FormNewBudgetComponent } from './form-new-budget/form-new-budget.compon
   styleUrl: './budget-page.component.css'
 })
 export class BudgetPageComponent implements OnInit {
+  roleActualUser: string = "";
+  groupId: string = "";
+  
   expandedIndex = 0;
   totalAccount: number[] = [];
   totalBudget: number[] = [];
@@ -32,12 +36,17 @@ export class BudgetPageComponent implements OnInit {
   constructor(
     private transactionService: TransactionService,
     private userService: UserService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private groupService: GroupService
   ) {}
 
   ngOnInit(): void {
+    this.getActualGroupId();
     this.loadTransactionsAccount();
     this.loadTransactionsBudget();
+    if (this.roleActualUser === "leader") {
+      this.loadMembers();
+    }
   }
 
   loadTransactionsAccount() {
@@ -68,6 +77,34 @@ export class BudgetPageComponent implements OnInit {
         });
       }
     });
+  }
+
+  loadMembers() {
+    // this.userService.getUserByGroupId()
+  }
+
+  getGroupId() {
+    this.userService.getUserById(this.getActualIdUser()).subscribe(user => {
+      if (user.group) {
+        this.userService.getUserByGroupId(this.groupId).subscribe(user => {
+          console.log("user", user);
+        })
+      }
+    })
+  }
+
+  getRoleActualUser() {
+    this.userService.getUserById(this.getActualIdUser()).subscribe(user => {
+      this.roleActualUser = user.role;
+    })
+  }
+
+  getActualGroupId() {
+    this.userService.getUserById(this.getActualIdUser()).subscribe(user => {
+      if (user.group) {
+        this.groupId = user.group.id;
+      }
+    })
   }
 
   getActualIdUser() {
