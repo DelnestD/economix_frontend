@@ -5,13 +5,12 @@ import { TransactionFormComponent } from '../../forms/transaction-form/transacti
 import { Transaction, TransactionService } from '../../../services/transaction.service';
 import { Account } from '../../../services/account.service';
 import { HttpClientModule } from '@angular/common/http';
-import { Role, UserService } from '../../../services/user.service';
+import { User, UserService } from '../../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from "jwt-decode";
 import { CdkAccordionModule } from "@angular/cdk/accordion";
 import { Budget } from '../../../services/budget.service';
 import { FormNewBudgetComponent } from './form-new-budget/form-new-budget.component';
-import { GroupService } from '../../../services/group.service';
 
 @Component({
   selector: 'app-budget-page',
@@ -23,6 +22,7 @@ import { GroupService } from '../../../services/group.service';
 export class BudgetPageComponent implements OnInit {
   roleActualUser: string = "";
   groupId: string = "";
+  membersGroup: User[] = [];
   
   expandedIndex = 0;
   totalAccount: number[] = [];
@@ -36,17 +36,13 @@ export class BudgetPageComponent implements OnInit {
   constructor(
     private transactionService: TransactionService,
     private userService: UserService,
-    private cookieService: CookieService,
-    private groupService: GroupService
+    private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
-    this.getActualGroupId();
     this.loadTransactionsAccount();
     this.loadTransactionsBudget();
-    if (this.roleActualUser === "leader") {
-      this.loadMembers();
-    }
+    this.loadMembers();
   }
 
   loadTransactionsAccount() {
@@ -80,30 +76,20 @@ export class BudgetPageComponent implements OnInit {
   }
 
   loadMembers() {
-    // this.userService.getUserByGroupId()
-  }
-
-  getGroupId() {
     this.userService.getUserById(this.getActualIdUser()).subscribe(user => {
       if (user.group) {
-        this.userService.getUserByGroupId(this.groupId).subscribe(user => {
-          console.log("user", user);
-        })
+        this.groupId = user.group.id;
       }
+      
+      this.userService.getUserByGroupId(this.groupId).subscribe(user => {
+        this.membersGroup = user;
+      })
     })
   }
 
   getRoleActualUser() {
     this.userService.getUserById(this.getActualIdUser()).subscribe(user => {
       this.roleActualUser = user.role;
-    })
-  }
-
-  getActualGroupId() {
-    this.userService.getUserById(this.getActualIdUser()).subscribe(user => {
-      if (user.group) {
-        this.groupId = user.group.id;
-      }
     })
   }
 
@@ -118,5 +104,4 @@ export class BudgetPageComponent implements OnInit {
       return null;
     }
   }
-  
 }

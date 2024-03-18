@@ -90,8 +90,10 @@
         </div>
     </div>
 </div>
-<div class="absolute top-[90%] left-[5%] text-2xl">
-    <button type="button">
-        ko
-    </button>
+<div class="absolute text-2xl w-full flex justify-center items-end">
+    @for (member of membersGroup; track member.id) {
+        <button type="button" class="btnMember">
+            {{ member.firstName }}
+        </button>
+    }
 </div>

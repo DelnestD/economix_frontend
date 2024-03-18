@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .side {
-    @apply w-1/2 my-7 py-7 px-[5%] h-[80vh];
+    @apply w-1/2 my-7 py-7 px-[5%] h-[72.5vh];
 }
 
 .title {
@@ -12,4 +12,8 @@
 
 .btnAdd {
     @apply border-2 border-dark hover:border-secondary bg-secondary hover:bg-light hover:text-dark font-textFont p-3 text-sm -mt-10 min-w-[30%];
+}
+
+.btnMember {
+    @apply w-[5rem] h-[5rem] font-textFont text-sm bg-info rounded-full mx-3;
 }
