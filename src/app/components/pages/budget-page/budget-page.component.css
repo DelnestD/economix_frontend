@@ -15,5 +15,5 @@
 }
 
 .btnMember {
-    @apply w-[5rem] h-[5rem] font-textFont text-sm bg-info rounded-full mx-3;
+    @apply w-[5rem] h-[5rem] font-textFont text-sm bg-info rounded-full mx-3 hover:bg-light hover:border-2 hover:border-primary;
 }
