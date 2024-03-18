@@ -22,8 +22,8 @@ export class GroupService {
     return this.httpClient.post<Group>(this.baseUrl, group);
   }
 
-  updateGroup(id: string, group: Partial<Group>) {
-    return this.httpClient.patch<Group>(`${this.baseUrl}${id}`, group);
+  updateGroup(group: Partial<Group>) {
+    return this.httpClient.patch<Group>(`${this.baseUrl}${group.id}`, group);
   }
 
   deleteGroup(id: string) {
