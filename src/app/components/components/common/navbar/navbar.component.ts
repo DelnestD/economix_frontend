@@ -33,13 +33,9 @@ export class NavbarComponent {
       this.userService
         .getUserById(this.getActualIdUser())
         .subscribe((user: User) => {
-          console.log(user);
-
           if (user.role !== null) {
-            console.log(user.role);
             this.haveGroup = true;
           }
-          console.log(this.haveGroup);
         });
     } else {
       this.isConnected = false;
