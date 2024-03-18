@@ -17,7 +17,6 @@ import {
 export class GroupUserListUpdateComponent {
   usersList = new FormGroup(
     {
-      user: new FormControl(''),
       member1: new FormControl(''),
       member2: new FormControl(''),
       member3: new FormControl(''),
