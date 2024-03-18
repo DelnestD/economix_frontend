@@ -2,17 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface Group {
-  id: string;
+  id?: string;
   name: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GroupService {
   baseUrl = 'http://localhost:8081/group/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   getGroupById(id: string) {
     return this.httpClient.get<Group>(`${this.baseUrl}${id}`);
