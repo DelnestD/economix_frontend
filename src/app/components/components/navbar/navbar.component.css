@@ -16,7 +16,7 @@
 }
 
 .dropdown {
-  @apply w-[150px] h-[120px] absolute top-[60px] right-0 mr-[5.85rem] bg-secondary shadow-lg text-base;
+  @apply w-[150px] h-[120px] absolute top-[60px] right-0 mr-[4.05rem] bg-secondary shadow-lg text-base;
 }
 
 .tabs-dropdown {

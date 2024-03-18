@@ -61,7 +61,7 @@ export class LoginComponent {
               '/'
             );
             //TODO: redirect to the account/budget page
-            this.router.navigate(['/parameters']);
+            window.location.href = '/about';
           }
         }
       });
