@@ -92,7 +92,7 @@
 </div>
 <div class="absolute text-2xl w-full flex justify-center items-end">
     @for (member of membersGroup; track member.id) {
-        <button type="button" class="btnMember">
+        <button type="button" class="btnMember" (click)="showBudgetOfMemberSelected(member.id)">
             {{ member.firstName }}
         </button>
     }

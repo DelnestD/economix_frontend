@@ -40,13 +40,13 @@ export class BudgetPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadTransactionsAccount();
-    this.loadTransactionsBudget();
-    this.loadMembers();
+    this.loadTransactionsAccount(this.getActualIdUser());
+    this.loadTransactionsBudget(this.getActualIdUser());
+    this.loadMembers(this.getActualIdUser());
   }
 
-  loadTransactionsAccount() {
-    this.userService.getUserAccounts(this.getActualIdUser()).subscribe(accounts => {
+  loadTransactionsAccount(id: string) {
+    this.userService.getUserAccounts(id).subscribe(accounts => {
       this.accounts = accounts;
       for (let i = 0; i <= accounts.length; i++) {
         this.totalAccount[i] = 0;
@@ -60,8 +60,8 @@ export class BudgetPageComponent implements OnInit {
     });
   }
 
-  loadTransactionsBudget() {
-    this.userService.getUserBudgets(this.getActualIdUser()).subscribe(budgets => {
+  loadTransactionsBudget(id: string) {
+    this.userService.getUserBudgets(id).subscribe(budgets => {
       this.budgets = budgets;
       for (let i = 0; i <= budgets.length; i++) {
         this.totalBudget[i] = 0;
@@ -75,16 +75,27 @@ export class BudgetPageComponent implements OnInit {
     });
   }
 
-  loadMembers() {
-    this.userService.getUserById(this.getActualIdUser()).subscribe(user => {
+  loadMembers(id: string) {
+    this.userService.getUserById(id).subscribe(user => {
       if (user.group) {
         this.groupId = user.group.id;
       }
+      this.membersGroup = [];
       
       this.userService.getUserByGroupId(this.groupId).subscribe(user => {
-        this.membersGroup = user;
-      })
-    })
+        for (let u of user) {
+          if (u.id !== id) {
+            this.membersGroup.push(u);
+          }
+        }
+      });
+    });
+  }
+
+  showBudgetOfMemberSelected(member: string) {
+    this.loadTransactionsAccount(member);
+    this.loadTransactionsBudget(member);
+    this.loadMembers(member);
   }
 
   getRoleActualUser() {
