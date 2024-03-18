@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SharedService } from '../../../../services/shared.service';
+import { jwtDecode } from 'jwt-decode';
+import { User, UserService } from '../../../../services/user.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -17,8 +19,13 @@ export class NavbarComponent {
   constructor(
     private router: Router,
     private cookieService: CookieService,
+    private userService: UserService,
     private sharedService: SharedService
-  ) {}
+  ) {
+    userService.getUserById(this.getActualIdUser()).subscribe((user: any) => {
+      console.log(user.groupId);
+    });
+  }
 
   ngOnInit() {
     //? cookie is deleted automaticaly 3 min after expiration
@@ -46,5 +53,17 @@ export class NavbarComponent {
     this.isConnected = false;
     this.isRegistered = true;
     this.router.navigate(['/home']);
+  }
+
+  getActualIdUser() {
+    return this.getDecodedAccessToken(this.cookieService.get('accessToken')).id;
+  }
+
+  getDecodedAccessToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      return null;
+    }
   }
 }
