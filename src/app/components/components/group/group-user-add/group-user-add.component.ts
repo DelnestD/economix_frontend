@@ -10,6 +10,7 @@ import { Role, UserService } from '../../../../services/user.service';
 import { jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 import { Group } from '../../../../services/group.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-group-user-add',
@@ -22,8 +23,6 @@ export class GroupUserAddComponent {
   userAddForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
   });
-
-  showErrorMessage: boolean = false;
 
   declare actualGroup: Group;
 
@@ -45,16 +44,39 @@ export class GroupUserAddComponent {
     this.userService
       .getUserByEmail(this.userAddForm.value.email!)
       .subscribe((user) => {
-        if (user.group) {
-          this.showErrorMessage = true;
-          console.error('user already in a group');
-        } else {
-          user.role = Role.MEMBER;
-          user.group = this.actualGroup;
-          this.userService.updateUser(user).subscribe((user) => {
-            console.log('user added successfully');
-          });
-        }
+        Swal.fire({
+          title: 'Confirmation',
+          html: `Etes vous sûr de vouloir ajouter <span class="font-bold">${user.lastName} ${user.firstName}</span> à votre foyer ?`,
+          icon: 'warning',
+          showCancelButton: true,
+          reverseButtons: true,
+          confirmButtonText: 'Oui',
+          confirmButtonColor: '#28A745',
+          cancelButtonText: 'Non',
+          cancelButtonColor: '#DC3545',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            if (user.group) {
+              Swal.fire({
+                title: 'Erreur',
+                text: "L'utilisateur est déjà dans un foyer",
+                icon: 'error',
+                confirmButtonColor: '#28A745',
+              });
+            } else {
+              user.role = Role.MEMBER;
+              user.group = this.actualGroup;
+              this.userService.updateUser(user).subscribe((user) => {
+                Swal.fire({
+                  title: 'Succès',
+                  text: `${user.lastName} ${user.firstName} a bien été ajouté à votre foyer`,
+                  icon: 'success',
+                  confirmButtonColor: '#28A745',
+                });
+              });
+            }
+          }
+        });
       });
   }
   getActualIdUser() {
