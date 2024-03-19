@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .button {
-  @apply bg-secondary w-[210px] rounded-lg px-6 py-3 block shadow-lg cursor-default hover:bg-primary hover:text-[white];
+  @apply bg-secondary w-[210px] rounded-lg px-6 py-3 block shadow-lg cursor-pointer font-semibold hover:bg-primary hover:text-[white];
 }

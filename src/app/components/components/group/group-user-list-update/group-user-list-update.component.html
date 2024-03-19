@@ -5,7 +5,9 @@
 <div class="mt-8 mx-auto max-w-xl">
   <ul>
     @for (user of groupUserList; track user.id) {
-    <li class="flex justify-around mb-4 items-center">
+    <li
+      class="flex justify-around mb-4 items-center border border-light rounded-lg shadow-md py-2 hover:border-dark"
+    >
       {{ user.lastName }} {{ user.firstName }}
       <button class="button" type="button" (click)="updateUserRole(user)">
         Changer en {{ getOppositeRole(user.role!) }}
