@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({
@@ -9,7 +9,14 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './budget-structure.component.css',
 })
 export class BudgetStructureComponent {
+  @Input() declare type: string;
   @Input() declare id: string;
   @Input() declare description: string;
   @Input() declare total: number;
+
+  @Output() modal: EventEmitter<any> = new EventEmitter();
+
+  showModal() {
+    this.modal.emit({ type: this.type, id: this.id });
+  }
 }

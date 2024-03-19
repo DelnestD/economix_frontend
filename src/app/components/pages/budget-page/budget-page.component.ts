@@ -46,6 +46,11 @@ export class BudgetPageComponent implements OnInit {
   budgets: Budget[] = [];
 
   showModal: string = '';
+  createNew: boolean = true;
+
+  declare accountToUpdate: Account | undefined;
+  declare budgetToUpdate: Budget | undefined;
+  declare transactionToUpdate: Transaction | undefined;
 
   constructor(
     private transactionService: TransactionService,
@@ -56,6 +61,10 @@ export class BudgetPageComponent implements OnInit {
   ngOnInit(): void {
     this.loadTransactionsAccount();
     this.loadTransactionsBudget();
+  }
+
+  setType(param: string): string {
+    return param;
   }
 
   loadTransactionsAccount() {
@@ -94,6 +103,29 @@ export class BudgetPageComponent implements OnInit {
             });
         }
       });
+  }
+
+  modalUpdate(event: { type: string; id: string; accountId?: string }) {
+    if (event.type === 'account') {
+      this.accountToUpdate = this.accounts.find(
+        (account) => account.id === event.id
+      );
+    }
+    if (event.type === 'budget') {
+      this.budgetToUpdate = this.budgets.find(
+        (budget) => budget.id === event.id
+      );
+    }
+    if (event.type === 'transaction') {
+      let res = this.transactionsAccount.map((account) =>
+        account.find((transaction) => transaction.id === event.id)
+      );
+      for (const item of res) {
+        if (item !== undefined) this.transactionToUpdate = item;
+      }
+    }
+    this.createNew = false;
+    this.setShowModal(event.type);
   }
 
   setShowModal(modal: string) {

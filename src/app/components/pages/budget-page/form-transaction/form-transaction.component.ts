@@ -6,10 +6,10 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { Account } from '../../../../services/account.service';
 import { Budget } from '../../../../services/budget.service';
+import { Transaction } from '../../../../services/transaction.service';
 
 @Component({
   selector: 'app-form-transaction',
@@ -24,15 +24,31 @@ export class FormTransactionComponent {
   @Input() createNew: boolean = false;
   @Input() accounts: Account[] = [];
   @Input() budgets: Budget[] = [];
+  @Input() declare transactionToUpdate: Transaction | undefined;
 
   constructor(private userService: UserService) {}
 
-  createForm = new FormGroup(
-    {
-      compte: new FormControl(''),
-    },
-    [Validators.required]
-  );
+  transactionFrom = new FormGroup({
+    account: new FormControl(''),
+    budget: new FormControl(''),
+    title: new FormControl(''),
+    amount: new FormControl(''),
+    category: new FormControl(''),
+  });
+
+  ngOnInit() {
+    if (!this.createNew) {
+      console.log(this.transactionToUpdate);
+      this.transactionFrom.setValue({
+        account: '',
+        budget: '',
+        title: this.transactionToUpdate!.title,
+        amount: this.transactionToUpdate!.amount.toString(),
+        category: '',
+      });
+      console.log(this.transactionToUpdate);
+    }
+  }
 
   onSubmit() {
     throw new Error('Method not implemented.');
@@ -41,6 +57,4 @@ export class FormTransactionComponent {
   closeModal() {
     this.close.emit();
   }
-
-  ngOnInit() {}
 }

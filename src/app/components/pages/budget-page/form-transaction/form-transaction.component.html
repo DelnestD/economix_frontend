@@ -6,10 +6,14 @@
   >
     @if (createNew) { Ajouter } @else { Modifier } un transaction
   </p>
-  <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="font-textFont">
+  <form
+    [formGroup]="transactionFrom"
+    (ngSubmit)="onSubmit()"
+    class="font-textFont"
+  >
     <div class="inputline">
       <label class="label" for="account">Compte</label>
-      <select name="account" id="account">
+      <select formControlName="account" id="account">
         @for (account of accounts; track $index) {
         <option title="{{ account.description }}" value="{{ account.title }}">
           {{ account.title }}
@@ -19,7 +23,7 @@
     </div>
     <div class="inputline">
       <label class="label" for="budget">Budget</label>
-      <select name="budget" id="budget">
+      <select formControlName="budget" id="budget">
         <option value="" selected>
           <span class="italic text-sm">-</span>
         </option>
@@ -32,12 +36,12 @@
     </div>
     <div class="inputline">
       <label class="label" for="title">Titre *</label>
-      <input type="text" name="title" id="title" required />
+      <input type="text" formControlName="title" id="title" required />
     </div>
 
     <div class="inputline">
       <label class="label" for="amount">Montant *</label>
-      <input type="number" name="amount" id="amount" required />
+      <input type="number" formControlName="amount" id="amount" required />
     </div>
     <div class="flex justify-center mt-2 ml-10 mr-5">
       <span class="label"></span>
@@ -46,7 +50,7 @@
           id="spend"
           type="radio"
           value="spend"
-          name="category"
+          formControlName="category"
           class="w-4 h-4 mx-2"
           checked
         />

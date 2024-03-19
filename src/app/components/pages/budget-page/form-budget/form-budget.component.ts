@@ -1,15 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
-import { Account, AccountService } from '../../../../services/account.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../../services/user.service';
-import { BudgetService } from '../../../../services/budget.service';
+import { Budget, BudgetService } from '../../../../services/budget.service';
+import { jwtDecode } from 'jwt-decode';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-form-budget',
@@ -21,32 +21,43 @@ import { BudgetService } from '../../../../services/budget.service';
 export class FormBudgetComponent {
   @Output() close: EventEmitter<any> = new EventEmitter();
 
-  @Input() createNew: boolean = false;
+  @Input() declare createNew: boolean;
+  @Input() declare budgetToUpdate: Budget | undefined;
 
   constructor(
     private userService: UserService,
-    private budgetService: BudgetService
+    private budgetService: BudgetService,
+    private cookieService: CookieService
   ) {}
 
   budgetForm: FormGroup = new FormGroup({
-    name: new FormControl(''),
+    title: new FormControl(''),
     description: new FormControl(''),
   });
 
-  description = new FormControl('');
+  ngOnInit() {
+    if (!this.createNew) {
+      this.budgetForm.setValue({
+        title: this.budgetToUpdate!.title,
+        description: this.budgetToUpdate!.description,
+      });
+    }
+  }
 
   onSubmit() {
-    let oldValues: { title: string; description: string };
-    () => {
-      if (this.createNew) {
-        oldValues = { title: '', description: '' };
-      } else {
-        //TODO attribué les valeurs du compte modifié !
-        oldValues = { title: '', description: '' };
-      }
-    };
-
-    // this.budgetService.insertBudget(this.)
+    if (!this.createNew) {
+      this.budgetService
+        .insertBudget(this.budgetForm.value)
+        .subscribe((budget) => {
+          const userId = this.getActualIdUser();
+          this.userService.getUserById(userId).subscribe((user) => {
+            user.budgets!.push(budget);
+            this.userService
+              .updateUser(userId, user)
+              .subscribe((user) => console.log(user, 'user'));
+          });
+        });
+    }
 
     // this.accountService
     //   .insertAccount(this.accountForm.value)
@@ -63,5 +74,17 @@ export class FormBudgetComponent {
 
   closeModal() {
     this.close.emit();
+  }
+
+  getActualIdUser() {
+    return this.getDecodedAccessToken(this.cookieService.get('accessToken')).id;
+  }
+
+  getDecodedAccessToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      return null;
+    }
   }
 }

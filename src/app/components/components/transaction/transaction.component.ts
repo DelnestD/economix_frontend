@@ -1,5 +1,12 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component, Input, OnInit, input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  input,
+} from '@angular/core';
 
 @Component({
   selector: 'app-transaction',
@@ -10,7 +17,14 @@ import { Component, Input, OnInit, input } from '@angular/core';
 })
 export class TransactionComponent {
   @Input() declare id: string;
+  @Input() declare accountId: string;
   @Input() declare dateTransaction: Date;
   @Input() declare description: string;
   @Input() declare amount: number;
+
+  @Output() modal: EventEmitter<any> = new EventEmitter();
+
+  showModal() {
+    this.modal.emit({ type: 'transaction', id: this.id });
+  }
 }

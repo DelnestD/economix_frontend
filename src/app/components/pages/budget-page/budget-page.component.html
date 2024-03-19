@@ -7,19 +7,22 @@
   ></div>
   <app-form-transaction
     *ngIf="showModal === 'transaction'"
-    [createNew]="true"
+    [createNew]="createNew"
     [accounts]="accounts"
     [budgets]="budgets"
+    [transactionToUpdate]="transactionToUpdate"
     (close)="setShowModal('')"
   ></app-form-transaction>
   <app-form-account
     *ngIf="showModal === 'account'"
-    [createNew]="true"
+    [createNew]="createNew"
+    [accountToUpdate]="accountToUpdate"
     (close)="setShowModal('')"
   ></app-form-account>
   <app-form-budget
     *ngIf="showModal === 'budget'"
-    [createNew]="true"
+    [createNew]="createNew"
+    [budgetToUpdate]="budgetToUpdate"
     (close)="setShowModal('')"
   ></app-form-budget>
 </div>
@@ -31,7 +34,7 @@
 </div>
 <div class="flex justify-between px-32">
   <div class="flex items-center mb-5">
-    <p class="title">Mon compte</p>
+    <p class="title">Mes comptes</p>
     <button type="button" class="btnAddRound" (click)="setShowModal('account')">
       +
     </button>
@@ -40,7 +43,7 @@
     <button type="button" class="btnAddRound" (click)="setShowModal('budget')">
       +
     </button>
-    <p class="title">Mon budget</p>
+    <p class="title">Mes budgets</p>
   </div>
 </div>
 
@@ -58,9 +61,11 @@
       >
         <div (click)="accordionItem.toggle()">
           <app-budget-structure
+            [type]="setType('account')"
             [id]="account.id"
             [description]="account.title"
             [total]="totalAccount[index]"
+            (modal)="modalUpdate($event)"
           />
         </div>
         <div
@@ -77,6 +82,7 @@
             [dateTransaction]="transaction.date"
             [description]="transaction.title"
             [amount]="transaction.amount"
+            (modal)="modalUpdate($event)"
           />
           }
         </div>
@@ -99,9 +105,11 @@
         >
           <div (click)="accordionItem.toggle()">
             <app-budget-structure
+              [type]="setType('budget')"
               [id]="budget.id"
               [description]="budget.title"
               [total]="totalBudget[index]"
+              (modal)="modalUpdate($event)"
             />
           </div>
           <div
@@ -114,9 +122,11 @@
             @for (transaction of transactionsBudget[index]; track
             transaction.id) {
             <app-transaction
+              [id]="transaction.id"
               [dateTransaction]="transaction.date"
               [description]="transaction.title"
               [amount]="transaction.amount"
+              (modal)="modalUpdate($event)"
             />
             }
           </div>

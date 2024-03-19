@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface Account {
-  title: string;
-  description: string;
   id: string;
+  title: string;
+  description?: string;
 }
 
 @Injectable({
@@ -23,8 +23,11 @@ export class AccountService {
     return this.httpClient.post<Account>(this.baseUrl, account);
   }
 
-  updateAccount(id: string, account: Partial<Account>) {
-    return this.httpClient.patch<Account>(`${this.baseUrl}${id}`, account);
+  updateAccount(account: Partial<Account>) {
+    return this.httpClient.patch<Account>(
+      `${this.baseUrl}${account.id}`,
+      account
+    );
   }
 
   deleteAccount(id: string) {

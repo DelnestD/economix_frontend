@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
 import {
   FormControl,
@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AccountService, Account } from '../../../../services/account.service';
 import { jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
+import { Group } from '../../../../services/group.service';
 
 @Component({
   selector: 'app-form-account',
@@ -21,7 +22,10 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class FormAccountComponent {
   @Output() close: EventEmitter<any> = new EventEmitter();
-  @Input() createNew: boolean = false;
+
+  @Input() declare createNew: boolean;
+  @Input() declare accountToUpdate: Account | undefined;
+  @Input() declare group: Group | undefined;
 
   constructor(
     private cookieService: CookieService,
@@ -34,28 +38,42 @@ export class FormAccountComponent {
       title: new FormControl(''),
       description: new FormControl(''),
     },
-    [Validators.required]
   );
 
-  onSubmit() {
-    let oldValues: { title: string; description: string };
-    () => {
-      if (this.createNew) {
-        oldValues = { title: '', description: '' };
-      } else {
-        //TODO attribué les valeurs du compte modifié !
-        oldValues = { title: '', description: '' };
-      }
-    };
-    this.accountService
-      .insertAccount(this.accountForm.value)
-      .subscribe((account) => {
-        const userId = this.getActualIdUser();
-        const user = this.userService.getUserById(userId).subscribe((user) => {
-          user.accounts!.push(account);
-          this.userService.updateUser(userId, user).subscribe();
-        });
+  ngOnInit() {
+    if (!this.createNew) {
+      this.accountForm.setValue({
+        title: this.accountToUpdate!.title,
+        description: this.accountToUpdate!.description,
       });
+    }
+  }
+
+  onSubmit() {
+    if (this.createNew) {
+      this.accountService
+        .insertAccount(this.accountForm.value)
+        .subscribe((account) => {
+          const userId = this.getActualIdUser();
+          this.userService.getUserById(userId).subscribe((user) => {
+            user.accounts!.push(account);
+            this.userService
+              .updateUser(userId, user)
+              .subscribe((user) => console.log('user', user));
+          });
+        });
+    } else {
+      //! Update account error
+      const updateAccount: Account = {
+        id: this.accountToUpdate!.id,
+        title: this.accountForm.value.title,
+        description: this.accountForm.value.description,
+      };
+      console.log('avant service', updateAccount);
+      this.accountService.updateAccount(updateAccount).subscribe((account) => {
+        console.log('account updated', account);
+      });
+    }
 
     window.location.reload();
   }
@@ -63,8 +81,6 @@ export class FormAccountComponent {
   closeModal() {
     this.close.emit();
   }
-
-  ngOnInit() {}
 
   getActualIdUser() {
     return this.getDecodedAccessToken(this.cookieService.get('accessToken')).id;
