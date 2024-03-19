@@ -1,12 +1,19 @@
 <h1 class="text-center text-2xl font-semibold text-dark">
   Création d'un groupe
 </h1>
-<form class="mt-8" [formGroup]="createGroupForm">
+<form class="mt-8" [formGroup]="createGroupForm" (ngSubmit)="onSubmit()">
   <div class="mx-auto max-w-xl">
     <div class="py-2">
       <label class="label flex" for="name">Nom</label>
       <input class="input" type="text" id="name" formControlName="name" />
     </div>
-    <button class="button" type="submit">Créer</button>
+    <button
+      class="button"
+      type="submit"
+      [disabled]="createGroupForm.invalid"
+      [class.button-hover]="createGroupForm.valid"
+    >
+      Créer
+    </button>
   </div>
 </form>

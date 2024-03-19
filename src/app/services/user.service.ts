@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Group } from './group.service';
 
 export interface User {
   id: string;
@@ -8,6 +9,7 @@ export interface User {
   email: string;
   password?: string;
   role?: Role;
+  group?: Group;
 }
 
 export enum Role {
