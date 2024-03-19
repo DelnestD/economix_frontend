@@ -1,7 +1,4 @@
 <h1 class="text-center text-2xl font-semibold text-dark">Se Connecter</h1>
-<div class="text-center mt-4" [hidden]="!showErrorMessage">
-  <p class="error-message">Email ou mot de passe invalide</p>
-</div>
 <form class="mt-8" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="mx-auto max-w-xl pb-4">
     <div class="py-2">

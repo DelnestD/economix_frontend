@@ -9,6 +9,7 @@ import {
 import { LoginService, accessToken } from '../../../../services/login.service';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -37,9 +38,15 @@ export class LoginComponent {
       .login(this.loginForm.value)
       .pipe(
         catchError((e: { status: number; message: string }) => {
+          this.showErrorMessage = true;
+          Swal.fire({
+            title: 'Error',
+            text: 'Email ou mot de passe invalide',
+            icon: 'error',
+            confirmButtonColor: '#DC3545',
+          });
           const errorMessage =
             e.status === 401 ? 'Email or Password invalid' : e.message;
-          this.showErrorMessage = true;
           return errorMessage;
         })
       )
