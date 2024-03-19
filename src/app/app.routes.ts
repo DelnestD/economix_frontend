@@ -16,7 +16,7 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'a-propos',
+    path: 'about',
     component: AProposComponent,
   },
   {
@@ -24,7 +24,7 @@ export const routes: Routes = [
     component: ContactComponent,
   },
   {
-    path: 'parametres',
+    path: 'parameters',
     component: ParametresComponent,
   },
   {

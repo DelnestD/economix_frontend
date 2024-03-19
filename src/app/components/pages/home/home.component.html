@@ -1,1 +1,21 @@
-<p>home works!</p>
+<div class="flex mt-[6%]">
+  <div class="w-1/2 py-4">
+    <h1 class="text-center text-2xl font-semibold text-dark">
+      Bienvenue sur Economix
+    </h1>
+    <div class="mt-8 mx-auto max-w-3xl">
+      <p>
+        Bienvenue sur Economix, une application web qui permet la gestion de
+        votre budget.
+      </p>
+      <p>
+        En un clic, vous surveillez votre budget ainsi que celui de vos enfants
+        qui eux-mêmes peuvent avoir un accès à leurs dépenses.
+      </p>
+    </div>
+  </div>
+  <div class="w-1/2 py-4">
+    <app-login *ngIf="showLogin" />
+    <app-register *ngIf="!showLogin" />
+  </div>
+</div>
