@@ -33,7 +33,7 @@ export class UserService {
     return this.httpClient.get<User>(`${this.baseUrl}email/${email}`);
   }
 
-  getUserByGroupId(groupId: string) {
+  getUsersByGroupId(groupId: string) {
     return this.httpClient.get<User[]>(`${this.baseUrl}group/${groupId}`);
   }
 

@@ -1,35 +1,16 @@
-<h1 class="text-center text-2xl font-semibold text-dark">Liste des membres</h1>
-<form class="mt-8" [formGroup]="usersList">
-  <div class="flex justify-around mx-auto max-w-xl bg-light mt-8 p-5">
-    <div>
-      <div class="pb-3">
-        <h2>Membres</h2>
-      </div>
-      <div>
-        <p>membre 1</p>
-        <p>membre 2</p>
-      </div>
-    </div>
-    <div>
-      <div class="pb-3">
-        <h2>Rôles</h2>
-      </div>
-      <div class="flex">
-        <p>leader</p>
-        <label for="leader1"></label>
-        <input type="radio" name="role1" id="leader1" class="mx-2" />
-        <p>membre</p>
-        <label for="member1"></label>
-        <input type="radio" name="role1" id="member1" class="mx-2" />
-      </div>
-      <div class="flex">
-        <p>leader</p>
-        <label for="leader2"></label>
-        <input type="radio" name="role2" id="leader2" class="mx-2" />
-        <p>membre</p>
-        <label for="member2"></label>
-        <input type="radio" name="role2" id="member2" class="mx-2" />
-      </div>
-    </div>
-  </div>
-</form>
+<h1 class="text-center text-2xl font-semibold text-dark">Membres du foyer</h1>
+<div class="mt-8" [hidden]="hideAloneMessage">
+  Vous êtes actuellement le seul membre de votre foyer
+</div>
+<div class="mt-8 mx-auto max-w-xl">
+  <ul>
+    @for (user of groupUserList; track user.id) {
+    <li class="flex justify-around mb-4 items-center">
+      {{ user.lastName }} {{ user.firstName }}
+      <button class="button" type="button" (click)="updateUserRole(user)">
+        Changer en {{ getOppositeRole(user.role!) }}
+      </button>
+    </li>
+    }
+  </ul>
+</div>
