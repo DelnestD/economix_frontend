@@ -1,0 +1,62 @@
+<div id="navbar" class="flex justify-between px-5 bg-secondary">
+  <div id="logo">
+    <a routerLink="/home" routerLinkActive="active">
+      <img src="./assets/images/logo.png" alt="logo" class="w-[15%]" />
+    </a>
+  </div>
+  <nav class="px-4 flex items-center w-[35%]">
+    <ul class="flex justify-around w-full">
+      <!-- <li class="tabs">
+        <a routerLink="/budget" routerLinkActive="active">Budget</a>
+      </li> -->
+      <li class="tabs">
+        <a routerLink="/about" routerLinkActive="active">A propos</a>
+      </li>
+      <li class="tabs">
+        <a routerLink="/contact" routerLinkActive="active">Contact</a>
+      </li>
+      <li
+        [class.tabs]="isRegistered && !isConnected"
+        [hidden]="!isRegistered || isConnected"
+        (click)="switchConnection()"
+      >
+        <p>S'inscrire</p>
+      </li>
+      <li
+        [class.tabs]="!isRegistered && !isConnected"
+        [hidden]="isRegistered || isConnected"
+        (click)="switchConnection()"
+      >
+        <p>Se connecter</p>
+      </li>
+      <li
+        [class.tabs-select-dropdown]="isConnected"
+        [hidden]="!isConnected"
+        (mouseenter)="setShowDropDown(true)"
+        (mouseleave)="setShowDropDown(false)"
+      >
+        <p>Mes Paramètres</p>
+        <ul class="dropdown" [hidden]="!showDropDown">
+          <li class="tabs-dropdown">
+            <a routerLink="/parameters/user" routerLinkActive="active"
+              >Mon Compte</a
+            >
+          </li>
+          <li class="tabs-dropdown" *ngIf="!isLeader && !haveGroup">
+            <a routerLink="/parameters/createGroup" routerLinkActive="active"
+              >Créer mon Foyer</a
+            >
+          </li>
+          <li class="tabs-dropdown" *ngIf="isLeader && haveGroup">
+            <a routerLink="/parameters/group" routerLinkActive="active"
+              >Mon Foyer</a
+            >
+          </li>
+          <li class="tabs-dropdown" (click)="deconnect()">
+            <p>Se déconnecter</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>

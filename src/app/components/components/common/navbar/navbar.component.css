@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.tabs {
+  @apply h-[60px] w-[160px] flex justify-center items-center cursor-pointer hover:bg-primary hover:text-lg;
+}
+
+.tabs a,
+.tabs p {
+  @apply w-full h-full text-center font-semibold py-4;
+}
+
+.tabs-select-dropdown {
+  @apply h-[60px] w-[160px] flex justify-center items-center cursor-default hover:bg-primary hover:text-lg;
+}
+
+.tabs-select-dropdown p {
+  @apply w-full h-full text-center font-semibold py-4;
+}
+
+.dropdown {
+  @apply w-[160px] absolute top-[60px] right-0 mr-[3.2rem] shadow-lg text-base;
+}
+
+.tabs-dropdown {
+  @apply w-full h-1/2 flex justify-center items-center cursor-pointer bg-secondary hover:bg-primary hover:text-lg;
+}
+
+.tabs-dropdown a,
+.tabs-dropdown p {
+  @apply w-full h-full text-center font-semibold py-4;
+}

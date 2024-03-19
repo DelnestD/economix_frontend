@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 import { NotFoundComponent } from './components/pages/not-found/not-found.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { AProposComponent } from './components/pages/a-propos/a-propos.component';
 import { ContactComponent } from './components/pages/contact/contact.component';
-import { ParametresComponent } from './components/pages/parametres/parametres.component';
+import { AboutComponent } from './components/pages/about/about.component';
+import { ParametersUserComponent } from './components/pages/parameters-user/parameters-user.component';
+import { ParametersGroupComponent } from './components/pages/parameters-group/parameters-group.component';
+import { ParametersGroupCreateComponent } from './components/pages/parameters-group-create/parameters-group-create.component';
 
 export const routes: Routes = [
   {
@@ -17,7 +19,7 @@ export const routes: Routes = [
   },
   {
     path: 'about',
-    component: AProposComponent,
+    component: AboutComponent,
   },
   {
     path: 'contact',
@@ -25,7 +27,11 @@ export const routes: Routes = [
   },
   {
     path: 'parameters',
-    component: ParametresComponent,
+    children: [
+      { path: 'user', component: ParametersUserComponent },
+      { path: 'group', component: ParametersGroupComponent },
+      { path: 'createGroup', component: ParametersGroupCreateComponent },
+    ],
   },
   {
     path: 'not-found',
