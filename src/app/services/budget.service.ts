@@ -4,17 +4,16 @@ import { Injectable } from '@angular/core';
 export interface Budget {
   id: string;
   title: string;
-  description: string;
-  amount: number;
+  description?: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BudgetService {
   baseUrl = 'http://localhost:8081/budget/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   getBudgetById(id: string) {
     return this.httpClient.get<Budget[]>(`${this.baseUrl}${id}`);

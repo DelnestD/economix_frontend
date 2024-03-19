@@ -4,16 +4,16 @@ import { Injectable } from '@angular/core';
 export interface Account {
   id: string;
   title: string;
-  description: string;
+  description?: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountService {
   baseUrl = 'http://localhost:8081/account/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   getAccountById(id: string) {
     return this.httpClient.get<Account>(`${this.baseUrl}${id}`);

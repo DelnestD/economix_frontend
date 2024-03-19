@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Group } from './group.service';
+import { Account } from './account.service';
+import { Budget } from './budget.service';
 
 export interface User {
   id: string;
@@ -10,6 +12,8 @@ export interface User {
   password?: string;
   role?: Role;
   group?: Group;
+  accounts?: Account[];
+  budgets?: Budget[];
 }
 
 export enum Role {
