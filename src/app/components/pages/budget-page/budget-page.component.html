@@ -1,26 +1,28 @@
-<div
-  class="w-[100vw] h-[100vh] bg-[black] bg-opacity-20 fixed top-0 left-0"
-  *ngIf="showModal !== ''"
-  (click)="setShowModal('')"
-  tabindex="-1"
-></div>
-<app-form-transaction
-  *ngIf="showModal === 'transaction'"
-  [createNew]="true"
-  [accounts]="accounts"
-  [budgets]="budgets"
-  (close)="setShowModal('')"
-></app-form-transaction>
-<app-form-account
-  *ngIf="showModal === 'account'"
-  [createNew]="true"
-  (close)="setShowModal('')"
-></app-form-account>
-<app-form-budget
-  *ngIf="showModal === 'budget'"
-  [createNew]="true"
-  (close)="setShowModal('')"
-></app-form-budget>
+<div class="z-10">
+  <div
+    class="w-[100vw] h-[100vh] bg-[black] bg-opacity-20 fixed top-0 left-0"
+    *ngIf="showModal !== ''"
+    (click)="setShowModal('')"
+    tabindex="-1"
+  ></div>
+  <app-form-transaction
+    *ngIf="showModal === 'transaction'"
+    [createNew]="true"
+    [accounts]="accounts"
+    [budgets]="budgets"
+    (close)="setShowModal('')"
+  ></app-form-transaction>
+  <app-form-account
+    *ngIf="showModal === 'account'"
+    [createNew]="true"
+    (close)="setShowModal('')"
+  ></app-form-account>
+  <app-form-budget
+    *ngIf="showModal === 'budget'"
+    [createNew]="true"
+    (close)="setShowModal('')"
+  ></app-form-budget>
+</div>
 
 <div class="flex justify-center mt-5">
   <button class="btnAdd" (click)="setShowModal('transaction')">
