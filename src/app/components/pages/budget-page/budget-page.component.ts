@@ -56,10 +56,6 @@ export class BudgetPageComponent implements OnInit {
   ngOnInit(): void {
     this.loadTransactionsAccount();
     this.loadTransactionsBudget();
-
-    setTimeout(() => {
-      console.log('accounts', this.accounts);
-    }, 5000);
   }
 
   loadTransactionsAccount() {
@@ -70,7 +66,7 @@ export class BudgetPageComponent implements OnInit {
         for (let i = 0; i < accounts.length; i++) {
           this.totalAccount[i] = 0;
           this.transactionService
-            .getTransactionByAccountId(accounts[i].id)
+            .getTransactionByAccountId(accounts[i].id!)
             .subscribe((transactions) => {
               this.transactionsAccount[i] = transactions;
               transactions.map((transaction) => {

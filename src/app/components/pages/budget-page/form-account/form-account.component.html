@@ -1,34 +1,38 @@
 <div
-  class="absolute top-[20%] left-[30%] border-2 border-dark w-[40%] bg-light pb-7 rounded-xl"
+  class="absolute top-[17.5%] left-[25%] w-[50%] border-2 border-dark bg-[white] pb-7 rounded-2xl"
 >
   <p
-    class="flex justify-center font-titleFont text-xl my-10 font-bold bg-primary py-3"
+    class="flex justify-center font-titleFont text-xl mb-10 font-bold bg-secondary py-7 rounded-t-xl"
   >
     @if (createNew) { Ajouter } @else { Modifier } un compte
   </p>
-  <form [formGroup]="createForm" class="font-textFont">
+  <form [formGroup]="accountForm" (ngSubmit)="onSubmit()" class="font-textFont">
     <div class="inputline">
-      <label for="name" class="label">Nom</label>
-      <input type="text" name="name" id="name" />
+      <label for="title" class="label">Nom *</label>
+      <input type="text" name="title" formControlName="title" required="" />
     </div>
     <div class="inputline">
       <label for="description">Description</label>
-      <textarea name="description" id="description" rows="3"></textarea>
+      <textarea
+        name="description"
+        formControlName="description"
+        rows="3"
+      ></textarea>
     </div>
 
     <div class="mt-10 w-[100%] flex">
       <div class="w-[50%] flex justify-center">
         <button
-          class="bg-danger px-10 py-3 rounded-xl font-bold text-lg text-light hover:bg-dangerhover"
+          class="text-[gray] underline px-10 py-3 rounded-xl text-sm border-2 border-light hover:border-dark"
           (click)="closeModal()"
         >
-          Fermer
+          Annuler
         </button>
       </div>
       <div class="w-[50%] flex justify-center">
         <button
-          class="bg-success px-10 py-3 rounded-xl font-bold text-lg text-light hover:bg-successhover"
-          (click)="submitForm()"
+          type="submit"
+          class="px-10 py-3 rounded-xl font-semibold text-lg text-[white] shadow-2xl bg-primary hover:bg-dark"
         >
           @if (createNew) { Ajouter } @else { Modifier }
         </button>

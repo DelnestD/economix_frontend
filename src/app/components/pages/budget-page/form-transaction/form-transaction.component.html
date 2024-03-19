@@ -1,14 +1,14 @@
 <div
-  class="absolute top-[20%] left-[25%] w-[50%] border-2 border-dark bg-light pb-7 rounded-xl"
+  class="absolute top-[17.5%] left-[25%] w-[50%] border-2 border-dark bg-[white] pb-7 rounded-2xl"
 >
   <p
-    class="flex justify-center font-titleFont text-xl my-10 font-bold bg-primary py-3"
+    class="flex justify-center font-titleFont text-xl mb-10 font-bold bg-secondary py-7 rounded-t-xl"
   >
     @if (createNew) { Ajouter } @else { Modifier } un transaction
   </p>
-  <form [formGroup]="createForm" class="font-textFont">
+  <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="font-textFont">
     <div class="inputline">
-      <label for="account">Compte</label>
+      <label class="label" for="account">Compte</label>
       <select name="account" id="account">
         @for (account of accounts; track $index) {
         <option title="{{ account.description }}" value="{{ account.title }}">
@@ -18,9 +18,11 @@
       </select>
     </div>
     <div class="inputline">
-      <label for="budget">Budget</label>
+      <label class="label" for="budget">Budget</label>
       <select name="budget" id="budget">
-        <option value="" selected></option>
+        <option value="" selected>
+          <span class="italic text-sm">-</span>
+        </option>
         @for (budget of budgets; track $index) {
         <option title="{{ budget.description }}" value="{{ budget.title }}">
           {{ budget.title }}
@@ -29,27 +31,52 @@
       </select>
     </div>
     <div class="inputline">
-      <label for="title">Titre *</label>
-      <input type="text" name="title" id="title" required />
-    </div>
-    <div class="inputline">
-      <label for="amount">Montant *</label>
-      <input type="number" name="amount" id="amount" required />
+      <label class="label" for="title">Titre *</label>
+      <input type="text" name="title" id="title" class="input" required />
     </div>
 
-    <div class="mt-10 w-[100%] flex">
+    <div class="inputline">
+      <label class="label" for="amount">Montant *</label>
+
+      <div class="flex justify-center ml-10 mr-5">
+        <div class="flex items-center">
+          <input
+            id=""
+            type="radio"
+            value=""
+            name="default-radio"
+            class="w-4 h-4 mx-2"
+            checked
+          />
+          <label for="default-radio-1">Dépensé</label>
+        </div>
+        <div class="flex items-center">
+          <input
+            id="default-radio-2"
+            type="radio"
+            value=""
+            name="default-radio"
+            class="w-4 h-4 mx-2"
+          />
+          <label for="default-radio-2">Reçu</label>
+        </div>
+      </div>
+      <input type="number" name="amount" id="amount" required class="amount" />
+    </div>
+
+    <div class="mt-20 w-[100%] flex">
       <div class="w-[50%] flex justify-center">
         <button
-          class="bg-danger px-10 py-3 rounded-xl font-bold text-lg text-light hover:bg-dangerhover"
+          class="text-[gray] underline px-10 py-3 rounded-xl text-sm border-2 border-light hover:border-dark"
           (click)="closeModal()"
         >
-          Fermer
+          Annuler
         </button>
       </div>
       <div class="w-[50%] flex justify-center">
         <button
-          class="bg-success px-10 py-3 rounded-xl font-bold text-lg text-light hover:bg-successhover"
-          (click)="submitForm()"
+          type="submit"
+          class="px-10 py-3 rounded-xl font-semibold text-lg text-[white] shadow-2xl bg-primary hover:bg-dark"
         >
           @if (createNew) { Ajouter } @else { Modifier }
         </button>

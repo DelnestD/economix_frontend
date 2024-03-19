@@ -34,7 +34,7 @@ export class FormTransactionComponent {
     [Validators.required]
   );
 
-  submitForm() {
+  onSubmit() {
     throw new Error('Method not implemented.');
   }
 

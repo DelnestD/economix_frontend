@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 .inputline {
-  @apply w-[100%] flex text-center mt-5 items-center;
+  @apply w-[100%] flex text-center mt-8 items-center;
 }
 label {
-  @apply w-[50%];
+  @apply w-[50%] px-1 font-bold text-dark text-lg;
 }
 input,
 textarea {
-  @apply flex align-middle w-[40%] min-h-7 mx-10 px-2 border-2 border-dark;
-  background-color: white;
+  @apply flex align-middle mx-10 px-3 py-2 min-h-7 w-[40%] bg-[white] border-2 border-light rounded-lg shadow-md focus:border-dark focus:outline-none hover:border-dark;
 }

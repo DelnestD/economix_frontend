@@ -2,27 +2,31 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account } from './account.service';
 import { Budget } from './budget.service';
+import { Group } from './group.service';
 
 export interface User {
   id: string;
   firstName: string;
   lastName: string;
   password: string;
-  role: Role;
+  role?: Role;
+  group?: Group;
+  accounts?: Account[];
+  budgets?: Budget[];
 }
 
 export enum Role {
-  LEADER = "leader",
-  MEMBER = "member"
+  LEADER = 'leader',
+  MEMBER = 'member',
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   baseUrl = 'http://localhost:8081/user/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   getUserById(id: string) {
     return this.httpClient.get<User>(`${this.baseUrl}${id}`);

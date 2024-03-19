@@ -8,6 +8,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AccountService, Account } from '../../../../services/account.service';
+import { jwtDecode } from 'jwt-decode';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-form-account',
@@ -18,20 +21,43 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class FormAccountComponent {
   @Output() close: EventEmitter<any> = new EventEmitter();
-
   @Input() createNew: boolean = false;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private cookieService: CookieService,
+    private userService: UserService,
+    private accountService: AccountService
+  ) {}
 
-  createForm = new FormGroup(
+  accountForm: FormGroup = new FormGroup(
     {
-      compte: new FormControl(''),
+      title: new FormControl(''),
+      description: new FormControl(''),
     },
     [Validators.required]
   );
 
-  submitForm() {
-    throw new Error('Method not implemented.');
+  onSubmit() {
+    let oldValues: { title: string; description: string };
+    () => {
+      if (this.createNew) {
+        oldValues = { title: '', description: '' };
+      } else {
+        //TODO attribué les valeurs du compte modifié !
+        oldValues = { title: '', description: '' };
+      }
+    };
+    this.accountService
+      .insertAccount(this.accountForm.value)
+      .subscribe((account) => {
+        const userId = this.getActualIdUser();
+        const user = this.userService.getUserById(userId).subscribe((user) => {
+          user.accounts!.push(account);
+          this.userService.updateUser(userId, user).subscribe();
+        });
+      });
+
+    window.location.reload();
   }
 
   closeModal() {
@@ -39,4 +65,16 @@ export class FormAccountComponent {
   }
 
   ngOnInit() {}
+
+  getActualIdUser() {
+    return this.getDecodedAccessToken(this.cookieService.get('accessToken')).id;
+  }
+
+  getDecodedAccessToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      return null;
+    }
+  }
 }
