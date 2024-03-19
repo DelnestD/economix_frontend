@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export interface Account {
   title: string;
   description: string;
-  id?: string;
+  id: string;
 }
 
 @Injectable({

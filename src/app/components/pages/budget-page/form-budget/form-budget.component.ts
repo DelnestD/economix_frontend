@@ -31,7 +31,6 @@ export class FormBudgetComponent {
   budgetForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),
-    amount: new FormControl(''),
   });
 
   description = new FormControl('');

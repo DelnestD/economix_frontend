@@ -1,6 +1,7 @@
 <div
   class="w-[100vw] h-[100vh] bg-[black] bg-opacity-20 fixed top-0 left-0"
   *ngIf="showModal !== ''"
+  (click)="setShowModal('')"
   tabindex="-1"
 ></div>
 <app-form-transaction
@@ -55,6 +56,7 @@
       >
         <div (click)="accordionItem.toggle()">
           <app-budget-structure
+            [id]="account.id"
             [description]="account.title"
             [total]="totalAccount[index]"
           />
@@ -66,9 +68,10 @@
           [attr.id]="'accordion-body-' + index"
           [attr.aria-labelledby]="'accordion-header-' + index"
         >
-          @for (transaction of transactionsAccount[index]; track transaction.id)
-          {
+          @for (transaction of transactionsAccount[index]; track
+          transaction.id;) {
           <app-transaction
+            [id]="transaction.id"
             [dateTransaction]="transaction.date"
             [description]="transaction.title"
             [amount]="transaction.amount"
@@ -94,6 +97,7 @@
         >
           <div (click)="accordionItem.toggle()">
             <app-budget-structure
+              [id]="budget.id"
               [description]="budget.title"
               [total]="totalBudget[index]"
             />

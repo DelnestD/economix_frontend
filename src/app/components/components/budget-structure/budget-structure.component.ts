@@ -6,11 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
   standalone: true,
   imports: [HttpClientModule],
   templateUrl: './budget-structure.component.html',
-  styleUrl: './budget-structure.component.css'
+  styleUrl: './budget-structure.component.css',
 })
 export class BudgetStructureComponent {
-  @Input()
-  description!: string;
-  @Input()
-  total!: number;
+  @Input() declare id: string;
+  @Input() declare description: string;
+  @Input() declare total: number;
 }
