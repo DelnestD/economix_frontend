@@ -10,6 +10,7 @@ import { User, UserService } from '../../../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
 import bcrypt from 'bcryptjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-infos-update',
@@ -60,13 +61,20 @@ export class UserInfosUpdateComponent {
           };
           //? check email ?
           this.userService.updateUser(updatedUser).subscribe((user) => {
-            console.log('User updated', user);
+            Swal.fire({
+              title: 'Modifications enregistrées',
+              icon: 'success',
+              confirmButtonText: 'Ok',
+              confirmButtonColor: '#28A745',
+            });
           });
         } else {
-          console.error('Password is incorrect');
-          this.showErrorMessage = true;
-          document.getElementsByClassName('error-message')[0].innerHTML =
-            'Mot de passe incorrect';
+          Swal.fire({
+            title: 'Mot de passe incorrect',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#DC3545',
+          });
         }
       }
     );

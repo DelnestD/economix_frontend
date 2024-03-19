@@ -11,6 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
 import bcrypt from 'bcryptjs';
 import { User, UserService } from '../../../../services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-password-update',
@@ -82,15 +83,21 @@ export class UserPasswordUpdateComponent {
               this.actualUser.password!,
               (err, res) => {
                 if (res) {
-                  this.userService
-                    .updateUser(userToUpdate)
-                    .subscribe((user) => {
-                      console.log('Password updated');
+                  this.userService.updateUser(userToUpdate).subscribe(() => {
+                    Swal.fire({
+                      title: 'Mot de passe mis à jour',
+                      icon: 'success',
+                      confirmButtonText: 'Ok',
+                      confirmButtonColor: '#28A745',
                     });
+                  });
                 } else {
-                  console.error('Password is not updated');
-                  this.showErrorMessage = true;
-                  this.errorMessage.innerHTML = 'Mot de passe incorrect';
+                  Swal.fire({
+                    title: 'Mot de passe incorrect',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#DC3545',
+                  });
                 }
               }
             );
