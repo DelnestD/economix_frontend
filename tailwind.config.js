@@ -11,6 +11,7 @@ module.exports = {
       success: "#28A745",
       warning: "#FFC107",
       danger: "#DC3545",
+      bg: "#F2F2F2",
     },
     fontFamily: {
       titleFont: ["titleFont", "sans-serif"],
