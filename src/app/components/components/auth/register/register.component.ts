@@ -9,6 +9,7 @@ import {
 import { confirmPassword } from '../../../validators/password.validator';
 import { RegisterService } from '../../../../services/register.service';
 import { catchError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -48,15 +49,26 @@ export class RegisterComponent {
       .register(newUser)
       .pipe(
         catchError((e: { status: number; message: string }) => {
+          this.showErrorMessages = true;
+          Swal.fire({
+            title: 'Error!',
+            text: 'Cette Email existe déjà ! Veuillez saisir un autre email',
+            icon: 'error',
+            confirmButtonColor: '#DC3545',
+          });
           const errorMessage =
             e.status === 409 ? 'Email already exists' : e.message;
-          this.showErrorMessages = true;
           return errorMessage;
         })
       )
       .subscribe((reponse) => {
         if (this.showErrorMessages === false) {
-          console.log('User registered successfully');
+          Swal.fire({
+            title: 'Success!',
+            text: 'Votre compte a été créé avec succès ! Vous pouvez maintenant vous connecter.',
+            icon: 'success',
+            confirmButtonColor: '#28A745',
+          });
         }
       });
   }

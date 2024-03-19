@@ -1,7 +1,4 @@
 <h1 class="text-center text-2xl font-semibold text-dark">S'inscrire</h1>
-<div class="text-center mt-4" [hidden]="!showErrorMessages">
-  <p class="error-message">Un compte avec cet email existe déjà</p>
-</div>
 <form class="mt-4" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="mx-auto max-w-xl pb-4">
     <div class="py-2">
