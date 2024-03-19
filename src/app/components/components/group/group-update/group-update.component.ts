@@ -10,6 +10,7 @@ import { User, UserService } from '../../../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Group, GroupService } from '../../../../services/group.service';
 import { jwtDecode } from 'jwt-decode';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-group-update',
@@ -46,6 +47,12 @@ export class GroupUpdateComponent {
     };
 
     this.groupService.updateGroup(updateGroup).subscribe((group) => {
+      Swal.fire({
+        title: 'Succès',
+        text: 'Le nom de votre foyer a bien été mis à jour',
+        icon: 'success',
+        confirmButtonColor: '#28A745',
+      });
       console.log('group updated', group);
     });
   }
