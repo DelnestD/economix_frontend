@@ -19,5 +19,5 @@
 }
 
 .btnMemberSelected {
-    @apply w-[5rem] h-[5rem] font-textFont text-sm rounded-full mx-3 bg-light border-2 border-primary font-bold;
+    @apply w-[5rem] h-[5rem] font-textFont text-sm rounded-full mx-3 bg-secondary border-2 border-primary font-bold;
 }
