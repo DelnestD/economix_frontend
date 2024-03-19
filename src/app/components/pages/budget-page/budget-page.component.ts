@@ -22,6 +22,8 @@ import { FormNewBudgetComponent } from './form-new-budget/form-new-budget.compon
 export class BudgetPageComponent implements OnInit {
   roleActualUser: string = "";
   groupId: string = "";
+  status: boolean[] = [];
+  statusAvantIndex: number = 0;
   membersGroup: User[] = [];
   
   expandedIndex = 0;
@@ -43,6 +45,7 @@ export class BudgetPageComponent implements OnInit {
     this.loadTransactionsAccount(this.getActualIdUser());
     this.loadTransactionsBudget(this.getActualIdUser());
     this.loadMembers();
+    this.status[this.statusAvantIndex] = true;
   }
 
   loadTransactionsAccount(id: string) {
@@ -77,20 +80,34 @@ export class BudgetPageComponent implements OnInit {
 
   loadMembers() {
     this.userService.getUserById(this.getActualIdUser()).subscribe(user => {
+      this.membersGroup = [];
+
       if (user.group) {
         this.groupId = user.group.id;
       }
 
       this.userService.getUserByGroupId(this.groupId).subscribe(user => {
-          this.membersGroup = user;
+        for (let u of user) {
+          if (u.id === this.getActualIdUser()) {
+            this.membersGroup.push(u);
+          }
+        }
+        for (let u of user) {
+          if (u.id !== this.getActualIdUser()) {
+            this.membersGroup.push(u);
+          }
+        }
       });
     });
   }
 
-  showBudgetOfMemberSelected(member: string) {
-    this.loadTransactionsAccount(member);
-    this.loadTransactionsBudget(member);
+  showBudgetOfMemberSelected(memberId: string, index: number) {
+    this.loadTransactionsAccount(memberId);
+    this.loadTransactionsBudget(memberId);
     this.loadMembers();
+    this.status[this.statusAvantIndex] = false;
+    this.status[index] = !this.status[index];
+    this.statusAvantIndex = index;
   }
 
   showBudgetOfAllMembers() {
