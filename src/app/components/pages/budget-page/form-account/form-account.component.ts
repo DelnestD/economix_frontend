@@ -38,7 +38,7 @@ export class FormAccountComponent {
   accountForm: FormGroup = new FormGroup(
     {
       title: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required)
+      description: new FormControl('')
     }
   );
 
@@ -73,17 +73,21 @@ export class FormAccountComponent {
           });
       }
     } else {
-      //! Update account error
-      const updateAccount: Account = {
-        id: this.accountToUpdate!.id,
-        title: this.accountForm.value.title,
-        description: this.accountForm.value.description,
-      };
-      console.log('avant service', updateAccount);
-      this.accountService.updateAccount(updateAccount).subscribe((account) => {
-        console.log('account updated', account);
-      });
-      window.location.reload();
+      if (this.getTitle().status === "INVALID") {
+        this.formValid = false;
+      } else {
+        //! Update account error
+        const updateAccount: Account = {
+          id: this.accountToUpdate!.id,
+          title: this.accountForm.value.title,
+          description: this.accountForm.value.description,
+        };
+        console.log('avant service', updateAccount);
+        this.accountService.updateAccount(updateAccount).subscribe((account) => {
+          console.log('account updated', account);
+        });
+        window.location.reload();
+      }
     }
   }
 

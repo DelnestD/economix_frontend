@@ -4,6 +4,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../../services/user.service';
@@ -30,10 +31,16 @@ export class FormBudgetComponent {
     private cookieService: CookieService
   ) {}
 
+  formValid: boolean = true;
+
   budgetForm: FormGroup = new FormGroup({
-    title: new FormControl(''),
+    title: new FormControl('', Validators.required),
     description: new FormControl(''),
   });
+
+  getTitle() {
+    return this.budgetForm.get('title') as FormControl;
+  }
 
   ngOnInit() {
     if (!this.createNew) {
@@ -46,17 +53,22 @@ export class FormBudgetComponent {
 
   onSubmit() {
     if (!this.createNew) {
-      this.budgetService
-        .insertBudget(this.budgetForm.value)
-        .subscribe((budget) => {
-          const userId = this.getActualIdUser();
-          this.userService.getUserById(userId).subscribe((user) => {
-            user.budgets!.push(budget);
-            this.userService
-              .updateUser(userId, user)
-              .subscribe((user) => console.log(user, 'user'));
+      if (this.getTitle().status === "INVALID") {
+        this.formValid = false;
+      } else {
+        this.budgetService
+          .insertBudget(this.budgetForm.value)
+          .subscribe((budget) => {
+            const userId = this.getActualIdUser();
+            this.userService.getUserById(userId).subscribe((user) => {
+              user.budgets!.push(budget);
+              this.userService
+                .updateUser(userId, user)
+                .subscribe((user) => console.log(user, 'user'));
+            });
           });
-        });
+          window.location.reload();
+      }
     }
 
     // this.accountService
@@ -69,7 +81,7 @@ export class FormBudgetComponent {
     //     });
     //   });
 
-    window.location.reload();
+    
   }
 
   closeModal() {

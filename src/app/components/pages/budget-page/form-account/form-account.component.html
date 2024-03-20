@@ -11,7 +11,7 @@
       <label for="title" class="label">Nom *</label>
       <input type="text" name="title" formControlName="title" required />
     </div>
-    <div class="flex justify-end mr-11 mt-2 text-sm">
+    <div class="errorMessage">
       <p [hidden]="formValid" class="text-danger">* Ce champ est obligatoire</p>
     </div>
     <div class="inputline">
