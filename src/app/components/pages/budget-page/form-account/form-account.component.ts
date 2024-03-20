@@ -33,11 +33,13 @@ export class FormAccountComponent {
     private accountService: AccountService
   ) {}
 
+  formValid: boolean = true;
+
   accountForm: FormGroup = new FormGroup(
     {
-      title: new FormControl(''),
-      description: new FormControl(''),
-    },
+      title: new FormControl('', Validators.required),
+      description: new FormControl('')
+    }
   );
 
   ngOnInit() {
@@ -49,33 +51,44 @@ export class FormAccountComponent {
     }
   }
 
+  getTitle() {
+    return this.accountForm.get('title') as FormControl;
+  }
+
   onSubmit() {
     if (this.createNew) {
-      this.accountService
-        .insertAccount(this.accountForm.value)
-        .subscribe((account) => {
-          const userId = this.getActualIdUser();
-          this.userService.getUserById(userId).subscribe((user) => {
-            user.accounts!.push(account);
-            this.userService
-              .updateUser(userId, user)
-              .subscribe((user) => console.log('user', user));
+      if (this.getTitle().status === "INVALID") {
+        this.formValid = false;
+      } else {
+        this.accountService
+          .insertAccount(this.accountForm.value)
+          .subscribe((account) => {
+            const userId = this.getActualIdUser();
+            this.userService.getUserById(userId).subscribe((user) => {
+              user.accounts!.push(account);
+              this.userService
+                .updateUser(userId, user)
+                .subscribe((user) => console.log('user', user));
+            });
           });
-        });
+      }
     } else {
-      //! Update account error
-      const updateAccount: Account = {
-        id: this.accountToUpdate!.id,
-        title: this.accountForm.value.title,
-        description: this.accountForm.value.description,
-      };
-      console.log('avant service', updateAccount);
-      this.accountService.updateAccount(updateAccount).subscribe((account) => {
-        console.log('account updated', account);
-      });
+      if (this.getTitle().status === "INVALID") {
+        this.formValid = false;
+      } else {
+        //! Update account error
+        const updateAccount: Account = {
+          id: this.accountToUpdate!.id,
+          title: this.accountForm.value.title,
+          description: this.accountForm.value.description,
+        };
+        console.log('avant service', updateAccount);
+        this.accountService.updateAccount(updateAccount).subscribe((account) => {
+          console.log('account updated', account);
+        });
+        window.location.reload();
+      }
     }
-
-    window.location.reload();
   }
 
   closeModal() {

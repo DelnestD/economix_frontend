@@ -13,9 +13,13 @@
 @font-face {
     font-family: "textFont";
     src: url(./assets/fonts/Montserrat-VariableFont_wght.ttf);
-}
+} 
+
 body {
     background-image: url('./assets/images/bg-economix.jpg');
     background-size: 100%;
-     
 } 
+
+.errorMessage {
+    @apply flex justify-end mr-11 mt-2 text-sm;
+}
