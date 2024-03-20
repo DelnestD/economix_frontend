@@ -4,6 +4,7 @@ import { NavbarComponent } from './components/components/navbar/navbar.component
 import { FooterComponent } from './components/components/footer/footer.component';
 import { AProposComponent } from './components/pages/a-propos/a-propos.component';
 import { ParametresComponent } from './components/pages/parametres/parametres.component';
+import { BudgetPageComponent } from './components/pages/budget-page/budget-page.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
     FooterComponent,
     AProposComponent,
     ParametresComponent,
+    BudgetPageComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

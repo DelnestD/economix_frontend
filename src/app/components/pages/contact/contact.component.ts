@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './contact.component.css'
 })
 export class ContactComponent {
- email:string = "info@economix.com";
+  email:string = "info@economix.com";
 }

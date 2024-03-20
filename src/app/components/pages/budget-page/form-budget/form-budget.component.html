@@ -1,0 +1,42 @@
+<div
+  class="absolute top-[17.5%] left-[25%] w-[50%] border-2 border-dark bg-[white] pb-7 rounded-2xl"
+>
+  <p
+    class="flex justify-center font-titleFont text-xl mb-10 font-bold bg-secondary py-7 rounded-t-xl"
+  >
+    @if (createNew) { Ajouter } @else { Modifier } un budget
+  </p>
+  <form [formGroup]="budgetForm" (ngSubmit)="onSubmit()" class="font-textFont">
+    <div class="inputline">
+      <label for="title" class="label">Nom *</label>
+      <input type="text" formControlName="title" id="title" required />
+    </div>
+    <div class="inputline">
+      <label for="description">Description</label>
+      <textarea
+        formControlName="description"
+        id="description"
+        rows="3"
+      ></textarea>
+    </div>
+
+    <div class="mt-10 w-[100%] flex">
+      <div class="w-[50%] flex justify-center">
+        <button
+          class="text-[gray] underline px-10 py-3 rounded-xl text-sm border-2 border-light hover:border-dark"
+          (click)="closeModal()"
+        >
+          Annuler
+        </button>
+      </div>
+      <div class="w-[50%] flex justify-center">
+        <button
+          type="submit"
+          class="px-10 py-3 rounded-xl font-semibold text-lg text-[white] shadow-2xl bg-primary hover:bg-dark"
+        >
+          @if (createNew) { Ajouter } @else { Modifier }
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

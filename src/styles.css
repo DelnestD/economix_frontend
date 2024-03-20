@@ -3,10 +3,17 @@
 @tailwind utilities;
 
 .change-mdp .inputText{
-
     @apply border-2 border-secondary;
 }
 
+@font-face {
+    font-family: "titleFont";
+    src: url(./assets/fonts/Aurora.otf);
+}
+@font-face {
+    font-family: "textFont";
+    src: url(./assets/fonts/Montserrat-VariableFont_wght.ttf);
+}
 body {
     background-image: url('./assets/images/bg-economix.jpg');
     background-size: 100%;
