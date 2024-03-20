@@ -136,7 +136,7 @@
       </div>
     </div>
   </div>
-<div class="absolute text-2xl w-full flex justify-center items-end">
+<div class="absolute text-2xl w-full flex justify-center -bottom-0">
     @for (member of membersGroup; track member.id; let index = $index) {
         <button [class]="status[index] ? 'btnMemberSelected' : 'btnMember'" (click)="showBudgetOfMemberSelected(member.id, index)">
             {{ member.firstName }}
