@@ -169,10 +169,6 @@ export class BudgetPageComponent implements OnInit {
     this.statusAvantIndex = index;
   }
 
-  showBudgetOfAllMembers() {
-
-  }
-
   getRoleActualUser() {
     this.userService.getUserById(this.getActualIdUser()).subscribe(user => {
       this.roleActualUser = user.role;
