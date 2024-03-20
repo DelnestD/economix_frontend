@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BudgetStructureComponent } from '../../components/budget-structure/budget-structure.component';
 import { TransactionComponent } from '../../components/transaction/transaction.component';
-import { TransactionFormComponent } from '../../forms/transaction-form/transaction-form.component';
 import {
   Transaction,
   TransactionService,
@@ -26,7 +25,6 @@ import { FormAccountComponent } from './form-account/form-account.component';
     HttpClientModule,
     BudgetStructureComponent,
     TransactionComponent,
-    TransactionFormComponent,
     CdkAccordionModule,
     FormTransactionComponent,
     FormAccountComponent,
@@ -134,9 +132,6 @@ export class BudgetPageComponent implements OnInit {
   }
 
   closeModal() {
-    this.accountToUpdate = undefined;
-    this.budgetToUpdate = undefined;
-    this.transactionToUpdate = undefined;
     this.showModal = '';
   }
 

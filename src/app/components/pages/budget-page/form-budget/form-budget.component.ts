@@ -45,31 +45,29 @@ export class FormBudgetComponent {
   }
 
   onSubmit() {
-    if (!this.createNew) {
+    if (this.createNew) {
       this.budgetService
         .insertBudget(this.budgetForm.value)
         .subscribe((budget) => {
           const userId = this.getActualIdUser();
           this.userService.getUserById(userId).subscribe((user) => {
+            console.log('tada');
             user.budgets!.push(budget);
             this.userService
               .updateUser(userId, user)
-              .subscribe((user) => console.log(user, 'user'));
+              .subscribe(() => window.location.reload());
           });
         });
+    } else {
+      const updatedBudget: Budget = {
+        id: this.budgetToUpdate!.id,
+        title: this.budgetForm.value.title,
+        description: this.budgetForm.value.description,
+      };
+      this.budgetService
+        .updateBudget(updatedBudget)
+        .subscribe(() => window.location.reload());
     }
-
-    // this.accountService
-    //   .insertAccount(this.accountForm.value)
-    //   .subscribe((account) => {
-    //     const userId = this.getActualIdUser();
-    //     const user = this.userService.getUserById(userId).subscribe((user) => {
-    //       user.accounts!.push(account);
-    //       this.userService.updateUser(userId, user).subscribe();
-    //     });
-    //   });
-
-    window.location.reload();
   }
 
   closeModal() {

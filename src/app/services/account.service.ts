@@ -24,6 +24,7 @@ export class AccountService {
   }
 
   updateAccount(account: Partial<Account>) {
+    console.log(this.getAccountById(account.id!));
     return this.httpClient.patch<Account>(
       `${this.baseUrl}${account.id}`,
       account

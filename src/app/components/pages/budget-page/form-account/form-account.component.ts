@@ -33,12 +33,10 @@ export class FormAccountComponent {
     private accountService: AccountService
   ) {}
 
-  accountForm: FormGroup = new FormGroup(
-    {
-      title: new FormControl(''),
-      description: new FormControl(''),
-    },
-  );
+  accountForm: FormGroup = new FormGroup({
+    title: new FormControl(''),
+    description: new FormControl(''),
+  });
 
   ngOnInit() {
     if (!this.createNew) {
@@ -59,23 +57,19 @@ export class FormAccountComponent {
             user.accounts!.push(account);
             this.userService
               .updateUser(userId, user)
-              .subscribe((user) => console.log('user', user));
+              .subscribe(() => window.location.reload());
           });
         });
     } else {
-      //! Update account error
-      const updateAccount: Account = {
+      const updatedAccount: Account = {
         id: this.accountToUpdate!.id,
         title: this.accountForm.value.title,
         description: this.accountForm.value.description,
       };
-      console.log('avant service', updateAccount);
-      this.accountService.updateAccount(updateAccount).subscribe((account) => {
-        console.log('account updated', account);
-      });
+      this.accountService
+        .updateAccount(updatedAccount)
+        .subscribe(() => window.location.reload());
     }
-
-    window.location.reload();
   }
 
   closeModal() {
