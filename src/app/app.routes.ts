@@ -14,7 +14,7 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    component: AProposComponent,
+    component: HomeComponent,
   },
   {
     path: 'about',
