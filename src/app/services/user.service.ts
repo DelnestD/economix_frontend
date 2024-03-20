@@ -42,11 +42,11 @@ export class UserService {
   }
 
   getUserAccounts(id: string) {
-    return this.httpClient.get<User>(`${this.baseUrl}account/${id}`);
+    return this.httpClient.get<Account[]>(`${this.baseUrl}account/${id}`);
   }
 
   getUserBudgets(id: string) {
-    return this.httpClient.get<User>(`${this.baseUrl}budget/${id}`);
+    return this.httpClient.get<Budget[]>(`${this.baseUrl}budget/${id}`);
   }
 
   insertUser(user: User) {

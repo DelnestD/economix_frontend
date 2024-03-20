@@ -6,6 +6,7 @@ import { AboutComponent } from './components/pages/about/about.component';
 import { ParametersUserComponent } from './components/pages/parameters-user/parameters-user.component';
 import { ParametersGroupComponent } from './components/pages/parameters-group/parameters-group.component';
 import { ParametersGroupCreateComponent } from './components/pages/parameters-group-create/parameters-group-create.component';
+import { BudgetPageComponent } from './components/pages/budget-page/budget-page.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,10 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'budget',
+    component: BudgetPageComponent,
   },
   {
     path: 'about',

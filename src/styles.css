@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-image: url("./assets/images/bg-economix.jpg");
+  background-size: 100%;
+}
+
 .change-mdp .inputText {
   @apply border-2 border-secondary;
 }

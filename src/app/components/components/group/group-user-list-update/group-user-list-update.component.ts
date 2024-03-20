@@ -25,7 +25,7 @@ export class GroupUserListUpdateComponent {
   ) {
     this.userService.getUserById(this.getActualIdUser()).subscribe((user) => {
       this.actualUser = user;
-      this.userService.getUsersByGroupId(user.group?.id!).subscribe((users) => {
+      this.userService.getUsersByGroupId(user.group!.id!).subscribe((users) => {
         this.groupUserList = users;
         this.groupUserList = this.groupUserList.filter(
           (user) => user.id !== this.actualUser.id

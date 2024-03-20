@@ -23,8 +23,8 @@ export class BudgetService {
     return this.httpClient.post<Budget>(this.baseUrl, budget);
   }
 
-  updateBudget(id: string, budget: Partial<Budget>) {
-    return this.httpClient.patch<Budget>(`${this.baseUrl}${id}`, budget);
+  updateBudget(budget: Partial<Budget>) {
+    return this.httpClient.patch<Budget>(`${this.baseUrl}${budget.id}`, budget);
   }
 
   deleteBudget(id: string) {
