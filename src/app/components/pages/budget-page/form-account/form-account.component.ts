@@ -54,10 +54,10 @@ export class FormAccountComponent {
   }
 
   onSubmit() {
-    if (this.createNew) {
-      if (this.getTitle().status === 'INVALID') {
-        this.formValid = false;
-      } else {
+    if (this.getTitle().status === 'INVALID') {
+      this.formValid = false;
+    } else {
+      if (this.createNew) {
         this.accountService
           .insertAccount(this.accountForm.value)
           .subscribe((account) => {
@@ -69,21 +69,17 @@ export class FormAccountComponent {
                 .subscribe(() => window.location.reload());
             });
           });
-      }
-    } else {
-      if (this.getTitle().status === 'INVALID') {
-        this.formValid = false;
       } else {
         const updatedAccount: Account = {
-          id: this.accountToUpdate!.id,
-          title: this.accountForm.value.title,
-          description: this.accountForm.value.description,
-        };
-        this.accountService
-          .updateAccount(updatedAccount)
-          .subscribe(() => window.location.reload());
-      }
-    }
+            id: this.accountToUpdate!.id,
+            title: this.accountForm.value.title,
+            description: this.accountForm.value.description,
+          };
+          this.accountService
+            .updateAccount(updatedAccount)
+            .subscribe(() => window.location.reload());
+        }
+    } 
   }
 
   closeModal() {
