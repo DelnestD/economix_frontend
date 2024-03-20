@@ -1,12 +1,18 @@
 <div id="navbar" class="flex justify-between px-5 bg-secondary">
   <div id="logo">
+    @if (isConnected) {
     <a routerLink="/budget" routerLinkActive="active">
       <img src="./assets/images/logo.png" alt="logo" class="w-[15%]" />
     </a>
+    } @else {
+    <a routerLink="/home" routerLinkActive="active">
+      <img src="./assets/images/logo.png" alt="logo" class="w-[15%]" />
+    </a>
+    }
   </div>
   <nav class="px-4 flex items-center w-[35%]">
     <ul class="flex justify-around w-full">
-      <li class="tabs">
+      <li [class.tabs]="isConnected" [hidden]="!isConnected">
         <a routerLink="/budget" routerLinkActive="active">Budget</a>
       </li>
       <li class="tabs">
