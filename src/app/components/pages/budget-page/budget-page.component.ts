@@ -52,6 +52,8 @@ export class BudgetPageComponent implements OnInit {
   showModal: string = '';
   createNew: boolean = true;
 
+  isActualUserPage: boolean = true;
+
   declare accountToUpdate: Account | undefined;
   declare budgetToUpdate: Budget | undefined;
   declare transactionToUpdate: Transaction | undefined;
@@ -116,7 +118,9 @@ export class BudgetPageComponent implements OnInit {
             if (transactions.length != 0) {
               this.transactionsAccount[i] = transactions;
               transactions.map((transaction) => {
-                this.totalAccount[i] += transaction.amount;
+                if (!transaction.isRefill) {
+                  this.totalAccount[i] += transaction.amount;
+                }
               });
             }
           });
@@ -135,7 +139,11 @@ export class BudgetPageComponent implements OnInit {
             if (transactions.length != 0) {
               this.transactionsBudget[i] = transactions;
               transactions.map((transaction) => {
-                this.totalBudget[i] += transaction.amount;
+                if (!transaction.isRefill) {
+                  this.totalBudget[i] += transaction.amount;
+                } else {
+                  this.totalBudget[i] -= transaction.amount;
+                }
               });
             }
           });
@@ -148,7 +156,7 @@ export class BudgetPageComponent implements OnInit {
       this.membersGroup = [];
 
       if (user.group) {
-        this.groupId = user.group.id!;
+        this.groupId = user.group.id as string;
       }
 
       this.userService.getUsersByGroupId(this.groupId).subscribe((user) => {
@@ -167,6 +175,12 @@ export class BudgetPageComponent implements OnInit {
   }
 
   showBudgetOfMemberSelected(memberId: string, index: number) {
+    if (this.getActualIdUser() === memberId) {
+      this.isActualUserPage = true;
+    } else {
+      this.isActualUserPage = false;
+    }
+
     this.loadTransactionsAccount(memberId);
     this.loadTransactionsBudget(memberId);
     this.loadMembers();
@@ -177,7 +191,7 @@ export class BudgetPageComponent implements OnInit {
 
   getRoleActualUser() {
     this.userService.getUserById(this.getActualIdUser()).subscribe((user) => {
-      this.roleActualUser = user.role!;
+      this.roleActualUser = user.role as string;
     });
   }
 

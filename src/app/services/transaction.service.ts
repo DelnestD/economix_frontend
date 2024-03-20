@@ -3,22 +3,22 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
 export interface SerializedTransaction {
-  id?: string;
+  id: string;
   date: string;
   title: string;
   amount: number;
-  account?: { id: string };
-  budget?: { id: string } | null;
+  account: { id: string };
+  budget: { id: string } | null;
   isRefill: boolean;
 }
 
 export interface Transaction {
-  id?: string;
+  id: string;
   date: Date;
   title: string;
   amount: number;
-  account?: { id: string };
-  budget?: { id: string } | null;
+  account: { id: string };
+  budget: { id: string } | null;
   isRefill: boolean;
 }
 
@@ -69,16 +69,16 @@ export class TransactionService {
       );
   }
 
-  insertTransaction(transaction: SerializedTransaction) {
+  insertTransaction(transaction: Partial<SerializedTransaction>) {
     return this.httpClient.post<SerializedTransaction>(
       this.baseUrl,
       transaction
     );
   }
 
-  update(id: string, transaction: Partial<SerializedTransaction>) {
+  update(transaction: Partial<SerializedTransaction>) {
     return this.httpClient.patch<SerializedTransaction>(
-      `${this.baseUrl}${id}`,
+      `${this.baseUrl}${transaction.id}`,
       transaction
     );
   }

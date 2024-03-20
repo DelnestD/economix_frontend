@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .side {
-  @apply w-1/2 mb-7 pb-7 px-[5%] min-h-[72vh];
+  @apply w-1/2 mb-7 pb-7 px-[5%] min-h-[67vh];
 }
 
 .title {
@@ -14,9 +14,15 @@
   @apply border-2 border-dark hover:border-secondary bg-secondary hover:bg-light hover:text-dark
       font-textFont text-lg w-80 h-14 font-semibold top-20 rounded-full shadow-xl;
 }
+.btnAddDisabled {
+  @apply border-2 border-[grey]  bg-[lightgray] text-[gray] font-textFont text-lg w-80 h-14 font-semibold top-20 rounded-full shadow-xl opacity-60;
+}
 .btnAddRound {
   @apply mx-5 border-2 border-dark hover:border-secondary bg-secondary hover:bg-light hover:text-dark
       font-textFont py-1 px-3 min-w-[5%] rounded-full text-lg font-bold shadow-xl;
+}
+.btnAddRoundDisabled {
+  @apply mx-5 border-2 border-[gray] bg-[lightgray] text-[gray] font-textFont py-1 px-3 min-w-[5%] rounded-full text-lg font-bold shadow-xl opacity-60;
 }
 
 .accordion {
