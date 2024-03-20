@@ -5,6 +5,7 @@ import {
   FormRecord,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { Account, AccountService } from '../../../../services/account.service';
 import { Budget, BudgetService } from '../../../../services/budget.service';
@@ -28,20 +29,28 @@ export class FormTransactionComponent {
   @Input() budgets: Budget[] = [];
   @Input() declare transactionToUpdate: Transaction | undefined;
 
-  constructor(
-    private accountService: AccountService,
-    private budgetService: BudgetService,
-    private transactionService: TransactionService
-  ) {}
+  constructor(private transactionService: TransactionService) {}
+
+  formValid: boolean = true;
 
   transactionFrom = new FormGroup({
     account: new FormControl(''),
     budget: new FormControl(''),
-    title: new FormControl(''),
-    date: new FormControl(''),
-    amount: new FormControl(''),
+    title: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required),
+    amount: new FormControl('', Validators.required),
     category: new FormControl(''),
   });
+
+  getTitle() {
+    return this.transactionFrom.get('title') as FormControl;
+  }
+  getDate() {
+    return this.transactionFrom.get('date') as FormControl;
+  }
+  getAmount() {
+    return this.transactionFrom.get('amount') as FormControl;
+  }
 
   ngOnInit() {
     if (!this.createNew) {
@@ -70,7 +79,7 @@ export class FormTransactionComponent {
       }
 
       this.transactionFrom.setValue({
-        account: this.transactionToUpdate!.account!.id,
+        account: this.transactionToUpdate!.account.id,
         budget: budgetToUpdate,
         title: this.transactionToUpdate!.title,
         date: dateFormated,
@@ -96,33 +105,58 @@ export class FormTransactionComponent {
   }
 
   onSubmit() {
-    const formValue = this.transactionFrom.value;
+    if (
+      this.getTitle().status === 'INVALID' ||
+      this.getDate().status === 'INVALID' ||
+      this.getAmount().status === 'INVALID'
+    ) {
+      this.formValid = false;
+    } else {
+      const formValue = this.transactionFrom.value;
 
-    const accountUpdated = { id: formValue.account as string };
-    let budgetUpdated;
-    formValue.budget === ''
-      ? (budgetUpdated = null)
-      : (budgetUpdated = { id: formValue.budget as string });
+      const accountUpdated = { id: formValue.account as string };
+      let budgetUpdated;
+      formValue.budget === ''
+        ? (budgetUpdated = null)
+        : (budgetUpdated = { id: formValue.budget as string });
 
-    let refillUpdated = false;
-    if (formValue.category === 'refill') {
-      refillUpdated = true;
-    }
-    let amountUpdated = parseFloat(formValue.amount as string);
-    if (formValue.category === 'spend') {
-      amountUpdated *= -1;
-    }
+      let amountUpdated = parseFloat(formValue.amount as string);
+      if (formValue.category === 'spend') {
+        amountUpdated *= -1;
+      }
 
-    if (this.createNew) {
-      const transactionCreated = {
-        title: formValue!.title as string,
-        amount: Number(amountUpdated),
-        date: formValue.date as string,
-        account: accountUpdated,
-        budget: budgetUpdated,
-        isRefill: refillUpdated,
-      };
-      this.transactionService.insertTransaction(transactionCreated).subscribe();
+      let refillUpdated = false;
+      if (formValue.category === 'refill') {
+        refillUpdated = true;
+        amountUpdated *= -1;
+      }
+
+      if (this.createNew) {
+        const transactionCreated = {
+          title: formValue!.title as string,
+          amount: Number(amountUpdated),
+          date: formValue.date as string,
+          account: accountUpdated,
+          budget: budgetUpdated,
+          isRefill: refillUpdated,
+        };
+        this.transactionService
+          .insertTransaction(transactionCreated)
+          .subscribe(() => window.location.reload());
+      } else {
+        const transactionCreated = {
+          id: this.transactionToUpdate!.id,
+          title: formValue!.title as string,
+          amount: Number(amountUpdated),
+          date: formValue.date as string,
+          account: accountUpdated,
+          budget: budgetUpdated,
+          isRefill: refillUpdated,
+        };
+        this.transactionService
+          .update(transactionCreated)
+          .subscribe(() => window.location.reload());
+      }
     }
   }
 
