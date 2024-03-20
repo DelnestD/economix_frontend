@@ -4,7 +4,7 @@
   <p
     class="flex justify-center font-titleFont text-xl mb-10 font-bold bg-secondary py-7 rounded-t-xl"
   >
-    @if (createNew) { Ajouter } @else { Modifier } un transaction
+    @if (createNew) { Ajouter } @else { Modifier } une transaction
   </p>
   <form
     [formGroup]="transactionFrom"
@@ -12,7 +12,7 @@
     class="font-textFont"
   >
     <div class="inputline">
-      <label class="label" for="account">Compte</label>
+      <label class="label" for="account">Compte *</label>
       <select formControlName="account" id="account">
         @for (account of accounts; track $index) {
         <option title="{{ account.description }}" value="{{ account.id }}">
@@ -86,6 +86,9 @@
         />
         <label for="refill">Réapprovisionné</label>
       </div>
+    </div>
+    <div class="errorMessage">
+      <p [hidden]="formValid" class="text-danger">* Ces champs sont obligatoires</p>
     </div>
 
     <div class="mt-10 w-[100%] flex">
