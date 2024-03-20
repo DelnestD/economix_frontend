@@ -76,9 +76,9 @@ export class TransactionService {
     );
   }
 
-  update(id: string, transaction: Partial<SerializedTransaction>) {
+  update(transaction: Partial<SerializedTransaction>) {
     return this.httpClient.patch<SerializedTransaction>(
-      `${this.baseUrl}${id}`,
+      `${this.baseUrl}${transaction.id}`,
       transaction
     );
   }
