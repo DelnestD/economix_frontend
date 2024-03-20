@@ -80,8 +80,10 @@
           <app-transaction
             [id]="transaction.id"
             [dateTransaction]="transaction.date"
-            [description]="transaction.title"
+            [title]="transaction.title"
             [amount]="transaction.amount"
+            [isRefill]="transaction.isRefill"
+            [type]="setType('account')"
             (modal)="modalUpdate($event)"
           />
           }
@@ -124,8 +126,10 @@
             <app-transaction
               [id]="transaction.id"
               [dateTransaction]="transaction.date"
-              [description]="transaction.title"
+              [title]="transaction.title"
               [amount]="transaction.amount"
+              [isRefill]="transaction.isRefill"
+              [type]="setType('budget')"
               (modal)="modalUpdate($event)"
             />
             }

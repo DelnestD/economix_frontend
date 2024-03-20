@@ -116,7 +116,8 @@ export class BudgetPageComponent implements OnInit {
             if (transactions.length != 0) {
               this.transactionsAccount[i] = transactions;
               transactions.map((transaction) => {
-                this.totalAccount[i] += transaction.amount;
+                if (!transaction.isRefill)
+                  this.totalAccount[i] += transaction.amount;
               });
             }
           });

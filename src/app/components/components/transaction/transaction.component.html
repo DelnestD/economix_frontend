@@ -1,7 +1,7 @@
 <div
   class="transaction w-full flex items-center font-textFont text-sm px-4 pt-3 bg-light"
 >
-  <p class="w-[19%]">
+  <p class="w-[15%]">
     {{
       dateTransaction.getDate() <= 9
         ? "0" + dateTransaction.getDate()
@@ -14,14 +14,12 @@
     }}
     {{ dateTransaction.getFullYear() }}
   </p>
-  <p class="w-[68%]">
-    {{ description }}
-  </p>
-  <p class="w-[13%] flex">€ {{ amount.toFixed(2) }}</p>
+  <p class="w-[65%] flex"> @if(isRefill) { <p class="underline font-semibold mr-2">(Réa) </p> } {{ title }}</p>
+  <p class="w-[15%] flex">€ {{ amount.toFixed(2) }}</p>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
-    class="h-3 hover:fill-[white]"
+    class="h-3 hover:fill-[white] w-[5%]"
     (click)="showModal()"
   >
     <path
