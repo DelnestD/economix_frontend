@@ -125,11 +125,19 @@ export class BudgetPageComponent implements OnInit {
       }
     }
     this.createNew = false;
-    this.setShowModal(event.type);
+    this.showModal = event.type;
   }
 
-  setShowModal(modal: string) {
+  modalNew(modal: string) {
+    this.createNew = true;
     this.showModal = modal;
+  }
+
+  closeModal() {
+    this.accountToUpdate = undefined;
+    this.budgetToUpdate = undefined;
+    this.transactionToUpdate = undefined;
+    this.showModal = '';
   }
 
   getActualIdUser() {
