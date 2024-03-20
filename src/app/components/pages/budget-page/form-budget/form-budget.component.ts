@@ -4,6 +4,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../../services/user.service';
@@ -30,10 +31,16 @@ export class FormBudgetComponent {
     private cookieService: CookieService
   ) {}
 
+  formValid: boolean = true;
+
   budgetForm: FormGroup = new FormGroup({
-    title: new FormControl(''),
+    title: new FormControl('', Validators.required),
     description: new FormControl(''),
   });
+
+  getTitle() {
+    return this.budgetForm.get('title') as FormControl;
+  }
 
   ngOnInit() {
     if (!this.createNew) {

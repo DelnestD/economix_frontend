@@ -7,7 +7,7 @@ import {
 } from '../../../services/transaction.service';
 import { Account } from '../../../services/account.service';
 import { HttpClientModule } from '@angular/common/http';
-import { UserService } from '../../../services/user.service';
+import { User, UserService } from '../../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
@@ -26,14 +26,20 @@ import { FormAccountComponent } from './form-account/form-account.component';
     BudgetStructureComponent,
     TransactionComponent,
     CdkAccordionModule,
-    FormTransactionComponent,
     FormAccountComponent,
     FormBudgetComponent,
+    FormTransactionComponent,
   ],
   templateUrl: './budget-page.component.html',
   styleUrl: './budget-page.component.css',
 })
 export class BudgetPageComponent implements OnInit {
+  roleActualUser: string = '';
+  groupId: string = '';
+  status: boolean[] = [];
+  statusAvantIndex: number = 0;
+  membersGroup: User[] = [];
+
   expandedIndex = 0;
   totalAccount: number[] = [];
   totalBudget: number[] = [];
@@ -57,50 +63,14 @@ export class BudgetPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadTransactionsAccount();
-    this.loadTransactionsBudget();
+    this.loadTransactionsAccount(this.getActualIdUser());
+    this.loadTransactionsBudget(this.getActualIdUser());
+    this.loadMembers();
+    this.status[this.statusAvantIndex] = true;
   }
 
   setType(param: string): string {
     return param;
-  }
-
-  loadTransactionsAccount() {
-    this.userService
-      .getUserAccounts(this.getActualIdUser())
-      .subscribe((accounts) => {
-        this.accounts = accounts;
-        for (let i = 0; i < accounts.length; i++) {
-          this.totalAccount[i] = 0;
-          this.transactionService
-            .getTransactionByAccountId(accounts[i].id!)
-            .subscribe((transactions) => {
-              this.transactionsAccount[i] = transactions;
-              transactions.map((transaction) => {
-                this.totalAccount[i] += transaction.amount;
-              });
-            });
-        }
-      });
-  }
-
-  loadTransactionsBudget() {
-    this.userService
-      .getUserBudgets(this.getActualIdUser())
-      .subscribe((budgets) => {
-        this.budgets = budgets;
-        for (let i = 0; i < budgets.length; i++) {
-          this.totalBudget[i] = 0;
-          this.transactionService
-            .getTransactionByBudgetId(budgets[i].id)
-            .subscribe((transactions) => {
-              this.transactionsBudget[i] = transactions;
-              transactions.map((transaction) => {
-                this.totalBudget[i] += transaction.amount;
-              });
-            });
-        }
-      });
   }
 
   modalUpdate(event: { type: string; id: string; accountId?: string }) {
@@ -133,6 +103,82 @@ export class BudgetPageComponent implements OnInit {
 
   closeModal() {
     this.showModal = '';
+  }
+
+  loadTransactionsAccount(id: string) {
+    this.userService.getUserAccounts(id).subscribe((accounts) => {
+      this.accounts = accounts;
+      for (let i = 0; i < accounts.length; i++) {
+        this.totalAccount[i] = 0;
+        this.transactionService
+          .getTransactionByAccountId(accounts[i].id!)
+          .subscribe((transactions) => {
+            if (transactions.length != 0) {
+              this.transactionsAccount[i] = transactions;
+              transactions.map((transaction) => {
+                this.totalAccount[i] += transaction.amount;
+              });
+            }
+          });
+      }
+    });
+  }
+
+  loadTransactionsBudget(id: string) {
+    this.userService.getUserBudgets(id).subscribe((budgets) => {
+      this.budgets = budgets;
+      for (let i = 0; i < budgets.length; i++) {
+        this.totalBudget[i] = 0;
+        this.transactionService
+          .getTransactionByBudgetId(budgets[i].id)
+          .subscribe((transactions) => {
+            if (transactions.length != 0) {
+              this.transactionsBudget[i] = transactions;
+              transactions.map((transaction) => {
+                this.totalBudget[i] += transaction.amount;
+              });
+            }
+          });
+      }
+    });
+  }
+
+  loadMembers() {
+    this.userService.getUserById(this.getActualIdUser()).subscribe((user) => {
+      this.membersGroup = [];
+
+      if (user.group) {
+        this.groupId = user.group.id;
+      }
+
+      this.userService.getUserByGroupId(this.groupId).subscribe((user) => {
+        for (let u of user) {
+          if (u.id === this.getActualIdUser()) {
+            this.membersGroup.push(u);
+          }
+        }
+        for (let u of user) {
+          if (u.id !== this.getActualIdUser()) {
+            this.membersGroup.push(u);
+          }
+        }
+      });
+    });
+  }
+
+  showBudgetOfMemberSelected(memberId: string, index: number) {
+    this.loadTransactionsAccount(memberId);
+    this.loadTransactionsBudget(memberId);
+    this.loadMembers();
+    this.status[this.statusAvantIndex] = false;
+    this.status[index] = !this.status[index];
+    this.statusAvantIndex = index;
+  }
+
+  getRoleActualUser() {
+    this.userService.getUserById(this.getActualIdUser()).subscribe((user) => {
+      this.roleActualUser = user.role;
+    });
   }
 
   getActualIdUser() {

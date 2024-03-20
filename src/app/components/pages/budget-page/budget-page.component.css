@@ -12,13 +12,21 @@
 
 .btnAdd {
   @apply border-2 border-dark hover:border-secondary bg-secondary hover:bg-light hover:text-dark
-    font-textFont text-lg w-80 h-14 font-semibold top-20 rounded-full shadow-xl;
+      font-textFont text-lg w-80 h-14 font-semibold top-20 rounded-full shadow-xl;
 }
 .btnAddRound {
   @apply mx-5 border-2 border-dark hover:border-secondary bg-secondary hover:bg-light hover:text-dark
-    font-textFont py-1 px-3 min-w-[5%] rounded-full text-lg font-bold shadow-xl;
+      font-textFont py-1 px-3 min-w-[5%] rounded-full text-lg font-bold shadow-xl;
 }
 
 .accordion {
   @apply border-x-2 border-b-2 border-dark pb-3 bg-light shadow-xl;
+}
+
+.btnMember {
+  @apply w-[5rem] h-[5rem] font-textFont text-sm bg-info rounded-full mx-3 hover:bg-light hover:border-2 hover:border-primary hover:font-bold;
+}
+
+.btnMemberSelected {
+  @apply w-[5rem] h-[5rem] font-textFont text-sm rounded-full mx-3 bg-secondary border-2 border-primary font-bold;
 }

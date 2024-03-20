@@ -9,7 +9,7 @@ export interface User {
   firstName: string;
   lastName: string;
   password: string;
-  role?: Role;
+  role: Role;
   group?: Group;
   accounts?: Account[];
   budgets?: Budget[];

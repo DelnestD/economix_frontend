@@ -11,6 +11,9 @@
       <label for="title" class="label">Nom *</label>
       <input type="text" formControlName="title" id="title" required />
     </div>
+    <div class="errorMessage">
+      <p [hidden]="formValid" class="text-danger">* Ce champ est obligatoire</p>
+    </div>
     <div class="inputline">
       <label for="description">Description</label>
       <textarea

@@ -33,8 +33,10 @@ export class FormAccountComponent {
     private accountService: AccountService
   ) {}
 
+  formValid: boolean = true;
+
   accountForm: FormGroup = new FormGroup({
-    title: new FormControl(''),
+    title: new FormControl('', Validators.required),
     description: new FormControl(''),
   });
 
@@ -47,28 +49,40 @@ export class FormAccountComponent {
     }
   }
 
+  getTitle() {
+    return this.accountForm.get('title') as FormControl;
+  }
+
   onSubmit() {
     if (this.createNew) {
-      this.accountService
-        .insertAccount(this.accountForm.value)
-        .subscribe((account) => {
-          const userId = this.getActualIdUser();
-          this.userService.getUserById(userId).subscribe((user) => {
-            user.accounts!.push(account);
-            this.userService
-              .updateUser(userId, user)
-              .subscribe(() => window.location.reload());
+      if (this.getTitle().status === 'INVALID') {
+        this.formValid = false;
+      } else {
+        this.accountService
+          .insertAccount(this.accountForm.value)
+          .subscribe((account) => {
+            const userId = this.getActualIdUser();
+            this.userService.getUserById(userId).subscribe((user) => {
+              user.accounts!.push(account);
+              this.userService
+                .updateUser(userId, user)
+                .subscribe(() => window.location.reload());
+            });
           });
-        });
+      }
     } else {
-      const updatedAccount: Account = {
-        id: this.accountToUpdate!.id,
-        title: this.accountForm.value.title,
-        description: this.accountForm.value.description,
-      };
-      this.accountService
-        .updateAccount(updatedAccount)
-        .subscribe(() => window.location.reload());
+      if (this.getTitle().status === 'INVALID') {
+        this.formValid = false;
+      } else {
+        const updatedAccount: Account = {
+          id: this.accountToUpdate!.id,
+          title: this.accountForm.value.title,
+          description: this.accountForm.value.description,
+        };
+        this.accountService
+          .updateAccount(updatedAccount)
+          .subscribe(() => window.location.reload());
+      }
     }
   }
 
