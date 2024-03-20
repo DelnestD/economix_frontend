@@ -63,6 +63,7 @@ export class FormTransactionComponent {
       let amountToUpdate = this.transactionToUpdate!.amount;
       let categoryToUpdate;
       if (this.transactionToUpdate!.isRefill) {
+        this.transactionToUpdate!.amount *= -1;
         categoryToUpdate = 'refill';
       } else if (amountToUpdate < 0) {
         categoryToUpdate = 'spend';
