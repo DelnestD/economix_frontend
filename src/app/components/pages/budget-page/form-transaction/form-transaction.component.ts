@@ -7,8 +7,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Account, AccountService } from '../../../../services/account.service';
-import { Budget, BudgetService } from '../../../../services/budget.service';
+import { Account } from '../../../../services/account.service';
+import { Budget } from '../../../../services/budget.service';
 import {
   Transaction,
   TransactionService,
@@ -63,11 +63,10 @@ export class FormTransactionComponent {
       let amountToUpdate = this.transactionToUpdate!.amount;
       let categoryToUpdate;
       if (this.transactionToUpdate!.isRefill) {
-        this.transactionToUpdate!.amount *= -1;
+        amountToUpdate *= -1;
         categoryToUpdate = 'refill';
       } else if (amountToUpdate < 0) {
         categoryToUpdate = 'spend';
-        amountToUpdate *= -1;
       } else {
         categoryToUpdate = 'received';
       }
