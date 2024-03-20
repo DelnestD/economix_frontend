@@ -23,6 +23,7 @@ export class TransactionComponent {
   @Input() declare amount: number;
   @Input() declare isRefill: boolean;
   @Input() declare type: string;
+  @Input() declare isActualUserPage: boolean;
 
   @Output() modal: EventEmitter<any> = new EventEmitter();
 

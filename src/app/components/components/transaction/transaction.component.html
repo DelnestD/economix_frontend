@@ -19,7 +19,8 @@
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
-    class="h-3 hover:fill-[white] w-[5%]"
+    class="svg h-3 hover:fill-[white] w-[5%]"
+    [class.hidden]="!isActualUserPage"
     (click)="showModal()"
   >
     <path

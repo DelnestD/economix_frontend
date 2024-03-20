@@ -52,6 +52,8 @@ export class BudgetPageComponent implements OnInit {
   showModal: string = '';
   createNew: boolean = true;
 
+  isActualUserPage: boolean = true;
+
   declare accountToUpdate: Account | undefined;
   declare budgetToUpdate: Budget | undefined;
   declare transactionToUpdate: Transaction | undefined;
@@ -116,8 +118,9 @@ export class BudgetPageComponent implements OnInit {
             if (transactions.length != 0) {
               this.transactionsAccount[i] = transactions;
               transactions.map((transaction) => {
-                if (!transaction.isRefill)
+                if (!transaction.isRefill) {
                   this.totalAccount[i] += transaction.amount;
+                }
               });
             }
           });
@@ -136,7 +139,11 @@ export class BudgetPageComponent implements OnInit {
             if (transactions.length != 0) {
               this.transactionsBudget[i] = transactions;
               transactions.map((transaction) => {
-                this.totalBudget[i] += transaction.amount;
+                if (!transaction.isRefill) {
+                  this.totalBudget[i] += transaction.amount;
+                } else {
+                  this.totalBudget[i] -= transaction.amount;
+                }
               });
             }
           });
@@ -168,6 +175,12 @@ export class BudgetPageComponent implements OnInit {
   }
 
   showBudgetOfMemberSelected(memberId: string, index: number) {
+    if (this.getActualIdUser() === memberId) {
+      this.isActualUserPage = true;
+    } else {
+      this.isActualUserPage = false;
+    }
+
     this.loadTransactionsAccount(memberId);
     this.loadTransactionsBudget(memberId);
     this.loadMembers();

@@ -13,6 +13,7 @@ export class BudgetStructureComponent {
   @Input() declare id: string;
   @Input() declare description: string;
   @Input() declare total: number;
+  @Input() declare isActualUserPage: boolean;
 
   @Output() modal: EventEmitter<any> = new EventEmitter();
 
