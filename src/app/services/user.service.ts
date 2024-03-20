@@ -11,6 +11,8 @@ export interface User {
   password: string;
   role: Role;
   group?: Group;
+  accounts?: Account[];
+  budgets?: Budget[];
 }
 
 export enum Role {

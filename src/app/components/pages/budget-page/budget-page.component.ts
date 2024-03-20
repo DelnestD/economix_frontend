@@ -10,12 +10,25 @@ import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from "jwt-decode";
 import { CdkAccordionModule } from "@angular/cdk/accordion";
 import { Budget } from '../../../services/budget.service';
-import { FormNewBudgetComponent } from './form-new-budget/form-new-budget.component';
+import { FormBudgetComponent } from './form-budget/form-budget.component';
+import { CommonModule } from '@angular/common';
+import { FormTransactionComponent } from './form-transaction/form-transaction.component';
+import { FormAccountComponent } from './form-account/form-account.component';
 
 @Component({
   selector: 'app-budget-page',
   standalone: true,
-  imports: [HttpClientModule, BudgetStructureComponent, TransactionComponent, TransactionFormComponent, CdkAccordionModule, FormNewBudgetComponent],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    BudgetStructureComponent,
+    TransactionComponent,
+    TransactionFormComponent,
+    CdkAccordionModule,
+    FormTransactionComponent,
+    FormAccountComponent,
+    FormBudgetComponent
+  ],
   templateUrl: './budget-page.component.html',
   styleUrl: './budget-page.component.css'
 })
@@ -35,6 +48,13 @@ export class BudgetPageComponent implements OnInit {
   accounts: Account[] = [];
   budgets: Budget[] = [];
 
+  showModal: string = '';
+  createNew: boolean = true;
+
+  declare accountToUpdate: Account | undefined;
+  declare budgetToUpdate: Budget | undefined;
+  declare transactionToUpdate: Transaction | undefined;
+
   constructor(
     private transactionService: TransactionService,
     private userService: UserService,
@@ -48,12 +68,16 @@ export class BudgetPageComponent implements OnInit {
     this.status[this.statusAvantIndex] = true;
   }
 
+  setType(param: string): string {
+    return param;
+  }
+
   loadTransactionsAccount(id: string) {
     this.userService.getUserAccounts(id).subscribe(accounts => {
       this.accounts = accounts;
       for (let i = 0; i <= accounts.length; i++) {
         this.totalAccount[i] = 0;
-        this.transactionService.getTransactionByAccountId(accounts[i].id).subscribe(transactions => {
+        this.transactionService.getTransactionByAccountId(accounts[i].id!).subscribe(transactions => {
           this.transactionsAccount[i] = transactions;
           transactions.map(transaction => {
             this.totalAccount[i] += transaction.amount;
@@ -99,6 +123,41 @@ export class BudgetPageComponent implements OnInit {
         }
       });
     });
+  }
+
+  modalUpdate(event: { type: string; id: string; accountId?: string }) {
+    if (event.type === 'account') {
+      this.accountToUpdate = this.accounts.find(
+        (account) => account.id === event.id
+      );
+    }
+    if (event.type === 'budget') {
+      this.budgetToUpdate = this.budgets.find(
+        (budget) => budget.id === event.id
+      );
+    }
+    if (event.type === 'transaction') {
+      let res = this.transactionsAccount.map((account) =>
+        account.find((transaction) => transaction.id === event.id)
+      );
+      for (const item of res) {
+        if (item !== undefined) this.transactionToUpdate = item;
+      }
+    }
+    this.createNew = false;
+    this.showModal = event.type;
+  }
+
+  modalNew(modal: string) {
+    this.createNew = true;
+    this.showModal = modal;
+  }
+
+  closeModal() {
+    this.accountToUpdate = undefined;
+    this.budgetToUpdate = undefined;
+    this.transactionToUpdate = undefined;
+    this.showModal = '';
   }
 
   showBudgetOfMemberSelected(memberId: string, index: number) {

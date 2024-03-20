@@ -1,18 +1,30 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  input,
+} from '@angular/core';
 
 @Component({
   selector: 'app-transaction',
   standalone: true,
   imports: [HttpClientModule],
   templateUrl: './transaction.component.html',
-  styleUrl: './transaction.component.css'
+  styleUrl: './transaction.component.css',
 })
 export class TransactionComponent {
-  @Input()
-  dateTransaction!: Date;
-  @Input()
-  description!: string;
-  @Input()
-  amount!: number;
+  @Input() declare id: string;
+  @Input() declare accountId: string;
+  @Input() declare dateTransaction: Date;
+  @Input() declare description: string;
+  @Input() declare amount: number;
+
+  @Output() modal: EventEmitter<any> = new EventEmitter();
+
+  showModal() {
+    this.modal.emit({ type: 'transaction', id: this.id });
+  }
 }
