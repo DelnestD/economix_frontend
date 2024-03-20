@@ -28,11 +28,7 @@ export class FormTransactionComponent {
   @Input() budgets: Budget[] = [];
   @Input() declare transactionToUpdate: Transaction | undefined;
 
-  constructor(
-    private accountService: AccountService,
-    private budgetService: BudgetService,
-    private transactionService: TransactionService
-  ) {}
+  constructor(private transactionService: TransactionService) {}
 
   transactionFrom = new FormGroup({
     account: new FormControl(''),
@@ -122,7 +118,22 @@ export class FormTransactionComponent {
         budget: budgetUpdated,
         isRefill: refillUpdated,
       };
-      this.transactionService.insertTransaction(transactionCreated).subscribe();
+      this.transactionService
+        .insertTransaction(transactionCreated)
+        .subscribe(() => window.location.reload());
+    } else {
+      const transactionCreated = {
+        id: this.transactionToUpdate!.id,
+        title: formValue!.title as string,
+        amount: Number(amountUpdated),
+        date: formValue.date as string,
+        account: accountUpdated,
+        budget: budgetUpdated,
+        isRefill: refillUpdated,
+      };
+      this.transactionService
+        .update(transactionCreated)
+        .subscribe(() => window.location.reload());
     }
   }
 
