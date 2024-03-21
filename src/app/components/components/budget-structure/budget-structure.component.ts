@@ -11,8 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 export class BudgetStructureComponent {
   @Input() declare type: string;
   @Input() declare id: string;
-  @Input() declare description: string;
+  @Input() declare title: string;
   @Input() declare total: number;
+  @Input() declare realTotal?: number;
   @Input() declare isActualUserPage: boolean;
 
   @Output() modal: EventEmitter<any> = new EventEmitter();
