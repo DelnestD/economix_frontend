@@ -70,6 +70,10 @@ export class LoginComponent {
       });
   }
 
+  get EmailControl() {
+    return this.loginForm.get('email') as FormControl;
+  }
+
   toggleShowPassword() {
     this.showPassword = !this.showPassword;
   }
