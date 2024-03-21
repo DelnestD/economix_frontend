@@ -11,6 +11,7 @@ import { UserService } from '../../../../services/user.service';
 import { Budget, BudgetService } from '../../../../services/budget.service';
 import { jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-budget',
@@ -60,9 +61,16 @@ export class FormBudgetComponent {
           this.userService.getUserById(userId).subscribe((user) => {
             console.log('tada');
             user.budgets!.push(budget);
-            this.userService
-              .updateUser(user)
-              .subscribe(() => window.location.reload());
+            this.userService.updateUser(user).subscribe(() => {
+              Swal.fire({
+                icon: 'success',
+                title: 'Budget ajouté',
+                showConfirmButton: false,
+                timer: 1500,
+              }).then(() => {
+                window.location.reload();
+              });
+            });
           });
         });
     } else {
@@ -71,9 +79,16 @@ export class FormBudgetComponent {
         title: this.budgetForm.value.title,
         description: this.budgetForm.value.description,
       };
-      this.budgetService
-        .updateBudget(updatedBudget)
-        .subscribe(() => window.location.reload());
+      this.budgetService.updateBudget(updatedBudget).subscribe(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Budget modifié',
+          showConfirmButton: false,
+          timer: 1500,
+        }).then(() => {
+          window.location.reload();
+        });
+      });
     }
   }
 
