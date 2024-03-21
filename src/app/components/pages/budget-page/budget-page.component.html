@@ -163,7 +163,8 @@
     </div>
   </div>
 </div>
-<div class="absolute w-full flex justify-center bottom-2">
+<div class="w-full h-20"></div>
+<div class="fixed w-full flex justify-center bottom-2">
   @for (member of membersGroup; track member.id; let index = $index) {
   <button
     [class]="status[index] ? 'btnMemberSelected' : 'btnMember'"
