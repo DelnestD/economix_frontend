@@ -6,6 +6,7 @@ export interface Budget {
   id: string;
   title: string;
   description?: string;
+  isActive?: boolean;
 }
 
 let headers_object = new HttpHeaders();

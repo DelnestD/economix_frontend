@@ -12,7 +12,7 @@ body {
 }
 
 .input {
-  @apply block px-3 py-2 rounded-lg w-full bg-[white] border-2 border-light shadow-md focus:border-dark focus:outline-none;
+  @apply block px-3 py-2 rounded-lg w-full bg-[white] border-2 border-light shadow-md focus:border-dark focus:outline-none hover:border-dark;
 }
 .label {
   @apply px-1 text-dark text-lg font-semibold;
