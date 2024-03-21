@@ -163,13 +163,15 @@
     </div>
   </div>
 </div>
-<div class="absolute text-2xl w-full flex justify-center bottom-2">
+<div class="absolute w-full flex justify-center bottom-2">
   @for (member of membersGroup; track member.id; let index = $index) {
   <button
     [class]="status[index] ? 'btnMemberSelected' : 'btnMember'"
     (click)="showBudgetOfMemberSelected(member.id, index)"
   >
-    {{ member.firstName }}
+    <span [class]="member.firstName.length > 8 ? 'text-[12px]' : 'text-base'">{{
+      abreviation(member.firstName)
+    }}</span>
   </button>
   }
   <!-- <button type="button" class="btnMember" (click)="showBudgetOfAllMembers()">
