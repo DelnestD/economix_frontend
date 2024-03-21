@@ -5,6 +5,7 @@ export interface Budget {
   id: string;
   title: string;
   description?: string;
+  isActive?: boolean;
 }
 
 @Injectable({
