@@ -15,10 +15,15 @@
     {{ dateTransaction.getFullYear() }}
   </p>
   <p class="w-[65%] flex">
-    @if(isRefill) { <span class="underline font-semibold mr-2">(Réa) </span> }
+    @if(isRefill && type === 'budget') {
+    <span class="underline font-semibold mr-2">(Réa) </span> }
     {{ title }}
   </p>
-  <p class="w-[15%] flex">€ {{ amount.toFixed(2) }}</p>
+  <p class="w-[15%] flex">
+    @if(isRefill && type === 'account') {
+    <span class="underline font-semibold">(Réa)</span> } @else {€
+    {{ amount.toFixed(2) }}}
+  </p>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
