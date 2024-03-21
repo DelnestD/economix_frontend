@@ -67,7 +67,10 @@ export class RegisterComponent {
             title: 'Success!',
             text: 'Votre compte a été créé avec succès ! Vous pouvez maintenant vous connecter.',
             icon: 'success',
-            confirmButtonColor: '#28A745',
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            window.location.href = '/login';
           });
         }
       });
