@@ -71,7 +71,10 @@ export class GroupUserAddComponent {
                   title: 'Succès',
                   text: `${user.lastName} ${user.firstName} a bien été ajouté à votre foyer`,
                   icon: 'success',
-                  confirmButtonColor: '#28A745',
+                  showConfirmButton: false,
+                  timer: 1500,
+                }).then(() => {
+                  window.location.reload();
                 });
               });
             }

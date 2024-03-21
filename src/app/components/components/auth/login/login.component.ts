@@ -64,10 +64,14 @@ export class LoginComponent {
             );
             //TODO: redirect to the account/budget page
             //? windows location because reload also navbar
-            window.location.href = '/about';
+            window.location.href = '/budget';
           }
         }
       });
+  }
+
+  get EmailControl() {
+    return this.loginForm.get('email') as FormControl;
   }
 
   toggleShowPassword() {

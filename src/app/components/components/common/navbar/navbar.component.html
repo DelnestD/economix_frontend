@@ -26,14 +26,14 @@
         [hidden]="!isRegistered || isConnected"
         (click)="switchConnection()"
       >
-        <p>S'inscrire</p>
+        <a routerLink="/home" routerLinkActive="active">S'inscrire</a>
       </li>
       <li
         [class.tabs]="!isRegistered && !isConnected"
         [hidden]="isRegistered || isConnected"
         (click)="switchConnection()"
       >
-        <p>Se connecter</p>
+        <a routerLink="/home" routerLinkActive="active">Se connecter</a>
       </li>
       <li
         [class.tabs-select-dropdown]="isConnected"

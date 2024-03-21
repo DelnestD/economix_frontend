@@ -45,7 +45,7 @@ export class GroupCreateComponent {
 
     this.userService.updateUser(this.actualUser).subscribe((user) => {
       console.log('user updated', user);
-      window.location.href = '/about';
+      window.location.href = '/parameters/group';
     });
   }
 
