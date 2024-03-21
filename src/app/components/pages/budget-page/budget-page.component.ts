@@ -42,6 +42,7 @@ export class BudgetPageComponent implements OnInit {
 
   expandedIndex = 0;
   totalAccount: number[] = [];
+  realTotalAccount: number[] = [];
   totalBudget: number[] = [];
 
   transactionsAccount: Transaction[][] = [];
@@ -112,6 +113,7 @@ export class BudgetPageComponent implements OnInit {
       this.accounts = accounts;
       for (let i = 0; i < accounts.length; i++) {
         this.totalAccount[i] = 0;
+        this.realTotalAccount[i] = 0;
         this.transactionService
           .getTransactionByAccountId(accounts[i].id!)
           .subscribe((transactions) => {
@@ -121,6 +123,7 @@ export class BudgetPageComponent implements OnInit {
                 if (!transaction.isRefill) {
                   this.totalAccount[i] += transaction.amount;
                 }
+                this.realTotalAccount[i] += transaction.amount;
               });
             }
           });

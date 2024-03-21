@@ -80,8 +80,9 @@
           <app-budget-structure
             [type]="setType('account')"
             [id]="account.id"
-            [description]="account.title"
+            [title]="account.title"
             [total]="totalAccount[index]"
+            [realTotal]="realTotalAccount[index]"
             [isActualUserPage]="isActualUserPage"
             (modal)="modalUpdate($event)"
           />
@@ -128,7 +129,7 @@
             <app-budget-structure
               [type]="setType('budget')"
               [id]="budget.id"
-              [description]="budget.title"
+              [title]="budget.title"
               [total]="totalBudget[index]"
               [isActualUserPage]="isActualUserPage"
               (modal)="modalUpdate($event)"

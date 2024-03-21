@@ -36,15 +36,28 @@
     </div>
     <div class="inputline">
       <label class="label" for="title">Titre *</label>
-      <input type="text" formControlName="title" id="title" required />
+      <input
+        class="input"
+        type="text"
+        formControlName="title"
+        id="title"
+        required
+      />
     </div>
     <div class="inputline">
       <label class="label" for="date">Date *</label>
-      <input type="date" formControlName="date" id="date" required />
+      <input
+        class="input"
+        type="date"
+        formControlName="date"
+        id="date"
+        required
+      />
     </div>
     <div class="inputline">
       <label class="label" for="amount">Montant *</label>
       <input
+        class="input"
         type="number"
         formControlName="amount"
         id="amount"
@@ -62,7 +75,7 @@
           type="radio"
           value="spend"
           formControlName="category"
-          class="w-4 h-4 mx-2"
+          class="w-4 mx-2"
         />
         <label for="spend">Dépensé</label>
       </div>
@@ -72,7 +85,7 @@
           type="radio"
           value="received"
           formControlName="category"
-          class="w-4 h-4 mx-2"
+          class="w-4 mx-2"
         />
         <label for="received">Reçu</label>
       </div>
@@ -82,7 +95,7 @@
           type="radio"
           value="refill"
           formControlName="category"
-          class="w-4 h-4 mx-2"
+          class="w-4 mx-2"
         />
         <label for="refill">Réapprovisionné</label>
       </div>
