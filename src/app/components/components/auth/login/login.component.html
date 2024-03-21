@@ -2,10 +2,12 @@
 <form class="mt-8" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="mx-auto max-w-xl pb-4">
     <div class="py-2">
-      <label class="label" for="email">Email</label>
-      @if(EmailControl.invalid && EmailControl.touched){
-      <p class="error-label">Ce n'est pas un format d'email valide</p>
-      }
+      <div class="flex justify-between">
+        <label class="label" for="email">Email</label>
+        @if(EmailControl.invalid && EmailControl.touched){
+        <p class="error-label">Ce n'est pas un format d'email valide</p>
+        }
+      </div>
       <input class="input" type="email" id="email" formControlName="email" />
     </div>
     <div class="py-2">
