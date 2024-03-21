@@ -178,6 +178,11 @@ export class BudgetPageComponent implements OnInit {
   }
 
   showBudgetOfMemberSelected(memberId: string, index: number) {
+    this.transactionsAccount = [];
+    this.transactionsBudget = [];
+    this.accounts = [];
+    this.budgets = [];
+
     if (this.getActualIdUser() === memberId) {
       this.isActualUserPage = true;
     } else {
