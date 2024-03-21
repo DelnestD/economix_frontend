@@ -4,16 +4,16 @@ import { Injectable } from '@angular/core';
 export interface Account {
   id: string;
   title: string;
-  description: string;
+  description?: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountService {
   baseUrl = 'http://localhost:8081/account/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   getAccountById(id: string) {
     return this.httpClient.get<Account>(`${this.baseUrl}${id}`);
@@ -24,7 +24,11 @@ export class AccountService {
   }
 
   updateAccount(account: Partial<Account>) {
-    return this.httpClient.patch<Account>(`${this.baseUrl}${account.id}`, account);
+    console.log(this.getAccountById(account.id!));
+    return this.httpClient.patch<Account>(
+      `${this.baseUrl}${account.id}`,
+      account
+    );
   }
 
   deleteAccount(id: string) {

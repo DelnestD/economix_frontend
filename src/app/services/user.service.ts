@@ -16,17 +16,17 @@ export interface User {
 }
 
 export enum Role {
-  LEADER = "leader",
-  MEMBER = "member"
+  LEADER = 'leader',
+  MEMBER = 'member',
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   baseUrl = 'http://localhost:8081/user/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   getUserById(id: string) {
     return this.httpClient.get<User>(`${this.baseUrl}${id}`);

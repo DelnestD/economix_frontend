@@ -4,7 +4,7 @@
   <p
     class="flex justify-center font-titleFont text-xl mb-10 font-bold bg-secondary py-7 rounded-t-xl"
   >
-    @if (createNew) { Ajouter } @else { Modifier } un transaction
+    @if (createNew) { Ajouter } @else { Modifier } une transaction
   </p>
   <form
     [formGroup]="transactionFrom"
@@ -12,10 +12,10 @@
     class="font-textFont"
   >
     <div class="inputline">
-      <label class="label" for="account">Compte</label>
+      <label class="label" for="account">Compte *</label>
       <select formControlName="account" id="account">
         @for (account of accounts; track $index) {
-        <option title="{{ account.description }}" value="{{ account.title }}">
+        <option title="{{ account.description }}" value="{{ account.id }}">
           {{ account.title }}
         </option>
         }
@@ -28,7 +28,7 @@
           <span class="italic text-sm">-</span>
         </option>
         @for (budget of budgets; track $index) {
-        <option title="{{ budget.description }}" value="{{ budget.title }}">
+        <option title="{{ budget.description }}" value="{{ budget.id }}">
           {{ budget.title }}
         </option>
         }
@@ -38,10 +38,21 @@
       <label class="label" for="title">Titre *</label>
       <input type="text" formControlName="title" id="title" required />
     </div>
-
+    <div class="inputline">
+      <label class="label" for="date">Date *</label>
+      <input type="date" formControlName="date" id="date" required />
+    </div>
     <div class="inputline">
       <label class="label" for="amount">Montant *</label>
-      <input type="number" formControlName="amount" id="amount" required />
+      <input
+        type="number"
+        formControlName="amount"
+        id="amount"
+        value="0.00"
+        placeholder="0.00"
+        step="0.01"
+        required
+      />
     </div>
     <div class="flex justify-center mt-2 ml-10 mr-5">
       <span class="label"></span>
@@ -52,7 +63,6 @@
           value="spend"
           formControlName="category"
           class="w-4 h-4 mx-2"
-          checked
         />
         <label for="spend">Dépensé</label>
       </div>
@@ -61,7 +71,7 @@
           id="received"
           type="radio"
           value="received"
-          name="category"
+          formControlName="category"
           class="w-4 h-4 mx-2"
         />
         <label for="received">Reçu</label>
@@ -71,11 +81,14 @@
           id="refill"
           type="radio"
           value="refill"
-          name="category"
+          formControlName="category"
           class="w-4 h-4 mx-2"
         />
         <label for="refill">Réapprovisionné</label>
       </div>
+    </div>
+    <div class="errorMessage">
+      <p [hidden]="formValid" class="text-danger">* Ces champs sont obligatoires</p>
     </div>
 
     <div class="mt-10 w-[100%] flex">

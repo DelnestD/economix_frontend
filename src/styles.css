@@ -2,18 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-.change-mdp .inputText{
-    @apply border-2 border-secondary;
+.change-mdp .inputText {
+  @apply border-2 border-secondary;
 }
 
 @font-face {
-    font-family: "titleFont";
-    src: url(./assets/fonts/Aurora.otf);
+  font-family: "titleFont";
+  src: url(./assets/fonts/Aurora.otf);
 }
 @font-face {
-    font-family: "textFont";
-    src: url(./assets/fonts/Montserrat-VariableFont_wght.ttf);
-} 
+  font-family: "textFont";
+  src: url(./assets/fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+body {
+  background-image: url("./assets/images/bg-economix.jpg");
+  background-size: 100%;
+}
 
 body {
     background-image: url('./assets/images/bg-economix.jpg');
@@ -21,5 +26,5 @@ body {
 } 
 
 .errorMessage {
-    @apply flex justify-end mr-11 mt-2 text-sm;
+    @apply flex justify-end mr-[3.5rem] mt-2 text-sm;
 }

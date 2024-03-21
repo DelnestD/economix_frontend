@@ -35,12 +35,10 @@ export class FormAccountComponent {
 
   formValid: boolean = true;
 
-  accountForm: FormGroup = new FormGroup(
-    {
-      title: new FormControl('', Validators.required),
-      description: new FormControl('')
-    }
-  );
+  accountForm: FormGroup = new FormGroup({
+    title: new FormControl('', Validators.required),
+    description: new FormControl(''),
+  });
 
   ngOnInit() {
     if (!this.createNew) {
@@ -56,10 +54,10 @@ export class FormAccountComponent {
   }
 
   onSubmit() {
-    if (this.createNew) {
-      if (this.getTitle().status === "INVALID") {
-        this.formValid = false;
-      } else {
+    if (this.getTitle().status === 'INVALID') {
+      this.formValid = false;
+    } else {
+      if (this.createNew) {
         this.accountService
           .insertAccount(this.accountForm.value)
           .subscribe((account) => {
@@ -68,27 +66,20 @@ export class FormAccountComponent {
               user.accounts!.push(account);
               this.userService
                 .updateUser(userId, user)
-                .subscribe((user) => console.log('user', user));
+                .subscribe(() => window.location.reload());
             });
           });
-      }
-    } else {
-      if (this.getTitle().status === "INVALID") {
-        this.formValid = false;
       } else {
-        //! Update account error
-        const updateAccount: Account = {
-          id: this.accountToUpdate!.id,
-          title: this.accountForm.value.title,
-          description: this.accountForm.value.description,
-        };
-        console.log('avant service', updateAccount);
-        this.accountService.updateAccount(updateAccount).subscribe((account) => {
-          console.log('account updated', account);
-        });
-        window.location.reload();
-      }
-    }
+        const updatedAccount: Account = {
+            id: this.accountToUpdate!.id,
+            title: this.accountForm.value.title,
+            description: this.accountForm.value.description,
+          };
+          this.accountService
+            .updateAccount(updatedAccount)
+            .subscribe(() => window.location.reload());
+        }
+    } 
   }
 
   closeModal() {
