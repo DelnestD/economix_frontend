@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Group } from './group.service';
 import { Account } from './account.service';
 import { Budget } from './budget.service';
+import { CookieService } from 'ngx-cookie-service';
 
 export interface User {
   id: string;
@@ -27,26 +28,54 @@ export enum Role {
 export class UserService {
   baseUrl = 'http://localhost:8081/user/';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private cookieService: CookieService
+  ) {}
+
+  private setupHeaderAuthorize() {
+    return {
+      headers: new HttpHeaders().set(
+        'Authorization',
+        `${this.cookieService.get('accessToken')}`
+      ),
+    };
+  }
 
   getUserById(id: string) {
-    return this.httpClient.get<User>(`${this.baseUrl}${id}`);
+    const token = this.setupHeaderAuthorize();
+
+    return this.httpClient.get<User>(`${this.baseUrl}${id}`, token);
   }
 
   getUserByEmail(email: string) {
-    return this.httpClient.get<User>(`${this.baseUrl}email/${email}`);
+    const token = this.setupHeaderAuthorize();
+
+    return this.httpClient.get<User>(`${this.baseUrl}email/${email}`, token);
   }
 
   getUsersByGroupId(groupId: string) {
-    return this.httpClient.get<User[]>(`${this.baseUrl}group/${groupId}`);
+    const token = this.setupHeaderAuthorize();
+
+    return this.httpClient.get<User[]>(
+      `${this.baseUrl}group/${groupId}`,
+      token
+    );
   }
 
   getUserAccounts(id: string) {
-    return this.httpClient.get<Account[]>(`${this.baseUrl}account/${id}`);
+    const token = this.setupHeaderAuthorize();
+
+    return this.httpClient.get<Account[]>(
+      `${this.baseUrl}account/${id}`,
+      token
+    );
   }
 
   getUserBudgets(id: string) {
-    return this.httpClient.get<Budget[]>(`${this.baseUrl}budget/${id}`);
+    const token = this.setupHeaderAuthorize();
+
+    return this.httpClient.get<Budget[]>(`${this.baseUrl}budget/${id}`, token);
   }
 
   insertUser(user: User) {
@@ -54,10 +83,18 @@ export class UserService {
   }
 
   updateUser(user: Partial<User>) {
-    return this.httpClient.patch<User>(`${this.baseUrl}${user.id}`, user);
+    const token = this.setupHeaderAuthorize();
+
+    return this.httpClient.patch<User>(
+      `${this.baseUrl}${user.id}`,
+      user,
+      token
+    );
   }
 
   deleteUser(id: string) {
-    return this.httpClient.delete(`${this.baseUrl}${id}`);
+    const token = this.setupHeaderAuthorize();
+
+    return this.httpClient.delete(`${this.baseUrl}${id}`, token);
   }
 }
