@@ -26,6 +26,10 @@ body {
 .error-message {
   @apply text-danger text-sm;
 }
+
+.error-message-budget {
+  @apply flex justify-end mr-[3.5rem] mt-2 text-sm;
+}
 .error-label {
   @apply px-1 text-danger text-lg font-semibold;
 }
