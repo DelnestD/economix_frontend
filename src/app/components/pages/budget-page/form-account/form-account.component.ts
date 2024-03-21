@@ -69,7 +69,10 @@ export class FormAccountComponent {
 
   onSubmit() {
     if (this.createNew) {
-      if ((this.getTitle().status === 'INVALID') || (this.getBaseAmount().status === 'INVALID')) {
+      if (
+        this.getTitle().status === 'INVALID' ||
+        this.getBaseAmount().status === 'INVALID'
+      ) {
         this.formValid = false;
       } else {
         this.accountService
@@ -113,7 +116,7 @@ export class FormAccountComponent {
                   showConfirmButton: false,
                   timer: 1500,
                 }).then(() => {
-                  // window.location.reload();
+                  window.location.reload();
                 });
               });
           });
