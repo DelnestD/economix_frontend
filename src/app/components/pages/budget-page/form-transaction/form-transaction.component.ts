@@ -68,6 +68,7 @@ export class FormTransactionComponent {
         categoryToUpdate = 'refill';
       } else if (amountToUpdate < 0) {
         categoryToUpdate = 'spend';
+        amountToUpdate *= -1;
       } else {
         categoryToUpdate = 'received';
       }
