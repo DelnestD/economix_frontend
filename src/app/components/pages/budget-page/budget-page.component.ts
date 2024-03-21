@@ -216,7 +216,7 @@ export class BudgetPageComponent implements OnInit {
   }
 
   abreviation(name: string): string {
-    if (name.length > 10) {
+    if (name.length > 8) {
       name = name.substring(0, 8) + '...';
     }
     return name;

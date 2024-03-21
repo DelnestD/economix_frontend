@@ -169,7 +169,7 @@
     [class]="status[index] ? 'btnMemberSelected' : 'btnMember'"
     (click)="showBudgetOfMemberSelected(member.id, index)"
   >
-    <span [class]="member.firstName.length > 8 ? 'text-[12px]' : 'text-base'">{{
+    <span [class]="member.firstName.length > 7 ? 'text-[12px]' : 'text-base'">{{
       abreviation(member.firstName)
     }}</span>
   </button>
