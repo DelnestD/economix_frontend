@@ -28,7 +28,7 @@ export class BudgetStructureComponent {
 
   deleteBudget() {
     Swal.fire({
-      title: `Etes vous sûr de vouloir supprimer ${this.description} ?`,
+      title: `Etes vous sûr de vouloir supprimer ${this.title} ?`,
       showCancelButton: true,
       confirmButtonText: 'Supprimer',
       confirmButtonColor: '#28A745',
@@ -40,7 +40,7 @@ export class BudgetStructureComponent {
         this.budgetService.deleteBudget(this.id).subscribe(() => {
           Swal.fire({
             title: 'Supprimé !',
-            text: `${this.description} a été supprimé.`,
+            text: `${this.title} a été supprimé.`,
             icon: 'success',
             showConfirmButton: false,
             timer: 1500,
