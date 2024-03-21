@@ -63,9 +63,13 @@ export class FormAccountComponent {
     return this.accountForm.get('title') as FormControl;
   }
 
+  getBaseAmount() {
+    return this.accountForm.get('baseAmount') as FormControl;
+  }
+
   onSubmit() {
     if (this.createNew) {
-      if (this.getTitle().status === 'INVALID') {
+      if ((this.getTitle().status === 'INVALID') || (this.getBaseAmount().status === 'INVALID')) {
         this.formValid = false;
       } else {
         this.accountService

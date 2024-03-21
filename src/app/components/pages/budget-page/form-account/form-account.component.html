@@ -11,9 +11,6 @@
       <label for="title" class="label">Nom *</label>
       <input type="text" name="title" formControlName="title" required />
     </div>
-    <div class="error-message-budget">
-      <p [hidden]="formValid" class="text-danger">* Ce champ est obligatoire</p>
-    </div>
     <div class="inputline">
       <label for="description">Description</label>
       <textarea
@@ -30,8 +27,12 @@
         id="baseAmount"
         placeholder="0.00"
         step="0.01"
+        [min]="0.00"
         [hidden]="!createNew"
       />
+    </div>
+    <div class="error-message-budget" [hidden]="formValid">
+      <p [hidden]="formValid" class="text-danger">* Ce champ est obligatoire et le montant initial doit être supérieur à 0</p>
     </div>
 
     <div class="mt-10 w-[100%] flex">
