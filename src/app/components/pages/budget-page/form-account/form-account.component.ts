@@ -13,6 +13,7 @@ import { jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 import { Group } from '../../../../services/group.service';
 import Swal from 'sweetalert2';
+import { TransactionService } from '../../../../services/transaction.service';
 @Component({
   selector: 'app-form-account',
   standalone: true,
@@ -30,7 +31,8 @@ export class FormAccountComponent {
   constructor(
     private cookieService: CookieService,
     private userService: UserService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private transactionService: TransactionService
   ) {}
 
   formValid: boolean = true;
@@ -38,6 +40,7 @@ export class FormAccountComponent {
   accountForm: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
     description: new FormControl(''),
+    baseAmount: new FormControl('', [Validators.required, Validators.min(0)]),
   });
 
   ngOnInit() {
@@ -45,6 +48,13 @@ export class FormAccountComponent {
       this.accountForm.setValue({
         title: this.accountToUpdate!.title,
         description: this.accountToUpdate!.description,
+        baseAmount: null,
+      });
+    } else {
+      this.accountForm.setValue({
+        title: '',
+        description: '',
+        baseAmount: '',
       });
     }
   }
@@ -64,17 +74,44 @@ export class FormAccountComponent {
             const userId = this.getActualIdUser();
             this.userService.getUserById(userId).subscribe((user) => {
               user.accounts!.push(account);
-              this.userService.updateUser(user).subscribe(() => {
+              this.userService.updateUser(user).subscribe(/* () => {
                 Swal.fire({
                   icon: 'success',
                   title: 'Compte ajouté',
                   showConfirmButton: false,
                   timer: 1500,
                 }).then(() => {
-                  window.location.reload();
+                  // window.location.reload();
+                });
+              } */);
+            });
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = (date.getMonth() + 1).toString().padStart(2, '0'); // +1 car les mois commencent à 0
+            const day = date.getDate().toString().padStart(2, '0');
+
+            const transactionDate = `${year}-${month}-${day}`;
+            const transaction = {
+              title: '(Création du compte) => Montant initial',
+              amount: Number(this.accountForm.value.baseAmount),
+              date: transactionDate,
+              account: { id: account.id },
+              budget: null,
+              isRefill: false,
+            };
+
+            this.transactionService
+              .insertTransaction(transaction)
+              .subscribe(() => {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Compte ajouté',
+                  showConfirmButton: false,
+                  timer: 1500,
+                }).then(() => {
+                  // window.location.reload();
                 });
               });
-            });
           });
       }
     } else {
